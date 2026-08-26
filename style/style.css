@@ -557,6 +557,39 @@ main {
     text-decoration: none;
 }
 
+.auth-form {
+    width: calc(100% - 48px);
+
+    margin-top: 38px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.auth-switch {
+    margin: 20px 0 32px;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    color: var(--color-text-primary);
+}
+
+.auth-switch a {
+    margin-left: 4px;
+
+    font-weight: 600;
+
+    color: var(--color-text-accent);
+
+    text-decoration: none;
+}
+
+.auth-submit {
+    margin-top: 38px;
+}
+
 
 
 

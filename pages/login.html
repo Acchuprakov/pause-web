@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Вход — ПАУЗА</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+<main class="auth-page">
+
+    <header class="header-bar">
+
+        <button class="header-back" type="button">
+            <img src="../assets/icons/arrow-left.svg" alt="Назад">
+        </button>
+
+    </header>
+
+
+    <div class="title-group">
+
+        <h2 class="auth-title">
+            Чтобы сохранить паузу —<br>
+            войдите в профиль
+        </h2>
+
+    </div>
+
+
+    <div class="segment-tabs">
+
+        <button class="tab-active" type="button">
+            Email
+        </button>
+
+        <button class="tab-inactive" type="button">
+            Телефон
+        </button>
+
+    </div>
+
+
+    <form class="auth-form">
+
+
+        <div class="form-field">
+
+            <label for="email">
+                EMAIL
+            </label>
+
+            <div class="input-container">
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Введите email"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="password">
+                ПАРОЛЬ
+            </label>
+
+            <div class="input-container password-container">
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Введите пароль"
+                >
+
+                <button
+                    class="password-toggle"
+                    type="button"
+                    aria-label="Показать пароль"
+                >
+                    <img
+                        src="../assets/icons/eye.svg"
+                        alt=""
+                    >
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <button class="button-primary auth-submit" type="button">
+        Войти
+    </button>
+
+
+    <p class="auth-switch">
+        <span>Нет аккаунта? </span>
+        <a href="registration.html">Регистрация</a>
+    </p>
+
+</main>
+
+<script src="../js/script.js"></script>
+
+</body>
+</html>
