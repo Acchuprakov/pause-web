@@ -2,11 +2,13 @@
 <html lang="ru">
 
 <head>
+    <!-- ===== Базовые настройки документа ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Создание профиля — ПАУЗА</title>
 
+    <!-- ===== Подключение шрифта Manrope ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -15,133 +17,142 @@
         rel="stylesheet"
     >
 
+    <!-- ===== Основные стили проекта ===== -->
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
 
-<main class="registration-page">
+    <!-- ========================================================== -->
+    <!-- ===== СТРАНИЦА РЕГИСТРАЦИИ ===== -->
+    <!-- ========================================================== -->
+    <main class="registration-page">
 
-    <header class="header-bar">
+        <!-- ===== Верхняя панель (шапка) с кнопкой "Назад" ===== -->
+        <header class="header-bar">
 
-        <button class="header-back" type="button">
-            <img src="../assets/icons/arrow-left.svg" alt="Назад">
+            <!-- ===== Кнопка возврата ===== -->
+            <button class="header-back" type="button">
+                <img src="../assets/icons/arrow-left.svg" alt="Назад">
+            </button>
+
+        </header>
+
+        <!-- ===== Заголовок и подзаголовок страницы ===== -->
+        <section class="title-group">
+
+            <h2>
+                Чтобы сохранить паузу — создайте профиль
+            </h2>
+
+            <p>
+                Это займет меньше минуты
+            </p>
+
+        </section>
+
+        <!-- ===== Переключатель способа регистрации (Email / Телефон) ===== -->
+        <div class="segment-tabs">
+
+            <button class="tab-active" type="button">
+                Email
+            </button>
+
+            <button class="tab-inactive" type="button">
+                Телефон
+            </button>
+
+        </div>
+
+        <!-- ===== Форма регистрации ===== -->
+        <form class="registration-form">
+
+            <!-- ===== Поле ввода Имени ===== -->
+            <div class="form-field">
+
+                <label for="name">
+                    ИМЯ
+                </label>
+
+                <div class="input-container">
+
+                    <input
+                        id="name"
+                        type="text"
+                        placeholder="Введите имя"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ===== Поле ввода Email ===== -->
+            <div class="form-field">
+
+                <label for="email">
+                    EMAIL
+                </label>
+
+                <div class="input-container">
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Введите email"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- ===== Поле ввода Пароля с кнопкой показа/скрытия ===== -->
+            <div class="form-field">
+
+                <label for="password">
+                    ПАРОЛЬ
+                </label>
+
+                <div class="input-container">
+
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Введите пароль"
+                    >
+
+                    <!-- ===== Кнопка-переключатель видимости пароля ===== -->
+                    <button
+                        class="password-toggle"
+                        type="button"
+                        aria-label="Показать пароль"
+                    >
+                        <img
+                            src="../assets/icons/eye.svg"
+                            alt=""
+                        >
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- ===== Основная кнопка "Продолжить" ===== -->
+        <button class="button-primary registration-button" type="button">
+            Продолжить
         </button>
 
-    </header>
-
-
-    <section class="title-group">
-
-        <h2>
-            Чтобы сохранить паузу — создайте профиль
-        </h2>
-
-        <p>
-            Это займет меньше минуты
+        <!-- ===== Ссылка на страницу входа ===== -->
+        <p class="login-link">
+            <span>Уже есть аккаунт?</span>
+            <a href="login.html">Войти</a>
         </p>
 
-    </section>
+    </main>
 
-
-    <div class="segment-tabs">
-
-        <button class="tab-active" type="button">
-            Email
-        </button>
-
-        <button class="tab-inactive" type="button">
-            Телефон
-        </button>
-
-    </div>
-
-
-    <form class="registration-form">
-
-        <div class="form-field">
-
-            <label for="name">
-                ИМЯ
-            </label>
-
-            <div class="input-container">
-
-                <input
-                    id="name"
-                    type="text"
-                    placeholder="Введите имя"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="form-field">
-
-            <label for="email">
-                EMAIL
-            </label>
-
-            <div class="input-container">
-
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="Введите email"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="form-field">
-
-            <label for="password">
-                ПАРОЛЬ
-            </label>
-
-            <div class="input-container">
-
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Введите пароль"
-                >
-
-                <button
-                    class="password-toggle"
-                    type="button"
-                    aria-label="Показать пароль"
-                >
-                    <img
-                        src="../assets/icons/eye.svg"
-                        alt=""
-                    >
-                </button>
-
-            </div>
-
-        </div>
-
-    </form>
-
-
-    <button class="button-primary registration-button" type="button">
-        Продолжить
-    </button>
-
-
-    <p class="login-link">
-        <span>Уже есть аккаунт?</span>
-        <a href="login.html">Войти</a>
-    </p>
-
-</main>
-
-<script src="../js/script.js"></script>
+    <!-- ===== Подключение JavaScript ===== -->
+    <script src="../js/script.js"></script>
 
 </body>
 </html>

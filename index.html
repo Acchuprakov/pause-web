@@ -1,53 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- ===== Базовые настройки документа ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ПАУЗА</title>
 
+    <!-- ===== Подключение шрифта Manrope ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- ===== Основные стили проекта ===== -->
     <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
 
-<main class="landing-page">
+    <!-- ========================================================== -->
+    <!-- ===== ГЛАВНЫЙ КОНТЕЙНЕР (Landing Page) ===== -->
+    <!-- ========================================================== -->
+    <main class="landing-page">
 
-    <div class="landing-content">
+        <!-- ===== Блок с контентом (заголовок, описание, иллюстрация, призыв) ===== -->
+        <div class="landing-content">
 
-        <h1 class="display">
-            ПАУЗА
-        </h1>
+            <!-- ===== Заголовок бренда ===== -->
+            <h1 class="display">
+                ПАУЗА
+            </h1>
 
-        <div class="intro">
-            <p>Остановись. Заметь себя.</p>
-            <p>Вернись к себе.</p>
-        </div>
+            <!-- ===== Вступительный текст ===== -->
+            <div class="intro">
+                <p>Остановись. Заметь себя.</p>
+                <p>Вернись к себе.</p>
+            </div>
 
-        <div class="pause-illustration">
-            <img src="assets/icons/pause-stone.png" alt="картинка пауза">
-        </div>
+            <!-- ===== Иллюстрация «камень паузы» ===== -->
+            <div class="pause-illustration">
+                <img src="assets/icons/pause-stone.png" alt="картинка пауза">
+            </div>
 
-        <div class="profile-prompt">
-            <p>Чтобы сохранять паузы и видеть историю — создайте профиль.</p>
+            <!-- ===== Карточка-приглашение создать профиль ===== -->
+            <div class="profile-prompt">
+                <p>Чтобы сохранять паузы и видеть историю — создайте профиль.</p>
 
-            <button class="button-secondary" type="button">
-                Создать профиль
-            </button>
-        </div>
+                <!-- ===== Кнопка вторичная (создать профиль) ===== -->
+                <button class="button-secondary" type="button">
+                    Создать профиль
+                </button>
+            </div>
 
-    </div>
+        </div> <!-- /landing-content -->
 
-    <button class="button-primary" type="button">
-        Начать паузу
-    </button>
+        <!-- ===== Основная кнопка действия (начать паузу) ===== -->
+        <button class="button-primary" type="button">
+            Начать паузу
+        </button>
 
-</main>
+    </main> <!-- /landing-page -->
 
-<script src="js/script.js"></script>
+    <!-- ===== Подключение JavaScript ===== -->
+    <script src="js/script.js"></script>
 
 </body>
 </html>

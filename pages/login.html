@@ -2,11 +2,13 @@
 <html lang="ru">
 
 <head>
+    <!-- ===== Базовые настройки документа ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Вход — ПАУЗА</title>
 
+    <!-- ===== Подключение шрифта Manrope ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -15,112 +17,120 @@
         rel="stylesheet"
     >
 
+    <!-- ===== Основные стили проекта ===== -->
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
 
-<main class="auth-page">
+    <!-- ========================================================== -->
+    <!-- ===== СТРАНИЦА АВТОРИЗАЦИИ ===== -->
+    <!-- ========================================================== -->
+    <main class="auth-page">
 
-    <header class="header-bar">
+        <!-- ===== Верхняя панель (шапка) с кнопкой "Назад" ===== -->
+        <header class="header-bar">
 
-        <button class="header-back" type="button">
-            <img src="../assets/icons/arrow-left.svg" alt="Назад">
-        </button>
+            <!-- ===== Кнопка возврата ===== -->
+            <button class="header-back" type="button">
+                <img src="../assets/icons/arrow-left.svg" alt="Назад">
+            </button>
 
-    </header>
+        </header>
 
+        <!-- ===== Заголовок страницы ===== -->
+        <div class="title-group">
 
-    <div class="title-group">
-
-        <h2 class="auth-title">
-            Чтобы сохранить паузу —<br>
-            войдите в профиль
-        </h2>
-
-    </div>
-
-
-    <div class="segment-tabs">
-
-        <button class="tab-active" type="button">
-            Email
-        </button>
-
-        <button class="tab-inactive" type="button">
-            Телефон
-        </button>
-
-    </div>
-
-
-    <form class="auth-form">
-
-
-        <div class="form-field">
-
-            <label for="email">
-                EMAIL
-            </label>
-
-            <div class="input-container">
-
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="Введите email"
-                >
-
-            </div>
+            <h2 class="auth-title">
+                Чтобы сохранить паузу —<br>
+                войдите в профиль
+            </h2>
 
         </div>
 
+        <!-- ===== Переключатель способа входа (Email / Телефон) ===== -->
+        <div class="segment-tabs">
 
-        <div class="form-field">
+            <button class="tab-active" type="button">
+                Email
+            </button>
 
-            <label for="password">
-                ПАРОЛЬ
-            </label>
+            <button class="tab-inactive" type="button">
+                Телефон
+            </button>
 
-            <div class="input-container password-container">
+        </div>
 
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Введите пароль"
-                >
+        <!-- ===== Форма авторизации ===== -->
+        <form class="auth-form">
 
-                <button
-                    class="password-toggle"
-                    type="button"
-                    aria-label="Показать пароль"
-                >
-                    <img
-                        src="../assets/icons/eye.svg"
-                        alt=""
+            <!-- ===== Поле ввода Email ===== -->
+            <div class="form-field">
+
+                <label for="email">
+                    EMAIL
+                </label>
+
+                <div class="input-container">
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="Введите email"
                     >
-                </button>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- ===== Поле ввода Пароля с кнопкой показа/скрытия ===== -->
+            <div class="form-field">
 
-    </form>
+                <label for="password">
+                    ПАРОЛЬ
+                </label>
 
+                <div class="input-container password-container">
 
-    <button class="button-primary auth-submit" type="button">
-        Войти
-    </button>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Введите пароль"
+                    >
 
+                    <!-- ===== Кнопка-переключатель видимости пароля ===== -->
+                    <button
+                        class="password-toggle"
+                        type="button"
+                        aria-label="Показать пароль"
+                    >
+                        <img
+                            src="../assets/icons/eye.svg"
+                            alt=""
+                        >
+                    </button>
 
-    <p class="auth-switch">
-        <span>Нет аккаунта? </span>
-        <a href="registration.html">Регистрация</a>
-    </p>
+                </div>
 
-</main>
+            </div>
 
-<script src="../js/script.js"></script>
+        </form>
+
+        <!-- ===== Основная кнопка "Войти" ===== -->
+        <button class="button-primary auth-submit" type="button">
+            Войти
+        </button>
+
+        <!-- ===== Ссылка на страницу регистрации ===== -->
+        <p class="auth-switch">
+            <span>Нет аккаунта? </span>
+            <a href="registration.html">Регистрация</a>
+        </p>
+
+    </main>
+
+    <!-- ===== Подключение JavaScript ===== -->
+    <script src="../js/script.js"></script>
 
 </body>
 </html>
