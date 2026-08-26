@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Создание профиля — ПАУЗА</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+<main class="registration-page">
+
+    <header class="header-bar">
+
+        <button class="header-back" type="button">
+            <img src="../assets/icons/arrow-left.svg" alt="Назад">
+        </button>
+
+    </header>
+
+
+    <section class="title-group">
+
+        <h2>
+            Чтобы сохранить паузу — создайте профиль
+        </h2>
+
+        <p>
+            Это займет меньше минуты
+        </p>
+
+    </section>
+
+
+    <div class="segment-tabs">
+
+        <button class="tab-active" type="button">
+            Email
+        </button>
+
+        <button class="tab-inactive" type="button">
+            Телефон
+        </button>
+
+    </div>
+
+
+    <form class="registration-form">
+
+        <div class="form-field">
+
+            <label for="name">
+                ИМЯ
+            </label>
+
+            <div class="input-container">
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Введите имя"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="email">
+                EMAIL
+            </label>
+
+            <div class="input-container">
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Введите email"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="password">
+                ПАРОЛЬ
+            </label>
+
+            <div class="input-container">
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Введите пароль"
+                >
+
+                <button
+                    class="password-toggle"
+                    type="button"
+                    aria-label="Показать пароль"
+                >
+                    <img
+                        src="../assets/icons/eye.svg"
+                        alt=""
+                    >
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <button class="button-primary registration-button" type="button">
+        Продолжить
+    </button>
+
+
+    <p class="login-link">
+        <span>Уже есть аккаунт?</span>
+        <a href="#">Войти</a>
+    </p>
+
+</main>
+
+<script src="../js/script.js"></script>
+
+</body>
+</html>
