@@ -864,6 +864,114 @@ main {
     text-decoration: none;
 }
 
+/* ===== Страница "Мои паузы" ===== */
+
+.history-page {
+    width: 100%;
+    padding-bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pauses-list {
+    width: calc(100% - 48px);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.pause-section {
+    width: 100%;
+}
+
+.pause-section + .pause-section {
+    margin-top: 32px;
+}
+
+.section-label {
+    margin: 24px 0 0;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: normal;
+
+    color: var(--color-text-tertiary);
+}
+
+.pause-card {
+    width: 100%;
+
+    margin-top: 12px;
+    padding: 16px;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-16);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.pause-card + .pause-card {
+    margin-top: 12px;
+}
+
+.pause-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pause-duration {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+
+    color: var(--color-text-secondary);
+}
+
+.pause-card-time {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+
+    color: var(--color-text-primary);
+}
+
+.pause-card-content {
+    margin-top: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pause-card-content p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.pause-card-content strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.pause-card-content span {
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+
+.history-page .bottom-tab-bar {
+    margin-top: 24px;
+    margin-bottom: 44px;
+}
+
 
 
 
