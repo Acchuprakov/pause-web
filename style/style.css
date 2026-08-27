@@ -2,8 +2,10 @@
     --color-background: #FAF7F2;
     --color-surface-muted: #F2ECE2;
     --color-primary-green: #3D5A45;
+    --color-surface-success: #E8EFE9;
     --color-background-card: #FFFFFF;
     --color-border-default: #EBE6DD;
+    --color-border-active: #3D5A45;
 
     --color-text-primary: #2B2E2A;
     --color-text-on-primary: #F9F9F9;
@@ -15,6 +17,7 @@
     --radius-26: 26px;
     --radius-24: 24px;
     --radius-22: 22px;
+    --radius-20: 20px;
     --radius-16: 16px;
     --radius-12: 12px;
 }
@@ -743,6 +746,126 @@ main {
     margin-top: 24px;
     margin-bottom: 44px;
 }
+
+/* ===== Страница завершения паузы ===== */
+
+.completed-page {
+    width: 100%;
+    padding-top: 56px;
+    padding-bottom: 48px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-surface-success);
+
+    border: 2px solid var(--color-border-active);
+    border-radius: 50%;
+}
+
+.checkmark-circle img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.congrats-text {
+    width: calc(100% - 48px);
+
+    margin-top: 24px;
+
+    text-align: center;
+}
+
+.congrats-text h2 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 600;
+    line-height: normal;
+
+    color: var(--color-text-primary);
+}
+
+.congrats-text p {
+    margin: 12px 0 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+
+    color: var(--color-text-secondary);
+}
+
+.meta-info-card {
+    width: calc(100% - 48px);
+
+    margin-top: 84px;
+    padding: 20px;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-row img {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.meta-row span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+
+    color: var(--color-text-primary);
+}
+
+.completed-button {
+    margin-top: 84px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+.completed-home-link {
+    margin-top: 16px;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+
+    color: var(--color-text-accent);
+    text-decoration: none;
+}
+
+
+
 
 /* ===== Медиа-запрос для больших экранов ===== */
 @media (min-width: 768px) {
