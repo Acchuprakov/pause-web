@@ -39,7 +39,6 @@ main {
     background: var(--color-background);
     border-radius: var(--radius-28);
     border: 1px solid var(--color-border-default);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,12 +49,9 @@ main {
     width: calc(100% - 48px);
     height: 52px;
     margin-top: 24px;
-
     border: none;
     border-radius: var(--radius-26);
-
     background: var(--color-primary-green);
-
     font-family: inherit;
     font-size: 16px;
     font-weight: 600;
@@ -66,12 +62,9 @@ main {
     width: 100%;
     height: 44px;
     margin-top: 16px;
-
     border: none;
     border-radius: var(--radius-22);
-
     background: var(--color-surface-muted);
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
@@ -85,50 +78,45 @@ main {
     padding: 0 32px;
     margin-top: 24px;
     margin-bottom: 72px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     background: var(--color-background);
-
     border-top: 1px solid var(--color-border-default);
     border-bottom: 1px solid var(--color-border-default);
-    
 }
 
 .bottom-tab-bar a {
-    color: inherit;
     text-decoration: none;
 }
 
+.tab-home,
 .tab-pauses,
 .tab-profile,
 .tab-lenta {
     width: 80px;
     height: 43px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
-
-    text-decoration: none;
-}
-
-.tab-pauses {
-    color: var(--color-primary-green);
-}
-
-.tab-profile {
     color: var(--color-text-tertiary);
+    transition: color 0.2s ease;
 }
 
-.tab-lenta {
-    color: var(--color-text-tertiary);
+/* Иконки внутри вкладок */
+.tab-home svg,
+.tab-pauses svg,
+.tab-profile svg,
+.tab-lenta svg {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
+/* Текст внутри вкладки */
+.tab-home span,
 .tab-pauses span,
 .tab-profile span,
 .tab-lenta span {
@@ -137,34 +125,27 @@ main {
     line-height: normal;
 }
 
-.tab-pauses span {
+/* Активная вкладка */
+.tab-home.active,
+.tab-pauses.active,
+.tab-profile.active,
+.tab-lenta.active {
     color: var(--color-primary-green);
 }
 
-.tab-profile span {
-    color: var(--color-text-tertiary);
-}
-
-.tab-lenta span {
-    color: var(--color-text-tertiary);
-}
-
-.tab-pauses img,
-.tab-profile img,
-.tab-lenta img {
-    width: 24px;
-    height: 24px;
-    display: block;
+.tab-home.active span,
+.tab-pauses.active span,
+.tab-profile.active span,
+.tab-lenta.active span {
+    color: var(--color-primary-green);
 }
 
 /* ===== Шапка (header) ===== */
 .header-bar {
     position: relative;
-
     width: 100%;
     height: 56px;
     padding: 0 20px;
-
     display: flex;
     align-items: center;
 }
@@ -172,14 +153,11 @@ main {
 .header-back {
     width: 24px;
     height: 24px;
-
     padding: 0;
     border: none;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: transparent;
 }
 
@@ -191,25 +169,19 @@ main {
 
 .header-title {
     position: absolute;
-
     left: 50%;
     transform: translateX(-50%);
-
     margin: 0;
-
     font-size: 18px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .pause-time {
     margin-left: auto;
-
     font-size: 14px;
     font-weight: 400;
-
     color: var(--color-primary-green);
 }
 
@@ -217,7 +189,6 @@ main {
 .landing-page {
     width: 100%;
     padding-bottom: 48px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -237,7 +208,6 @@ main {
 
 .landing-content {
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -276,7 +246,6 @@ main {
 .pause-illustration {
     width: 100%;
     margin-top: 0;
-
     display: flex;
     justify-content: center;
 }
@@ -288,10 +257,9 @@ main {
 }
 
 .profile-prompt {
-   width: calc(100% - 48px);
+    width: calc(100% - 48px);
     margin-top: 24px;
     padding: 20px;
-
     background: var(--color-background-card);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-24);
@@ -327,33 +295,26 @@ main {
 
 .title-group h2 {
     margin: 0;
-
     font-size: 22px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .title-group p {
     margin: 12px 0 0;
-
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
 .segment-tabs {
     width: calc(100% - 48px);
     height: 44px;
-
     margin-top: 38px;
     padding: 4px;
-
     display: flex;
-
     background: var(--color-surface-muted);
     border-radius: var(--radius-22);
 }
@@ -361,32 +322,24 @@ main {
 .tab-active {
     width: 50%;
     height: 36px;
-
     border: none;
     border-radius: 18px;
-
     background: var(--color-primary-green);
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
-
     color: var(--color-text-on-primary);
 }
 
 .tab-inactive {
     width: 50%;
     height: 36px;
-
     border: none;
     border-radius: 18px;
-
     background: transparent;
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
-
     color: var(--color-text-secondary);
 }
 
@@ -397,19 +350,15 @@ main {
 
 .question-title {
     margin: 0;
-
     font-size: 15px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .input-wrapper {
     margin-top: 12px;
-
     width: 100%;
-
     background: var(--color-background-card);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-12);
@@ -418,20 +367,15 @@ main {
 .input-wrapper textarea {
     width: 100%;
     min-height: 100px;
-
     padding: 16px;
-
     border: none;
     outline: none;
     resize: none;
-
     background: transparent;
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
@@ -441,7 +385,6 @@ main {
 
 .question-chips {
     margin-top: 4px;
-
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
@@ -449,27 +392,20 @@ main {
 
 .chip {
     cursor: pointer;
-
     padding: 0 4px;
-
     border: none;
-
     background: var(--color-background);
-
     font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     line-height: normal;
-
     color: var(--color-text-tertiary);
 }
 
 /* ===== Формы (регистрация и авторизация) ===== */
 .registration-form {
     width: calc(100% - 48px);
-
     margin-top: 38px;
-
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -481,27 +417,20 @@ main {
 
 .form-field label {
     display: block;
-
     margin-bottom: 6px;
-
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
 .input-container {
     width: 100%;
     height: 44px;
-
     display: flex;
     align-items: center;
-
     padding: 0 16px;
-
     background: var(--color-background-card);
-
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-12);
 }
@@ -509,18 +438,13 @@ main {
 .input-container input {
     width: 100%;
     height: 100%;
-
     padding: 0;
-
     border: none;
     outline: none;
-
     background: transparent;
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
-
     color: var(--color-text-primary);
 }
 
@@ -531,26 +455,19 @@ main {
 .password-toggle {
     width: 20px;
     height: 20px;
-
     flex-shrink: 0;
-
     padding: 0;
-
     border: none;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: transparent;
-
     cursor: pointer;
 }
 
 .password-toggle img {
     width: 20px;
     height: 20px;
-
     display: block;
 }
 
@@ -560,28 +477,21 @@ main {
 
 .login-link {
     margin: 20px 0 32px;
-
     font-size: 14px;
     font-weight: 400;
-
     color: var(--color-text-primary);
 }
 
 .login-link a {
     margin-left: 4px;
-
     font-weight: 600;
-
     color: var(--color-text-accent);
-
     text-decoration: none;
 }
 
 .auth-form {
     width: calc(100% - 48px);
-
     margin-top: 38px;
-
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -589,20 +499,15 @@ main {
 
 .auth-switch {
     margin: 20px 0 32px;
-
     font-size: 14px;
     font-weight: 400;
-
     color: var(--color-text-primary);
 }
 
 .auth-switch a {
     margin-left: 4px;
-
     font-weight: 600;
-
     color: var(--color-text-accent);
-
     text-decoration: none;
 }
 
@@ -614,7 +519,6 @@ main {
 .home-page {
     width: 100%;
     padding-bottom: 0;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -622,11 +526,9 @@ main {
 
 .brand-wrapper {
     width: calc(100% - 48px);
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
 }
 
@@ -636,57 +538,44 @@ main {
 
 .home-greeting {
     margin: 12px 0 0;
-
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .home-intro {
     width: calc(100% - 48px);
-
     margin-top: 44px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
 }
 
 .home-intro img {
     display: block;
-
     width: 156px;
     height: 120px;
 }
 
 .home-intro p {
     width: 100%;
-
     margin: 12px 0 0;
-
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
 .today-history-box {
     width: calc(100% - 48px);
     height: auto;
-
     margin-top: 44px;
     padding: 20px;
-
     background: var(--color-background-card);
-
     border: 1px solid var(--color-border-default);
     border-radius: 16px;
-
     display: flex;
     flex-direction: column;
 }
@@ -701,7 +590,6 @@ main {
     font-size: 12px;
     font-weight: 700;
     line-height: normal;
-
     color: var(--color-text-tertiary);
 }
 
@@ -709,31 +597,25 @@ main {
     font-size: 12px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
 .pause-preview {
     margin: 12px 0 0;
-
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .history-link {
     margin-top: 12px;
-
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-accent);
     text-decoration: none;
 }
@@ -748,12 +630,10 @@ main {
 }
 
 /* ===== Страница завершения паузы ===== */
-
 .completed-page {
     width: 100%;
     padding-top: 56px;
     padding-bottom: 48px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -762,13 +642,10 @@ main {
 .checkmark-circle {
     width: 80px;
     height: 80px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background: var(--color-surface-success);
-
     border: 2px solid var(--color-border-active);
     border-radius: 50%;
 }
@@ -781,43 +658,33 @@ main {
 
 .congrats-text {
     width: calc(100% - 48px);
-
     margin-top: 24px;
-
     text-align: center;
 }
 
 .congrats-text h2 {
     margin: 0;
-
     font-size: 22px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .congrats-text p {
     margin: 12px 0 0;
-
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
 .meta-info-card {
     width: calc(100% - 48px);
-
     margin-top: 84px;
     padding: 20px;
-
     background: var(--color-background-card);
-
     border: 1px solid var(--color-border-default);
     border-radius: 20px;
-
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -839,37 +706,30 @@ main {
     font-size: 14px;
     font-weight: 500;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .completed-button {
     margin-top: 84px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-decoration: none;
 }
 
 .completed-home-link {
     margin-top: 16px;
-
     font-size: 14px;
     font-weight: 500;
     line-height: normal;
-
     color: var(--color-text-accent);
     text-decoration: none;
 }
 
 /* ===== Страница "Мои паузы" ===== */
-
 .history-page {
     width: 100%;
     padding-bottom: 0;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -877,7 +737,6 @@ main {
 
 .pauses-list {
     width: calc(100% - 48px);
-
     display: flex;
     flex-direction: column;
 }
@@ -892,25 +751,19 @@ main {
 
 .section-label {
     margin: 24px 0 0;
-
     font-size: 12px;
     font-weight: 700;
     line-height: normal;
-
     color: var(--color-text-tertiary);
 }
 
 .pause-card {
     width: 100%;
-
     margin-top: 12px;
     padding: 16px;
-
     background: var(--color-background-card);
-
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-16);
-
     display: flex;
     flex-direction: column;
 }
@@ -929,7 +782,6 @@ main {
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
-
     color: var(--color-text-secondary);
 }
 
@@ -937,13 +789,11 @@ main {
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
-
     color: var(--color-text-primary);
 }
 
 .pause-card-content {
     margin-top: 12px;
-
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -951,7 +801,6 @@ main {
 
 .pause-card-content p {
     margin: 0;
-
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
@@ -972,14 +821,130 @@ main {
     margin-bottom: 44px;
 }
 
+/* ===== Страница профиля ===== */
+.profile-page {
+    width: 100%;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.user-identity-card {
+    width: calc(100% - 48px);
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--color-background-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.avatar-ring {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-muted);
+    border-radius: 50%;
+}
+
+.avatar-ring img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.profile-meta {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.profile-name {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--color-text-primary);
+}
+
+.profile-email {
+    margin: 4px 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--color-text-secondary);
+}
+
+.btn-edit-profile {
+    margin-top: 16px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border-active);
+    border-radius: var(--radius-12);
+    background: transparent;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--color-text-primary);
+}
+
+.profile-options {
+    width: calc(100% - 48px);
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-row {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    background: var(--color-background-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-12);
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.option-row > img:first-child {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: block;
+}
+
+.option-row span {
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--color-text-primary);
+}
+
+.option-row .option-arrow {
+    width: 16px;
+    height: 16px;
+    margin-left: auto;
+    flex-shrink: 0;
+    display: block;
+}
+
+.profile-page .bottom-tab-bar {
+    margin-top: 24px;
+    margin-bottom: 44px;
+}
 
 /* ===== Медиа-запрос для больших экранов ===== */
 @media (min-width: 768px) {
     body {
         min-height: 100vh;
-
         display: flex;
         align-items: center;
         justify-content: center;
