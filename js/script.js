@@ -5,6 +5,9 @@ const completePauseButton = document.querySelector(".pause-complete-button");
 const pauseTime = document.querySelector(".pause-time");
 const completedDuration = document.querySelector(".completed-duration");
 const completedDate = document.querySelector(".completed-date");
+const backButton = document.querySelector(".header-back");
+const pauseAnswers = document.querySelectorAll("textarea");
+const chips = document.querySelectorAll(".chip");
 
 if (startPauseButton) {
 
@@ -46,9 +49,33 @@ if (completePauseButton) {
 
     completePauseButton.addEventListener("click", function () {
 
+        const feelings = pauseAnswers[0].value;
+        const thoughts = pauseAnswers[1].value;
+        const needs = pauseAnswers[2].value;
+
         const endTime = Date.now();
 
         const duration = endTime - Number(savedStartTime);
+
+        const pauseData = {
+            feelings: feelings,
+            thoughts: thoughts,
+            needs: needs,
+            duration: duration,
+            endTime: endTime
+        };
+
+        const savedPauses = localStorage.getItem("pauses");
+
+        const pauses = savedPauses ? JSON.parse(savedPauses) : [];
+
+        pauses.push(pauseData);
+
+        localStorage.setItem("pauses", JSON.stringify(pauses));
+
+        const pauseDataString = JSON.stringify(pauseData);
+
+        localStorage.setItem("pauseData", pauseDataString);
 
         localStorage.setItem("pauseDuration", duration);
 
@@ -61,6 +88,20 @@ if (completePauseButton) {
 }
 
 if (completedDuration) {
+
+    const savedPauses = localStorage.getItem("pauses");
+
+    const pauses = JSON.parse(savedPauses);
+
+    console.log(pauses);
+
+    const savedPauseData = localStorage.getItem("pauseData");
+
+    const parsedPauseData = JSON.parse(savedPauseData);
+
+    console.log(parsedPauseData);
+
+    console.log(parsedPauseData.feelings);
 
     const savedDuration = localStorage.getItem("pauseDuration");
 
@@ -97,3 +138,37 @@ if (completedDate) {
     completedDate.textContent = formattedDate;
 
 }
+
+if (backButton) {
+
+    backButton.addEventListener("click", function () {
+
+        localStorage.removeItem("startTime");
+
+        window.location.href = "home.html";
+
+    });
+
+}
+
+chips.forEach(function (chip) {
+
+    chip.addEventListener("click", function () {
+
+        const questionCard = chip.closest(".question-card");
+
+        const textarea = questionCard.querySelector("textarea");
+
+        if (textarea.value) {
+
+            textarea.value += `, ${chip.textContent}`;
+
+        } else {
+
+            textarea.value = chip.textContent;
+
+        }
+
+    });
+
+});
