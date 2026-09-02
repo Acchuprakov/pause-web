@@ -8,6 +8,7 @@ const completedDate = document.querySelector(".completed-date");
 const backButton = document.querySelector(".header-back");
 const pauseAnswers = document.querySelectorAll("textarea");
 const chips = document.querySelectorAll(".chip");
+const pausesList = document.querySelector(".pauses-list");
 
 if (startPauseButton) {
 
@@ -172,3 +173,163 @@ chips.forEach(function (chip) {
     });
 
 });
+
+if (pausesList) {
+
+    const savedPauses = localStorage.getItem("pauses");
+
+    const pauses = savedPauses ? JSON.parse(savedPauses) : [];
+
+    pausesList.innerHTML = "";
+
+    const sections = {};
+
+    const reversedPauses = [...pauses].reverse();
+
+    reversedPauses.forEach(function (pause) {
+
+        const pauseCard = document.createElement("article");
+
+        pauseCard.classList.add("pause-card");
+
+        const cardHeader = document.createElement("div");
+
+        cardHeader.classList.add("pause-card-header");
+
+        const durationElement = document.createElement("span");
+
+        durationElement.classList.add("pause-duration");
+
+        const totalSeconds = Math.floor(pause.duration / 1000);
+
+        const minutes = Math.floor(totalSeconds / 60);
+
+        const seconds = totalSeconds % 60;
+
+        const formattedMinutes = String(minutes).padStart(2, "0");
+
+        const formattedSeconds = String(seconds).padStart(2, "0");
+
+        durationElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+
+        const timeElement = document.createElement("time");
+
+        timeElement.classList.add("pause-card-time");
+
+        const date = new Date(pause.endTime);
+
+        const today = new Date();
+
+        const yesterday = new Date();
+
+        yesterday.setDate(today.getDate() - 1);
+
+        let sectionTitle = "";
+
+        if (date.toDateString() === today.toDateString()) {
+
+            sectionTitle = "СЕГОДНЯ";
+
+        } else if (date.toDateString() === yesterday.toDateString()) {
+
+            sectionTitle = "ВЧЕРА";
+
+        } else {
+
+            sectionTitle = date.toLocaleDateString("ru-RU", {
+                day: "numeric",
+                month: "long"
+            }).toUpperCase();
+
+        }
+
+        if (!sections[sectionTitle]) {
+
+            const pauseSection = document.createElement("section");
+
+            pauseSection.classList.add("pause-section");
+
+            const sectionLabel = document.createElement("h2");
+
+            sectionLabel.classList.add("section-label");
+
+            sectionLabel.textContent = sectionTitle;
+
+            pauseSection.append(sectionLabel);
+
+            pausesList.append(pauseSection);
+
+            sections[sectionTitle] = pauseSection;
+
+        }
+
+        timeElement.textContent = date.toLocaleTimeString("ru-RU", {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+
+        cardHeader.append(durationElement);
+
+        cardHeader.append(timeElement);
+
+        pauseCard.append(cardHeader);
+
+        const cardContent = document.createElement("div");
+
+        cardContent.classList.add("pause-card-content");
+
+        const feelingsRow = document.createElement("p");
+
+        const feelingsLabel = document.createElement("strong");
+
+        feelingsLabel.textContent = "Чувства: ";
+
+        const feelingsText = document.createElement("span");
+
+        feelingsText.textContent = pause.feelings;
+
+        feelingsRow.append(feelingsLabel);
+
+        feelingsRow.append(feelingsText);
+
+        cardContent.append(feelingsRow);
+
+        const thoughtsRow = document.createElement("p");
+
+        const thoughtsLabel = document.createElement("strong");
+
+        thoughtsLabel.textContent = "Мысли: ";
+
+        const thoughtsText = document.createElement("span");
+
+        thoughtsText.textContent = pause.thoughts;
+
+        thoughtsRow.append(thoughtsLabel);
+
+        thoughtsRow.append(thoughtsText);
+
+        cardContent.append(thoughtsRow);
+
+        const needsRow = document.createElement("p");
+
+        const needsLabel = document.createElement("strong");
+
+        needsLabel.textContent = "Себе: ";
+
+        const needsText = document.createElement("span");
+
+        needsText.textContent = pause.needs;
+
+        needsRow.append(needsLabel);
+
+        needsRow.append(needsText);
+
+        cardContent.append(needsRow);
+
+        pauseCard.append(cardContent);
+
+        sections[sectionTitle].append(pauseCard);
+
+    });
+
+}
