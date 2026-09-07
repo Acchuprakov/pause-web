@@ -2,13 +2,20 @@
 <html lang="ru">
 
 <head>
-    <!-- ===== Базовые настройки документа ===== -->
+    <!-- ====================================================== -->
+    <!-- БАЗОВЫЕ НАСТРОЙКИ -->
+    <!-- ====================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ПАУЗА</title>
 
-    <!-- ===== Подключение шрифта Manrope ===== -->
+
+    <!-- ====================================================== -->
+    <!-- ШРИФТ MANROPE -->
+    <!-- ====================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -17,97 +24,317 @@
         rel="stylesheet"
     >
 
-    <!-- ===== Основные стили проекта ===== -->
+
+    <!-- ====================================================== -->
+    <!-- ОСНОВНЫЕ СТИЛИ -->
+    <!-- ====================================================== -->
+
     <link rel="stylesheet" href="style/style.css">
 </head>
 
 
 <body>
 
-    <!-- ========================================================== -->
-    <!-- ===== ГЛАВНЫЙ КОНТЕЙНЕР (Landing Page) ===== -->
-    <!-- ========================================================== -->
+
+    <!-- ====================================================== -->
+    <!-- DESKTOP HEADER -->
+    <!-- На мобильной версии будет скрыт через CSS -->
+    <!-- ====================================================== -->
+
+    <header class="desktop-header">
+
+
+        <!-- Логотип -->
+
+        <div class="brand-logo">
+
+            <div class="logo-badge">
+                <span>П</span>
+            </div>
+
+            <span class="brand-name">
+                ПАУЗА
+            </span>
+
+        </div>
+
+
+        <!-- Навигация -->
+
+        <nav class="header-tabs">
+
+            <button
+                class="header-tab header-tab--active"
+                type="button"
+            >
+                Главная
+            </button>
+
+            <button
+                class="header-tab"
+                type="button"
+            >
+                Паузы
+            </button>
+
+            <button
+                class="header-tab"
+                type="button"
+            >
+                Лента
+            </button>
+
+            <button
+                class="header-tab"
+                type="button"
+            >
+                Пауза+
+            </button>
+
+            <button
+                class="header-tab"
+                type="button"
+            >
+                Профиль
+            </button>
+
+        </nav>
+
+
+        <!-- Вход -->
+
+        <button
+            class="desktop-login-button"
+            type="button"
+        >
+            Войти в аккаунт
+        </button>
+
+    </header>
+
+
+    <!-- ====================================================== -->
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
+    <!-- ====================================================== -->
 
     <main class="landing-page">
 
 
-        <!-- ===== Основной контент ===== -->
+        <!-- ================================================== -->
+        <!-- HERO SECTION -->
+        <!-- ОДНА секция и для mobile, и для desktop -->
+        <!-- ================================================== -->
 
-        <div class="landing-content">
+        <section class="hero-section">
 
-
-            <!-- ===== Заголовок бренда ===== -->
-
-            <h1 class="display">
-                ПАУЗА
-            </h1>
+            <div class="hero-container">
 
 
-            <!-- ===== Вступительный текст ===== -->
+                <!-- ========================================== -->
+                <!-- Заголовок и текст -->
+                <!-- ========================================== -->
 
-            <div class="intro">
+                <div class="title-and-motto">
 
-                <p>
-                    Остановись. Заметь себя.
-                </p>
+                    <h1 class="hero-title">
+                        ПАУЗА
+                    </h1>
 
-                <p>
-                    Вернись к себе.
-                </p>
+
+                    <h2 class="hero-motto">
+
+                        <span>
+                            Остановись. Заметь себя.
+                        </span>
+
+                        <span>
+                            Вернись к себе.
+                        </span>
+
+                    </h2>
+
+
+                    <!--
+                        На desktop показываем.
+                        На mobile скроем через CSS.
+                    -->
+
+                    <p class="hero-description">
+                        Сделайте осознанным обычный день.
+                        Этот сервис создан, чтобы бережно помочь вам
+                        находить моменты тишины и осознанности
+                        в течение напряженного дня.
+                    </p>
+
+                </div>
+
+
+                <!-- ========================================== -->
+                <!-- Иллюстрация -->
+                <!-- ========================================== -->
+
+                <div class="hero-illustration">
+
+                    <img
+                        src="assets/images/pause-illustration4.png"
+                        alt="Иллюстрация человека в спокойной обстановке"
+                    >
+
+                </div>
+
+
+                <!-- ========================================== -->
+                <!-- MOBILE: предложение создать аккаунт -->
+                <!-- На desktop этот блок будет скрыт -->
+                <!-- ========================================== -->
+
+                <div class="profile-prompt">
+
+                    <p>
+                        Чтобы сохранять паузы и видеть историю —
+                        создайте аккаунт.
+                    </p>
+
+                    <button
+                        class="button-secondary"
+                        type="button"
+                    >
+                        Создать аккаунт
+                    </button>
+
+                </div>
+
+
+                <!-- ========================================== -->
+                <!-- Основные действия -->
+                <!-- ========================================== -->
+
+                <div class="hero-actions">
+
+                    <button
+                        class="hero-primary-button"
+                        type="button"
+                    >
+                        Начать паузу
+                    </button>
+
+
+                    <!--
+                        Вторая кнопка нужна на desktop.
+                        На mobile её скроем,
+                        потому что там есть profile-prompt.
+                    -->
+
+                    <button
+                        class="hero-secondary-button"
+                        type="button"
+                    >
+                        Создать аккаунт
+                    </button>
+
+                </div>
+
 
             </div>
 
+        </section>
 
-            <!-- ===== Иллюстрация ===== -->
 
-            <div class="pause-illustration">
+        <!-- ================================================== -->
+        <!-- FEATURES SECTION -->
+        <!-- Только desktop -->
+        <!-- ================================================== -->
 
-                <img
-                    src="assets/images/pause-illustration4.png"
-                    alt="Иллюстрация человека в спокойной обстановке"
-                >
+        <section class="features-section">
+
+            <div class="features-container">
+
+
+                <!-- Карточка 01 -->
+
+                <article class="benefit-card">
+
+                    <div class="card-badge">
+                        01
+                    </div>
+
+                    <h3 class="benefit-title">
+                        Замедление ума
+                    </h3>
+
+                    <p class="benefit-description">
+                        Уделите себе всего несколько минут,
+                        чтобы восстановить ментальный баланс
+                        в хаосе дня.
+                    </p>
+
+                </article>
+
+
+                <!-- Карточка 02 -->
+
+                <article class="benefit-card">
+
+                    <div class="card-badge">
+                        02
+                    </div>
+
+                    <h3 class="benefit-title">
+                        Фиксация состояний
+                    </h3>
+
+                    <p class="benefit-description">
+                        Записывайте свои чувства, эмоции и мысли,
+                        чтобы проследить динамику тревожности.
+                    </p>
+
+                </article>
+
+
+                <!-- Карточка 03 -->
+
+                <article class="benefit-card">
+
+                    <div class="card-badge">
+                        03
+                    </div>
+
+                    <h3 class="benefit-title">
+                        Пауза+
+                    </h3>
+
+                    <p class="benefit-description">
+                        Эксклюзивные курсы медитаций
+                        и дыхательных практик
+                        от сертифицированных психологов.
+                    </p>
+
+                </article>
+
 
             </div>
 
-
-            <!-- ===== Приглашение создать аккаунт ===== -->
-
-            <div class="profile-prompt">
-
-                <p>
-                    Чтобы сохранять паузы и видеть историю — создайте профиль.
-                </p>
-
-                <button class="button-secondary" type="button">
-                    Создать аккаунт
-                </button>
-
-            </div>
+        </section>
 
 
-        </div>
-        <!-- /landing-content -->
-
-
-        <!-- ===== Основная кнопка ===== -->
-
-        <button class="button-primary" type="button">
-            Начать паузу
-        </button>
-
-
-        <!-- ====================================================== -->
-        <!-- ===== Нижнее мобильное меню ===== -->
-        <!-- ====================================================== -->
+        <!-- ================================================== -->
+        <!-- MOBILE BOTTOM NAVIGATION -->
+        <!-- На desktop будет скрыта -->
+        <!-- ================================================== -->
 
         <nav class="bottom-tab-bar-container">
 
             <div class="bottom-tab-bar">
 
 
-                <!-- ===== Главная ===== -->
+                <!-- ========================================== -->
+                <!-- Главная -->
+                <!-- ========================================== -->
 
-                <a class="bottom-tab active" href="index.html">
+                <a
+                    class="bottom-tab active"
+                    href="index.html"
+                >
 
                     <span class="bottom-tab-icon">
 
@@ -130,9 +357,14 @@
                 </a>
 
 
-                <!-- ===== Паузы ===== -->
+                <!-- ========================================== -->
+                <!-- Паузы -->
+                <!-- ========================================== -->
 
-                <a class="bottom-tab" href="pages/history.html">
+                <a
+                    class="bottom-tab"
+                    href="pages/history.html"
+                >
 
                     <span class="bottom-tab-icon">
 
@@ -155,9 +387,14 @@
                 </a>
 
 
-                <!-- ===== Лента ===== -->
+                <!-- ========================================== -->
+                <!-- Лента -->
+                <!-- ========================================== -->
 
-                <a class="bottom-tab" href="pages/lenta.html">
+                <a
+                    class="bottom-tab"
+                    href="pages/lenta.html"
+                >
 
                     <span class="bottom-tab-icon">
 
@@ -180,9 +417,14 @@
                 </a>
 
 
-                <!-- ===== Пауза+ ===== -->
+                <!-- ========================================== -->
+                <!-- Пауза+ -->
+                <!-- ========================================== -->
 
-                <a class="bottom-tab" href="#">
+                <a
+                    class="bottom-tab"
+                    href="#"
+                >
 
                     <span class="bottom-tab-icon">
 
@@ -205,9 +447,14 @@
                 </a>
 
 
-                <!-- ===== Профиль ===== -->
+                <!-- ========================================== -->
+                <!-- Профиль -->
+                <!-- ========================================== -->
 
-                <a class="bottom-tab" href="pages/profile.html">
+                <a
+                    class="bottom-tab"
+                    href="pages/profile.html"
+                >
 
                     <span class="bottom-tab-icon">
 
@@ -236,10 +483,11 @@
 
 
     </main>
-    <!-- /landing-page -->
 
 
-    <!-- ===== Подключение JavaScript ===== -->
+    <!-- ====================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ====================================================== -->
 
     <script src="js/script.js"></script>
 

@@ -23,6 +23,7 @@
     --radius-24: 24px;
     --radius-22: 22px;
     --radius-20: 20px;
+    --radius-18: 18px;
     --radius-16: 16px;
     --radius-12: 12px;
 }
@@ -36,8 +37,11 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
+
+    min-height: 100vh;
 
     font-family: 'Manrope', sans-serif;
 
@@ -46,12 +50,14 @@ body {
 
 
 /*
-   Пока большинство мобильных страниц проекта
-   имеют максимальную ширину 420px.
+   Пока остальные страницы проекта
+   сделаны как мобильные экраны до 420px.
 */
+
 main {
     width: 100%;
     max-width: 420px;
+
     margin: 0 auto;
 
     display: flex;
@@ -66,6 +72,8 @@ main {
 
 
 button {
+    font-family: inherit;
+
     cursor: pointer;
 }
 
@@ -85,7 +93,6 @@ button {
 
     background: var(--color-primary-green);
 
-    font-family: inherit;
     font-size: 16px;
     font-weight: 500;
 
@@ -104,7 +111,6 @@ button {
 
     background: var(--color-surface-muted);
 
-    font-family: inherit;
     font-size: 14px;
     font-weight: 500;
 
@@ -115,8 +121,7 @@ button {
 /* ==========================================================
    СТАРОЕ НИЖНЕЕ МЕНЮ
 
-   ВРЕМЕННО оставляем его только для страниц,
-   которые ещё используют старую HTML-разметку:
+   Пока оно остаётся для:
    home.html
    history.html
    profile.html
@@ -173,8 +178,6 @@ button {
 }
 
 
-/* Иконки старого меню */
-
 .tab-home svg,
 .tab-pauses svg,
 .tab-profile svg,
@@ -186,8 +189,6 @@ button {
 }
 
 
-/* Текст старого меню */
-
 .tab-home span,
 .tab-pauses span,
 .tab-profile span,
@@ -197,8 +198,6 @@ button {
     line-height: normal;
 }
 
-
-/* Активный пункт старого меню */
 
 .tab-home.active,
 .tab-pauses.active,
@@ -253,6 +252,7 @@ button {
     position: absolute;
 
     left: 50%;
+
     transform: translateX(-50%);
 
     margin: 0;
@@ -276,16 +276,31 @@ button {
 
 
 /* ==========================================================
-   ГЛАВНАЯ СТРАНИЦА ДЛЯ ГОСТЯ
+   ГЛАВНАЯ СТРАНИЦА — MOBILE
    index.html
+
+   Сначала описываем мобильную версию.
+   Ниже через @media переопределяем её для desktop.
    ========================================================== */
+
+
+/* Desktop Header на мобильном скрыт */
+
+.desktop-header {
+    display: none;
+}
+
+
+/* ----------------------------------------------------------
+   Главный контейнер
+   ---------------------------------------------------------- */
 
 .landing-page {
     width: 100%;
 
     /*
-       Оставляем свободное место под фиксированное меню,
-       чтобы кнопка "Начать паузу" не уходила под него.
+       Оставляем место под фиксированное
+       нижнее мобильное меню.
     */
     padding-bottom: 110px;
 
@@ -294,37 +309,23 @@ button {
     align-items: center;
 
     /*
-       Убираем общую рамку main именно на главной странице.
+       На главной общей рамки вокруг экрана нет.
     */
     border: none;
     border-radius: 0;
 }
 
 
-/* Расстояние до иллюстрации */
+/* ----------------------------------------------------------
+   HERO
+   ---------------------------------------------------------- */
 
-.landing-page .pause-illustration {
-    margin-top: 63px;
+.hero-section {
+    width: 100%;
 }
 
 
-/* Расстояние до блока регистрации */
-
-.landing-page .profile-prompt {
-    margin-top: 63px;
-}
-
-
-/* Расстояние до кнопки "Начать паузу" */
-
-.landing-page .button-primary {
-    margin-top: 63px;
-}
-
-
-/* Основной контент главной */
-
-.landing-content {
+.hero-container {
     width: 100%;
 
     display: flex;
@@ -333,12 +334,25 @@ button {
 }
 
 
-/* Главный логотип ПАУЗА */
+/* ----------------------------------------------------------
+   Заголовок и слоган
+   ---------------------------------------------------------- */
 
-.display {
-    margin: 44px 0 0;
+.title-and-motto {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-align: center;
+}
+
+
+/* ПАУЗА */
+
+.hero-title {
+    margin: 44px 0 0;
 
     font-size: 40px;
     font-weight: 300;
@@ -348,17 +362,15 @@ button {
 }
 
 
-/* Вступительный текст */
+/* Мобильный слоган */
 
-.intro {
-    margin-top: 16px;
+.hero-motto {
+    margin: 16px 0 0;
 
-    text-align: center;
-}
+    display: flex;
+    flex-direction: column;
 
-
-.intro p {
-    margin: 0;
+    gap: 8px;
 
     font-size: 16px;
     font-weight: 400;
@@ -366,44 +378,59 @@ button {
 }
 
 
-.intro p:first-child {
+.hero-motto span:first-child {
     color: var(--color-text-primary);
 }
 
 
-.intro p:last-child {
-    margin-top: 8px;
-
+.hero-motto span:last-child {
     color: var(--color-text-secondary);
 }
 
 
-/* Иллюстрация */
+/*
+   Большое описание Hero показываем
+   только в desktop-версии.
+*/
 
-.pause-illustration {
+.hero-description {
+    display: none;
+}
+
+
+/* ----------------------------------------------------------
+   Иллюстрация
+   ---------------------------------------------------------- */
+
+.hero-illustration {
     width: 100%;
 
-    margin-top: 0;
+    margin-top: 32px;
 
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 
-.pause-illustration img {
-    width: 180px;
-    height: 138px;
+.hero-illustration img {
+    width: auto;
+    height: 187px;
 
     display: block;
+
+    object-fit: contain;
 }
 
 
-/* Карточка приглашения создать профиль */
+/* ----------------------------------------------------------
+   Предложение создать аккаунт — MOBILE
+   ---------------------------------------------------------- */
 
 .profile-prompt {
     width: calc(100% - 48px);
 
-    margin-top: 24px;
+    margin-top: 32px;
     padding: 20px;
 
     background: var(--color-background-card);
@@ -431,17 +458,142 @@ button {
 }
 
 
+/* ----------------------------------------------------------
+   Действия Hero
+   ---------------------------------------------------------- */
+
+.hero-actions {
+    width: 100%;
+
+    margin-top: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Начать паузу */
+
+.hero-primary-button {
+    width: calc(100% - 48px);
+    height: 52px;
+
+    border: none;
+    border-radius: var(--radius-26);
+
+    background: var(--color-primary-green);
+
+    font-size: 16px;
+    font-weight: 500;
+
+    color: var(--color-text-on-primary);
+}
+
+
+/*
+   На mobile отдельная кнопка "Создать аккаунт"
+   здесь не нужна, потому что она уже есть
+   внутри profile-prompt.
+*/
+
+.hero-secondary-button {
+    display: none;
+}
+
+
+/* ==========================================================
+   FEATURES — MOBILE
+
+   На мобильном карточки идут вертикально.
+   ========================================================== */
+
+.features-section {
+    width: 100%;
+
+    margin-top: 32px;
+}
+
+
+.features-container {
+    width: calc(100% - 48px);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+.benefit-card {
+    width: 100%;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-24);
+}
+
+
+.card-badge {
+    width: 38px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-surface-muted);
+
+    border-radius: var(--radius-12);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: var(--color-text-accent);
+}
+
+
+.benefit-title {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    color: var(--color-text-primary);
+}
+
+
+.benefit-description {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: var(--color-text-secondary);
+}
+
+
 /* ==========================================================
    НОВОЕ МОБИЛЬНОЕ НИЖНЕЕ МЕНЮ
    ========================================================== */
 
 
 /*
-   Внешний контейнер меню.
+   Внешний контейнер.
 
    position: fixed —
-   меню всегда находится внизу экрана,
-   даже когда пользователь скроллит страницу.
+   меню всегда остаётся внизу экрана.
 */
 
 .bottom-tab-bar-container {
@@ -459,16 +611,11 @@ button {
 
     background: var(--color-background);
 
-    /*
-       Меню должно находиться поверх контента страницы.
-    */
     z-index: 100;
 }
 
 
-/*
-   Сама панель с пятью пунктами.
-*/
+/* Сама панель */
 
 .bottom-tab-bar-container .bottom-tab-bar {
     width: 100%;
@@ -486,9 +633,7 @@ button {
 }
 
 
-/*
-   Один пункт меню.
-*/
+/* Один пункт меню */
 
 .bottom-tab {
     width: 44px;
@@ -504,16 +649,14 @@ button {
     text-decoration: none;
 
     /*
-       Этот цвет наследует и текст,
+       Этот цвет наследует и подпись,
        и inline SVG через currentColor.
     */
     color: var(--color-text-tertiary);
 }
 
 
-/*
-   Контейнер иконки.
-*/
+/* Фрейм иконки */
 
 .bottom-tab-icon {
     width: 24px;
@@ -525,9 +668,7 @@ button {
 }
 
 
-/*
-   Inline SVG наследует цвет tab через currentColor.
-*/
+/* Inline SVG */
 
 .bottom-tab-icon svg {
     width: 24px;
@@ -537,9 +678,7 @@ button {
 }
 
 
-/*
-   Подпись обычного неактивного пункта.
-*/
+/* Подпись */
 
 .bottom-tab-label {
     font-size: 10px;
@@ -548,18 +687,14 @@ button {
 }
 
 
-/*
-   Активный пункт.
-*/
+/* Активный пункт */
 
 .bottom-tab.active {
     color: var(--color-primary-green);
 }
 
 
-/*
-   Активная подпись — Bold.
-*/
+/* Активная подпись — Bold */
 
 .bottom-tab.active .bottom-tab-label {
     font-weight: 700;
@@ -633,11 +768,10 @@ button {
     height: 36px;
 
     border: none;
-    border-radius: 18px;
+    border-radius: var(--radius-18);
 
     background: var(--color-primary-green);
 
-    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
 
@@ -650,11 +784,10 @@ button {
     height: 36px;
 
     border: none;
-    border-radius: 18px;
+    border-radius: var(--radius-18);
 
     background: transparent;
 
-    font-family: inherit;
     font-size: 14px;
     font-weight: 500;
 
@@ -723,7 +856,7 @@ button {
 }
 
 
-/* Быстрые варианты ответа */
+/* Быстрые варианты */
 
 .question-chips {
     margin-top: 4px;
@@ -742,14 +875,11 @@ button {
 
     background: var(--color-background);
 
-    font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     line-height: normal;
 
     color: var(--color-text-tertiary);
-
-    cursor: pointer;
 }
 
 
@@ -828,8 +958,6 @@ button {
 }
 
 
-/* Кнопка показать / скрыть пароль */
-
 .password-toggle {
     width: 20px;
     height: 20px;
@@ -845,8 +973,6 @@ button {
     border: none;
 
     background: transparent;
-
-    cursor: pointer;
 }
 
 
@@ -883,8 +1009,6 @@ button {
     text-decoration: none;
 }
 
-
-/* Форма авторизации */
 
 .auth-form {
     width: calc(100% - 48px);
@@ -956,6 +1080,23 @@ button {
 }
 
 
+/*
+   Этот класс пока нужен home.html.
+*/
+
+.display {
+    margin: 44px 0 0;
+
+    text-align: center;
+
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.2;
+
+    color: var(--color-text-accent);
+}
+
+
 .home-greeting {
     margin: 12px 0 0;
 
@@ -1005,7 +1146,6 @@ button {
 
 .today-history-box {
     width: calc(100% - 48px);
-    height: auto;
 
     margin-top: 44px;
     padding: 20px;
@@ -1432,7 +1572,6 @@ button {
 
     background: transparent;
 
-    font-family: inherit;
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
@@ -1468,8 +1607,6 @@ button {
     border-radius: var(--radius-12);
 
     font-family: inherit;
-
-    cursor: pointer;
 }
 
 
@@ -1507,23 +1644,470 @@ button {
 
 
 /* ==========================================================
-   ВРЕМЕННЫЙ MEDIA QUERY
+   DESKTOP — ГЛАВНАЯ СТРАНИЦА
 
-   Раньше он использовался для показа мобильного интерфейса
-   по центру большого экрана.
+   Desktop-макет рассчитан на большой экран.
 
-   Когда начнём объединять desktop и mobile,
-   мы этот блок перепишем.
+   Внутренний контейнер:
+   max-width: 1200px
    ========================================================== */
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
 
-    body {
-        min-height: 100vh;
+
+    /* ------------------------------------------------------
+       DESKTOP HEADER
+       ------------------------------------------------------ */
+
+    .desktop-header {
+        width: 100%;
+        max-width: 1200px;
+        height: 72px;
+
+        margin: 12px auto 0;
+        padding: 16px 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        background: var(--color-background);
+
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-24);
+    }
+
+
+    /* Логотип */
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+    }
+
+
+    .logo-badge {
+        width: 32px;
+        height: 32px;
 
         display: flex;
         align-items: center;
         justify-content: center;
+
+        background: var(--color-primary-green);
+
+        border-radius: 50%;
+    }
+
+
+    .logo-badge span {
+        font-size: 16px;
+        font-weight: 700;
+
+        color: var(--color-text-on-primary);
+    }
+
+
+    .brand-name {
+        font-size: 20px;
+        font-weight: 300;
+
+        color: var(--color-text-accent);
+    }
+
+
+    /* ------------------------------------------------------
+       HEADER TABS
+       ------------------------------------------------------ */
+
+    .header-tabs {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+    }
+
+
+    .header-tab {
+        padding: 8px 20px;
+
+        background: transparent;
+
+        border: none;
+        border-radius: var(--radius-18);
+
+        font-size: 14px;
+        font-weight: 500;
+
+        color: var(--color-text-secondary);
+    }
+
+
+    .header-tab--active {
+        background: var(--color-primary-green);
+
+        color: var(--color-text-on-primary);
+    }
+
+
+    /* Кнопка входа */
+
+    .desktop-login-button {
+        width: 157px;
+        height: 40px;
+
+        background: var(--color-surface-muted);
+
+        border: none;
+        border-radius: var(--radius-26);
+
+        font-size: 14px;
+        font-weight: 500;
+
+        color: var(--color-text-accent);
+    }
+
+
+    /* ------------------------------------------------------
+       ГЛАВНАЯ СТРАНИЦА
+       ------------------------------------------------------ */
+
+    .landing-page {
+        width: 100%;
+        max-width: none;
+
+        margin: 0;
+        padding-bottom: 0;
+
+        align-items: stretch;
+
+        border: none;
+        border-radius: 0;
+    }
+
+
+    /* ------------------------------------------------------
+       HERO
+       ------------------------------------------------------ */
+
+    .hero-section {
+        width: 100%;
+        height: 543px;
+    }
+
+
+    /*
+       Desktop Hero:
+
+       560px текст
+       +
+       80px расстояние
+       +
+       560px иллюстрация
+       =
+       1200px
+    */
+
+    .hero-container {
+        width: 100%;
+        max-width: 1200px;
+        height: 100%;
+
+        margin: 0 auto;
+
+        display: grid;
+
+        grid-template-columns: 560px 560px;
+
+        grid-template-areas:
+            "text illustration"
+            "actions illustration";
+
+        column-gap: 80px;
+        row-gap: 32px;
+
+        align-content: center;
+        align-items: center;
+    }
+
+
+    /* ------------------------------------------------------
+       Hero text
+       ------------------------------------------------------ */
+
+    .title-and-motto {
+        grid-area: text;
+
+        width: 560px;
+
+        align-items: flex-start;
+
+        gap: 16px;
+
+        text-align: left;
+    }
+
+
+    .hero-title {
+        margin: 0;
+
+        font-size: 56px;
+        font-weight: 300;
+        line-height: normal;
+
+        color: var(--color-text-accent);
+    }
+
+
+    .hero-motto {
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 0;
+
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.2;
+
+        color: var(--color-text-primary);
+    }
+
+
+    /*
+       На desktop обе строки слогана
+       одного цвета.
+    */
+
+    .hero-motto span:first-child,
+    .hero-motto span:last-child {
+        color: var(--color-text-primary);
+    }
+
+
+    /* Desktop описание */
+
+    .hero-description {
+        display: block;
+
+        margin: 0;
+
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+
+        color: var(--color-text-secondary);
+    }
+
+
+    /* ------------------------------------------------------
+       Иллюстрация
+       ------------------------------------------------------ */
+
+    .hero-illustration {
+        grid-area: illustration;
+
+        width: 560px;
+
+        margin-top: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .hero-illustration img {
+        width: 560px;
+        height: auto;
+
+        object-fit: contain;
+    }
+
+
+    /*
+       Мобильную карточку регистрации
+       на desktop не показываем.
+    */
+
+    .profile-prompt {
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       HERO ACTIONS
+       ------------------------------------------------------ */
+
+    .hero-actions {
+        grid-area: actions;
+
+        width: auto;
+
+        margin-top: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 16px;
+    }
+
+
+    .hero-primary-button {
+        width: 165px;
+        height: 54px;
+
+        border: none;
+        border-radius: var(--radius-26);
+
+        background: var(--color-primary-green);
+
+        font-size: 16px;
+        font-weight: 500;
+
+        color: var(--color-text-on-primary);
+    }
+
+
+    .hero-secondary-button {
+        height: 54px;
+
+        padding: 0 32px;
+
+        display: block;
+
+        border: none;
+        border-radius: var(--radius-26);
+
+        background: var(--color-surface-muted);
+
+        font-size: 16px;
+        font-weight: 500;
+
+        color: var(--color-text-accent);
+    }
+
+
+    /* ======================================================
+       FEATURES — DESKTOP
+
+       Здесь важно переопределить
+       мобильное flex-direction: column
+       на flex-direction: row.
+       ====================================================== */
+
+    .features-section {
+        width: 100%;
+        height: 273px;
+
+        /*
+           На mobile было margin-top: 32px.
+           На desktop его убираем.
+        */
+        margin-top: 0;
+
+        padding-bottom: 80px;
+    }
+
+
+    .features-container {
+        width: 100%;
+        max-width: 1200px;
+        height: 100%;
+
+        margin: 0 auto;
+
+        display: flex;
+
+        /*
+           КЛЮЧЕВАЯ СТРОКА:
+           на mobile было column,
+           на desktop возвращаем row.
+        */
+        flex-direction: row;
+
+        align-items: stretch;
+
+        gap: 32px;
+    }
+
+
+    /*
+       На desktop три карточки
+       делят ширину контейнера поровну.
+    */
+
+    .benefit-card {
+        width: auto;
+
+        flex: 1 1 0;
+
+        min-width: 0;
+
+        padding: 32px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 16px;
+
+        background: var(--color-background-card);
+
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-24);
+    }
+
+
+    .card-badge {
+        width: 38px;
+        height: 28px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: var(--color-surface-muted);
+
+        border-radius: var(--radius-12);
+
+        font-size: 12px;
+        font-weight: 700;
+
+        color: var(--color-text-accent);
+    }
+
+
+    .benefit-title {
+        margin: 0;
+
+        font-size: 20px;
+        font-weight: 600;
+
+        color: var(--color-text-primary);
+    }
+
+
+    .benefit-description {
+        margin: 0;
+
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+
+        color: var(--color-text-secondary);
+    }
+
+
+    /* ------------------------------------------------------
+       MOBILE MENU на desktop скрываем
+       ------------------------------------------------------ */
+
+    .bottom-tab-bar-container {
+        display: none;
     }
 
 }
