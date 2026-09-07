@@ -10,6 +10,20 @@ const pauseAnswers = document.querySelectorAll("textarea");
 const chips = document.querySelectorAll(".chip");
 const pausesList = document.querySelector(".pauses-list");
 
+const authModalCard = document.querySelector(".auth-modal-card");
+const authModalHeading = document.querySelector(".auth-modal-heading");
+const authModalSubtitle = document.querySelector(".auth-modal-subtitle");
+const authModalSubmit = document.querySelector(".auth-modal-submit");
+const authModalSwitchText = document.querySelector(".auth-modal-switch-text");
+const authModeSwitch = document.querySelector(".auth-mode-switch");
+
+const authModal = document.querySelector(".auth-modal");
+const authModalOverlay = document.querySelector(".auth-modal-overlay");
+const authModalClose = document.querySelector(".auth-modal-close");
+
+const desktopLoginButton = document.querySelector(".desktop-login-button");
+const desktopRegisterButton = document.querySelector(".hero-secondary-button");
+
 if (startPauseButton) {
 
     startPauseButton.addEventListener("click", function () {
@@ -333,3 +347,204 @@ if (pausesList) {
     });
 
 }
+
+/* ==========================================================
+   МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ
+   ========================================================== */
+
+
+/*
+   Переключает содержимое модалки
+   между регистрацией и входом.
+*/
+
+function setAuthMode(mode) {
+
+    if (!authModalCard) {
+        return;
+    }
+
+
+    /* РЕГИСТРАЦИЯ */
+
+    if (mode === "register") {
+
+        authModalCard.dataset.authMode = "register";
+
+        authModalHeading.innerHTML =
+            "Чтобы сохранить паузу —<br>создайте аккаунт";
+
+        authModalSubmit.textContent = "Зарегистрироваться";
+
+        authModalSwitchText.textContent = "Уже есть аккаунт?";
+
+        authModeSwitch.textContent = "Войти";
+
+    }
+
+
+    /* ВХОД */
+
+    if (mode === "login") {
+
+        authModalCard.dataset.authMode = "login";
+
+        authModalHeading.innerHTML =
+            "Чтобы сохранить паузу —<br>войдите в аккаунт";
+
+        authModalSubmit.textContent = "Войти";
+
+        authModalSwitchText.textContent = "Нет аккаунта?";
+
+        authModeSwitch.textContent = "Регистрация";
+
+    }
+
+}
+
+
+/*
+   Открывает модалку.
+
+   mode может быть:
+   "register"
+   или
+   "login"
+*/
+
+function openAuthModal(mode) {
+
+    if (!authModal) {
+        return;
+    }
+
+    setAuthMode(mode);
+
+    authModal.classList.add("auth-modal--open");
+
+    document.body.classList.add("modal-open");
+
+}
+
+
+/*
+   Закрывает модалку.
+*/
+
+function closeAuthModal() {
+
+    if (!authModal) {
+        return;
+    }
+
+    authModal.classList.remove("auth-modal--open");
+
+    document.body.classList.remove("modal-open");
+
+}
+
+
+/* ==========================================================
+   ОТКРЫТИЕ МОДАЛКИ
+   ========================================================== */
+
+
+/*
+   Desktop:
+   "Создать аккаунт"
+*/
+
+if (desktopRegisterButton) {
+
+    desktopRegisterButton.addEventListener("click", function () {
+
+        openAuthModal("register");
+
+    });
+
+}
+
+
+/*
+   Desktop:
+   "Войти в аккаунт"
+*/
+
+if (desktopLoginButton) {
+
+    desktopLoginButton.addEventListener("click", function () {
+
+        openAuthModal("login");
+
+    });
+
+}
+
+
+/* ==========================================================
+   ПЕРЕКЛЮЧЕНИЕ РЕГИСТРАЦИЯ ↔ ВХОД
+   ========================================================== */
+
+if (authModeSwitch) {
+
+    authModeSwitch.addEventListener("click", function () {
+
+        const currentMode = authModalCard.dataset.authMode;
+
+        if (currentMode === "register") {
+
+            setAuthMode("login");
+
+        } else {
+
+            setAuthMode("register");
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================================
+   ЗАКРЫТИЕ МОДАЛКИ
+   ========================================================== */
+
+
+/* Крестик */
+
+if (authModalClose) {
+
+    authModalClose.addEventListener("click", function () {
+
+        closeAuthModal();
+
+    });
+
+}
+
+
+/* Клик по затемнённому фону */
+
+if (authModalOverlay) {
+
+    authModalOverlay.addEventListener("click", function () {
+
+        closeAuthModal();
+
+    });
+
+}
+
+
+/* Клавиша Escape */
+
+document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+        closeAuthModal();
+
+    }
+
+});

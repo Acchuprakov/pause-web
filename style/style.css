@@ -6,9 +6,11 @@
     --color-background: #FAF7F2;
     --color-surface-muted: #F2ECE2;
     --color-primary-green: #3D5A45;
+    --color-button-primary-hover: #324537;
+    --color-button-secondary-hover: #FDF0D9;
     --color-surface-success: #E8EFE9;
     --color-background-card: #FFFFFF;
-
+    
     --color-border-default: #EBE6DD;
     --color-border-active: #3D5A45;
 
@@ -46,6 +48,10 @@ body {
     font-family: 'Manrope', sans-serif;
 
     background: var(--color-background);
+}
+
+body.modal-open {
+    overflow: hidden;
 }
 
 
@@ -115,6 +121,48 @@ button {
     font-weight: 500;
 
     color: var(--color-text-accent);
+}
+
+/* ==========================================================
+   HOVER — PRIMARY BUTTONS
+   ========================================================== */
+
+/*
+   Плавное изменение цвета для всех основных зелёных кнопок.
+*/
+
+.button-primary,
+.hero-primary-button {
+    transition: background-color 0.2s ease;
+}
+
+
+/*
+   Hover работает:
+   - на обычных primary-кнопках
+   - на desktop Hero
+   - внутри модалки, потому что там тоже button-primary
+*/
+
+.button-primary:hover,
+.hero-primary-button:hover {
+    background: var(--color-button-primary-hover);
+}
+
+/* ==========================================================
+   HOVER — SECONDARY BUTTONS
+   ========================================================== */
+
+.button-secondary,
+.hero-secondary-button,
+.desktop-login-button {
+    transition: background-color 0.2s ease;
+}
+
+.button-secondary:hover,
+.hero-secondary-button:hover,
+.desktop-login-button:hover {
+    background: var(--color-button-secondary-hover);
 }
 
 
@@ -1652,6 +1700,18 @@ button {
    max-width: 1200px
    ========================================================== */
 
+/* ==========================================================
+   DESKTOP MODAL — БАЗОВОЕ СОСТОЯНИЕ
+
+   На мобильной версии модалка не используется:
+   там пока остаются отдельные страницы
+   registration.html и login.html.
+   ========================================================== */
+
+.auth-modal {
+    display: none;
+}
+
 @media (min-width: 1200px) {
 
 
@@ -1731,17 +1791,25 @@ button {
 
 
     .header-tab {
-        padding: 8px 20px;
+    padding: 8px 20px;
 
-        background: transparent;
+    background: transparent;
 
-        border: none;
-        border-radius: var(--radius-18);
+    border: none;
+    border-radius: var(--radius-18);
 
-        font-size: 14px;
-        font-weight: 500;
+    font-size: 14px;
+    font-weight: 500;
 
-        color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
+
+    transition: color 0.2s ease;
+    }
+
+    /* Hover только для неактивных пунктов меню */
+
+    .header-tab:not(.header-tab--active):hover {
+    color: var(--color-text-accent);
     }
 
 
@@ -2109,5 +2177,382 @@ button {
     .bottom-tab-bar-container {
         display: none;
     }
+
+    /* ======================================================
+   DESKTOP MODAL
+   ====================================================== */
+
+
+/*
+   Вся область модального окна.
+
+   position: fixed + inset: 0
+   растягивают её на весь экран браузера.
+*/
+
+.auth-modal {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /*
+       По умолчанию модалка скрыта.
+       Класс auth-modal--open позже будет добавлять JavaScript.
+    */
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+
+/*
+   Когда модалка открыта.
+*/
+
+.auth-modal.auth-modal--open {
+    display: flex;
+}
+
+
+/* ------------------------------------------------------
+   Затемнение страницы
+   ------------------------------------------------------ */
+
+.auth-modal-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /*
+       Пока используем мягкое затемнение.
+       Его потом легко сделать светлее или темнее.
+    */
+    background: rgba(43, 46, 42, 0.35);
+}
+
+
+/* ------------------------------------------------------
+   Общий wrapper
+
+   Внутри него находятся:
+   - карточка 520px
+   - крестик справа
+   ------------------------------------------------------ */
+
+.auth-modal-wrapper {
+    position: relative;
+
+    width: 520px;
+
+    /*
+       Поднимаем wrapper над overlay.
+    */
+    z-index: 1;
+}
+
+
+/* ------------------------------------------------------
+   RegistrationCard
+   ------------------------------------------------------ */
+
+.auth-modal-card {
+    width: 520px;
+
+    /*
+       Высоту НЕ фиксируем.
+       Она зависит от формы:
+       регистрация будет выше,
+       вход — немного ниже.
+    */
+
+    padding: 40px;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-24);
+}
+
+/* ======================================================
+   СОДЕРЖИМОЕ REGISTRATION CARD
+   ====================================================== */
+
+
+/* ------------------------------------------------------
+   TITLE BLOCK
+
+   "Чтобы сохранить паузу —
+    создайте аккаунт"
+
+   "Это займет меньше минуты"
+   ------------------------------------------------------ */
+
+.auth-modal-title-block {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* Главный заголовок */
+
+.auth-modal-title-block h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    color: var(--color-text-primary);
+}
+
+
+/* Подзаголовок */
+
+.auth-modal-title-block p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+
+    color: var(--color-text-secondary);
+}
+
+/* В режиме входа поле имени не нужно */
+
+.auth-modal-card[data-auth-mode="login"] .auth-register-only {
+    display: none;
+}
+
+
+/* В режиме входа подзаголовок тоже скрываем */
+
+.auth-modal-card[data-auth-mode="login"] .auth-modal-subtitle {
+    display: none;
+}
+
+
+
+/* ------------------------------------------------------
+   SEGMENT CONTROL
+   Email / Телефон
+
+   Используем уже существующие tab-active
+   и tab-inactive.
+   ------------------------------------------------------ */
+
+.auth-modal-card .segment-tabs {
+    width: 100%;
+    height: 44px;
+
+    margin-top: 38px;
+
+    padding: 4px;
+
+    display: flex;
+
+    background: var(--color-surface-muted);
+
+    border-radius: var(--radius-22);
+}
+
+
+/*
+   Каждый tab занимает половину
+   ширины SegmentControl.
+*/
+
+.auth-modal-card .tab-active,
+.auth-modal-card .tab-inactive {
+    width: 50%;
+}
+
+
+/* ------------------------------------------------------
+   ФОРМА РЕГИСТРАЦИИ
+
+   На мобильной странице у формы:
+   width: calc(100% - 48px)
+
+   Внутри модалки это уже не нужно,
+   потому что сама карточка имеет padding 40px.
+   ------------------------------------------------------ */
+
+.auth-modal-form {
+    width: 100%;
+
+    margin-top: 38px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* ------------------------------------------------------
+   Поля формы
+
+   Сами form-field и input-container
+   уже стилизованы глобально.
+
+   Здесь просто гарантируем,
+   что они занимают всю ширину карточки.
+   ------------------------------------------------------ */
+
+.auth-modal-card .form-field {
+    width: 100%;
+}
+
+
+.auth-modal-card .input-container {
+    width: 100%;
+}
+
+
+/* ------------------------------------------------------
+   КНОПКА "ПРОДОЛЖИТЬ"
+
+   На обычной мобильной странице
+   button-primary имеет ширину
+   calc(100% - 48px).
+
+   Внутри карточки она должна занять
+   всю доступную ширину.
+   ------------------------------------------------------ */
+
+.auth-modal-card .button-primary {
+    width: 100%;
+
+    margin-top: 38px;
+}
+
+
+/* ------------------------------------------------------
+   "Уже есть аккаунт? Войти"
+   ------------------------------------------------------ */
+
+/* ------------------------------------------------------
+   Нижнее переключение:
+   "Уже есть аккаунт? Войти"
+   ------------------------------------------------------ */
+
+.auth-modal-switch {
+    margin: 20px 0 0;
+
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+
+    color: var(--color-text-primary);
+}
+
+
+.auth-mode-switch {
+    margin-left: 4px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--color-text-accent);
+
+    cursor: pointer;
+}
+
+
+/* ------------------------------------------------------
+   Кнопка "Войти"
+
+   Визуально она выглядит как текстовая ссылка,
+   но технически это button,
+   потому что она не открывает другую страницу,
+   а переключает состояние этой же модалки.
+   ------------------------------------------------------ */
+
+.auth-mode-switch {
+    margin-left: 4px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--color-text-accent);
+
+    cursor: pointer;
+}
+
+
+/* ------------------------------------------------------
+   Кнопка закрытия
+
+   40 × 40
+   находится снаружи карточки справа.
+   ------------------------------------------------------ */
+
+.auth-modal-close {
+    position: absolute;
+
+    top: 0;
+
+    /*
+       100% = правый край карточки
+       + 8px расстояние.
+    */
+    left: calc(100% + 8px);
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
+
+    color: var(--color-primary-green);
+}
+
+
+/* Иконка крестика */
+
+.auth-modal-close svg {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
 
 }
