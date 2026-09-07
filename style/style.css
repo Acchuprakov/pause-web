@@ -1,9 +1,14 @@
+/* ==========================================================
+   ЦВЕТА И РАДИУСЫ
+   ========================================================== */
+
 :root {
     --color-background: #FAF7F2;
     --color-surface-muted: #F2ECE2;
     --color-primary-green: #3D5A45;
     --color-surface-success: #E8EFE9;
     --color-background-card: #FFFFFF;
+
     --color-border-default: #EBE6DD;
     --color-border-active: #3D5A45;
 
@@ -22,77 +27,131 @@
     --radius-12: 12px;
 }
 
+
+/* ==========================================================
+   БАЗОВЫЕ СТИЛИ
+   ========================================================== */
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+
     font-family: 'Manrope', sans-serif;
+
     background: var(--color-background);
 }
 
+
+/*
+   Пока большинство мобильных страниц проекта
+   имеют максимальную ширину 420px.
+*/
 main {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
-    background: var(--color-background);
-    border-radius: var(--radius-28);
-    border: 1px solid var(--color-border-default);
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    background: var(--color-background);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-28);
 }
+
 
 button {
     cursor: pointer;
 }
 
-/* ===== Кнопки ===== */
+
+/* ==========================================================
+   ОБЩИЕ КНОПКИ
+   ========================================================== */
+
 .button-primary {
     width: calc(100% - 48px);
     height: 52px;
+
     margin-top: 24px;
+
     border: none;
     border-radius: var(--radius-26);
+
     background: var(--color-primary-green);
+
     font-family: inherit;
     font-size: 16px;
     font-weight: 500;
+
     color: var(--color-text-on-primary);
 }
+
 
 .button-secondary {
     width: 100%;
     height: 44px;
+
     margin-top: 16px;
+
     border: none;
     border-radius: var(--radius-22);
+
     background: var(--color-surface-muted);
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
+
     color: var(--color-text-accent);
 }
 
-/* ===== Навигация (нижнее меню) ===== */
-.bottom-tab-bar {
+
+/* ==========================================================
+   СТАРОЕ НИЖНЕЕ МЕНЮ
+
+   ВРЕМЕННО оставляем его только для страниц,
+   которые ещё используют старую HTML-разметку:
+   home.html
+   history.html
+   profile.html
+
+   Позже заменим его новым меню.
+   ========================================================== */
+
+.home-page > .bottom-tab-bar,
+.history-page > .bottom-tab-bar,
+.profile-page > .bottom-tab-bar {
     width: 100%;
     height: 72px;
+
     padding: 0 32px;
+
     margin-top: 24px;
-    margin-bottom: 72px;
+    margin-bottom: 44px;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
     background: var(--color-background);
+
     border-top: 1px solid var(--color-border-default);
     border-bottom: 1px solid var(--color-border-default);
 }
 
-.bottom-tab-bar a {
+
+.home-page > .bottom-tab-bar a,
+.history-page > .bottom-tab-bar a,
+.profile-page > .bottom-tab-bar a {
     text-decoration: none;
 }
+
 
 .tab-home,
 .tab-pauses,
@@ -100,26 +159,35 @@ button {
 .tab-lenta {
     width: 80px;
     height: 43px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     gap: 4px;
+
     color: var(--color-text-tertiary);
+
     transition: color 0.2s ease;
 }
 
-/* Иконки внутри вкладок */
+
+/* Иконки старого меню */
+
 .tab-home svg,
 .tab-pauses svg,
 .tab-profile svg,
 .tab-lenta svg {
     width: 24px;
     height: 24px;
+
     display: block;
 }
 
-/* Текст внутри вкладки */
+
+/* Текст старого меню */
+
 .tab-home span,
 .tab-pauses span,
 .tab-profile span,
@@ -129,7 +197,9 @@ button {
     line-height: normal;
 }
 
-/* Активная вкладка */
+
+/* Активный пункт старого меню */
+
 .tab-home.active,
 .tab-pauses.active,
 .tab-profile.active,
@@ -137,644 +207,1079 @@ button {
     color: var(--color-primary-green);
 }
 
-.tab-home.active span,
-.tab-pauses.active span,
-.tab-profile.active span,
-.tab-lenta.active span {
-    color: var(--color-primary-green);
-}
 
-/* ===== Шапка (header) ===== */
+/* ==========================================================
+   МОБИЛЬНАЯ ШАПКА
+   ========================================================== */
+
 .header-bar {
     position: relative;
+
     width: 100%;
     height: 56px;
+
     padding: 0 20px;
+
     display: flex;
     align-items: center;
 }
+
 
 .header-back {
     width: 24px;
     height: 24px;
+
     padding: 0;
-    border: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: none;
+
     background: transparent;
 }
+
 
 .header-back img {
     width: 24px;
     height: 24px;
+
     display: block;
 }
 
+
 .header-title {
     position: absolute;
+
     left: 50%;
     transform: translateX(-50%);
+
     margin: 0;
+
     font-size: 18px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .pause-time {
     margin-left: auto;
+
     font-size: 14px;
     font-weight: 400;
+
     color: var(--color-primary-green);
 }
 
-/* ===== Страница приветствия (Landing) ===== */
+
+/* ==========================================================
+   ГЛАВНАЯ СТРАНИЦА ДЛЯ ГОСТЯ
+   index.html
+   ========================================================== */
+
 .landing-page {
     width: 100%;
-    padding-bottom: 48px;
+
+    /*
+       Оставляем свободное место под фиксированное меню,
+       чтобы кнопка "Начать паузу" не уходила под него.
+    */
+    padding-bottom: 110px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    /*
+       Убираем общую рамку main именно на главной странице.
+    */
+    border: none;
+    border-radius: 0;
 }
+
+
+/* Расстояние до иллюстрации */
 
 .landing-page .pause-illustration {
     margin-top: 63px;
 }
 
+
+/* Расстояние до блока регистрации */
+
 .landing-page .profile-prompt {
     margin-top: 63px;
 }
+
+
+/* Расстояние до кнопки "Начать паузу" */
 
 .landing-page .button-primary {
     margin-top: 63px;
 }
 
+
+/* Основной контент главной */
+
 .landing-content {
     width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
+/* Главный логотип ПАУЗА */
+
 .display {
     margin: 44px 0 0;
+
     text-align: center;
+
     font-size: 40px;
     font-weight: 300;
     line-height: 1.2;
+
     color: var(--color-text-accent);
 }
 
+
+/* Вступительный текст */
+
 .intro {
     margin-top: 16px;
+
     text-align: center;
 }
 
+
 .intro p {
     margin: 0;
+
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
 }
+
 
 .intro p:first-child {
     color: var(--color-text-primary);
 }
 
+
 .intro p:last-child {
     margin-top: 8px;
+
     color: var(--color-text-secondary);
 }
 
+
+/* Иллюстрация */
+
 .pause-illustration {
     width: 100%;
+
     margin-top: 0;
+
     display: flex;
     justify-content: center;
 }
 
+
 .pause-illustration img {
-    display: block;
     width: 180px;
     height: 138px;
+
+    display: block;
 }
+
+
+/* Карточка приглашения создать профиль */
 
 .profile-prompt {
     width: calc(100% - 48px);
+
     margin-top: 24px;
     padding: 20px;
+
     background: var(--color-background-card);
+
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-24);
 }
 
+
 .profile-prompt p {
     margin: 0;
+
     text-align: center;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
+
 
 .profile-prompt .button-secondary {
     margin-top: 16px;
 }
 
-/* ===== Страница паузы (Pause) ===== */
-.pause-page {
+
+/* ==========================================================
+   НОВОЕ МОБИЛЬНОЕ НИЖНЕЕ МЕНЮ
+   ========================================================== */
+
+
+/*
+   Внешний контейнер меню.
+
+   position: fixed —
+   меню всегда находится внизу экрана,
+   даже когда пользователь скроллит страницу.
+*/
+
+.bottom-tab-bar-container {
+    position: fixed;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
     width: 100%;
+    max-width: 420px;
+
+    padding: 0 8px 8px;
+
+    background: var(--color-background);
+
+    /*
+       Меню должно находиться поверх контента страницы.
+    */
+    z-index: 100;
+}
+
+
+/*
+   Сама панель с пятью пунктами.
+*/
+
+.bottom-tab-bar-container .bottom-tab-bar {
+    width: 100%;
+
+    padding: 16px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--color-background);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-24);
+}
+
+
+/*
+   Один пункт меню.
+*/
+
+.bottom-tab {
+    width: 44px;
+    height: 42px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    text-decoration: none;
+
+    /*
+       Этот цвет наследует и текст,
+       и inline SVG через currentColor.
+    */
+    color: var(--color-text-tertiary);
+}
+
+
+/*
+   Контейнер иконки.
+*/
+
+.bottom-tab-icon {
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
+
+
+/*
+   Inline SVG наследует цвет tab через currentColor.
+*/
+
+.bottom-tab-icon svg {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+}
+
+
+/*
+   Подпись обычного неактивного пункта.
+*/
+
+.bottom-tab-label {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+/*
+   Активный пункт.
+*/
+
+.bottom-tab.active {
+    color: var(--color-primary-green);
+}
+
+
+/*
+   Активная подпись — Bold.
+*/
+
+.bottom-tab.active .bottom-tab-label {
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   СТРАНИЦА ПАУЗЫ
+   ========================================================== */
+
+.pause-page {
+    width: 100%;
+
+    justify-content: center;
+}
+
 
 .pause-page .button-primary {
     margin-bottom: 24px;
 }
 
+
 .title-group {
     width: calc(100% - 48px);
+
     margin-top: 12px;
 }
 
+
 .title-group h2 {
     margin: 0;
+
     font-size: 22px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .title-group p {
     margin: 12px 0 0;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
+
+
+/* Переключатель */
 
 .segment-tabs {
     width: calc(100% - 48px);
     height: 44px;
+
     margin-top: 38px;
     padding: 4px;
+
     display: flex;
+
     background: var(--color-surface-muted);
+
     border-radius: var(--radius-22);
 }
+
 
 .tab-active {
     width: 50%;
     height: 36px;
+
     border: none;
     border-radius: 18px;
+
     background: var(--color-primary-green);
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
+
     color: var(--color-text-on-primary);
 }
+
 
 .tab-inactive {
     width: 50%;
     height: 36px;
+
     border: none;
     border-radius: 18px;
+
     background: transparent;
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
+
     color: var(--color-text-secondary);
 }
 
+
+/* Карточка вопроса */
+
 .question-card {
     width: calc(100% - 40px);
+
     margin-top: 24px;
 }
 
+
 .question-title {
     margin: 0;
+
     font-size: 15px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
+/* Поле ответа */
+
 .input-wrapper {
-    margin-top: 12px;
     width: 100%;
+
+    margin-top: 12px;
+
     background: var(--color-background-card);
+
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-12);
 }
 
+
 .input-wrapper textarea {
     width: 100%;
     min-height: 100px;
+
     padding: 16px;
+
     border: none;
     outline: none;
+
     resize: none;
+
     background: transparent;
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
+
 
 .input-wrapper textarea::placeholder {
     color: var(--color-text-tertiary);
 }
 
+
+/* Быстрые варианты ответа */
+
 .question-chips {
     margin-top: 4px;
+
     display: flex;
     flex-wrap: wrap;
+
     gap: 6px;
 }
 
+
 .chip {
-    cursor: pointer;
     padding: 0 4px;
+
     border: none;
+
     background: var(--color-background);
+
     font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     line-height: normal;
+
     color: var(--color-text-tertiary);
+
+    cursor: pointer;
 }
 
-/* ===== Формы (регистрация и авторизация) ===== */
+
+/* ==========================================================
+   ФОРМЫ
+   Регистрация и авторизация
+   ========================================================== */
+
 .registration-form {
     width: calc(100% - 48px);
+
     margin-top: 38px;
+
     display: flex;
     flex-direction: column;
+
     gap: 20px;
 }
+
 
 .form-field {
     width: 100%;
 }
 
+
 .form-field label {
     display: block;
+
     margin-bottom: 6px;
+
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
+
 
 .input-container {
     width: 100%;
     height: 44px;
+
+    padding: 0 16px;
+
     display: flex;
     align-items: center;
-    padding: 0 16px;
+
     background: var(--color-background-card);
+
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-12);
 }
 
+
 .input-container input {
     width: 100%;
     height: 100%;
+
     padding: 0;
+
     border: none;
     outline: none;
+
     background: transparent;
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 400;
+
     color: var(--color-text-primary);
 }
+
 
 .input-container input::placeholder {
     color: var(--color-text-tertiary);
 }
 
+
+/* Кнопка показать / скрыть пароль */
+
 .password-toggle {
     width: 20px;
     height: 20px;
+
     flex-shrink: 0;
+
     padding: 0;
-    border: none;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: none;
+
     background: transparent;
+
     cursor: pointer;
 }
+
 
 .password-toggle img {
     width: 20px;
     height: 20px;
+
     display: block;
 }
+
 
 .registration-button {
     margin-top: 38px;
 }
 
+
 .login-link {
     margin: 20px 0 32px;
+
     font-size: 14px;
     font-weight: 400;
+
     color: var(--color-text-primary);
 }
+
 
 .login-link a {
     margin-left: 4px;
+
     font-weight: 600;
+
     color: var(--color-text-accent);
+
     text-decoration: none;
 }
+
+
+/* Форма авторизации */
 
 .auth-form {
     width: calc(100% - 48px);
+
     margin-top: 38px;
+
     display: flex;
     flex-direction: column;
+
     gap: 20px;
 }
 
+
 .auth-switch {
     margin: 20px 0 32px;
+
     font-size: 14px;
     font-weight: 400;
+
     color: var(--color-text-primary);
 }
 
+
 .auth-switch a {
     margin-left: 4px;
+
     font-weight: 600;
+
     color: var(--color-text-accent);
+
     text-decoration: none;
 }
+
 
 .auth-submit {
     margin-top: 38px;
 }
 
-/* ===== Домашняя страница (Home) ===== */
+
+/* ==========================================================
+   ДОМАШНЯЯ СТРАНИЦА
+   Авторизованный пользователь
+   ========================================================== */
+
 .home-page {
     width: 100%;
+
     padding-bottom: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
 .brand-wrapper {
     width: calc(100% - 48px);
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     text-align: center;
 }
+
 
 .brand-wrapper .display {
     margin-top: 44px;
 }
 
+
 .home-greeting {
     margin: 12px 0 0;
+
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .home-intro {
     width: calc(100% - 48px);
+
     margin-top: 44px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     text-align: center;
 }
 
+
 .home-intro img {
-    display: block;
     width: 156px;
     height: 120px;
+
+    display: block;
 }
+
 
 .home-intro p {
     width: 100%;
+
     margin: 12px 0 0;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
+
+
+/* Карточка последней паузы */
 
 .today-history-box {
     width: calc(100% - 48px);
     height: auto;
+
     margin-top: 44px;
     padding: 20px;
-    background: var(--color-background-card);
-    border: 1px solid var(--color-border-default);
-    border-radius: 16px;
+
     display: flex;
     flex-direction: column;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-16);
 }
+
 
 .card-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
+
 
 .card-header span {
     font-size: 12px;
     font-weight: 700;
     line-height: normal;
+
     color: var(--color-text-tertiary);
 }
+
 
 .card-header time {
     font-size: 12px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
 
+
 .pause-preview {
     margin: 12px 0 0;
+
     overflow: hidden;
+
     white-space: nowrap;
     text-overflow: ellipsis;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .history-link {
     margin-top: 12px;
+
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-accent);
+
     text-decoration: none;
 }
+
 
 .home-start-button {
     margin-top: 44px;
 }
 
-.home-page .bottom-tab-bar {
-    margin-top: 24px;
-    margin-bottom: 44px;
-}
 
-/* ===== Страница завершения паузы ===== */
+/* ==========================================================
+   СТРАНИЦА ЗАВЕРШЕНИЯ ПАУЗЫ
+   ========================================================== */
+
 .completed-page {
     width: 100%;
+
     padding-top: 56px;
     padding-bottom: 48px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .checkmark-circle {
     width: 80px;
     height: 80px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: var(--color-surface-success);
+
     border: 2px solid var(--color-border-active);
     border-radius: 50%;
 }
 
+
 .checkmark-circle img {
     width: 32px;
     height: 32px;
+
     display: block;
 }
 
+
 .congrats-text {
     width: calc(100% - 48px);
+
     margin-top: 24px;
+
     text-align: center;
 }
 
+
 .congrats-text h2 {
     margin: 0;
+
     font-size: 22px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .congrats-text p {
     margin: 12px 0 0;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
 
+
 .meta-info-card {
     width: calc(100% - 48px);
+
     margin-top: 84px;
     padding: 20px;
-    background: var(--color-background-card);
-    border: 1px solid var(--color-border-default);
-    border-radius: 20px;
+
     display: flex;
     flex-direction: column;
+
     gap: 16px;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-20);
 }
+
 
 .meta-row {
     display: flex;
     align-items: center;
+
     gap: 8px;
 }
+
 
 .meta-row img {
     width: 18px;
     height: 18px;
+
     display: block;
 }
+
 
 .meta-row span {
     font-size: 14px;
     font-weight: 500;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .completed-button {
     margin-top: 84px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-decoration: none;
 }
+
 
 .completed-home-link {
     margin-top: 16px;
+
     font-size: 14px;
     font-weight: 500;
     line-height: normal;
+
     color: var(--color-text-accent);
+
     text-decoration: none;
 }
 
-/* ===== Страница "Мои паузы" ===== */
+
+/* ==========================================================
+   СТРАНИЦА "МОИ ПАУЗЫ"
+   ========================================================== */
+
 .history-page {
     width: 100%;
+
     padding-bottom: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
 .pauses-list {
     width: calc(100% - 48px);
+
     display: flex;
     flex-direction: column;
 }
+
 
 .pause-section {
     width: 100%;
 }
 
+
 .pause-section + .pause-section {
     margin-top: 32px;
 }
 
+
 .section-label {
     margin: 24px 0 0;
+
     font-size: 12px;
     font-weight: 700;
     line-height: normal;
+
     color: var(--color-text-tertiary);
 }
 
+
 .pause-card {
     width: 100%;
+
     margin-top: 12px;
     padding: 16px;
-    background: var(--color-background-card);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-16);
+
     display: flex;
     flex-direction: column;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-16);
 }
+
 
 .pause-card + .pause-card {
     margin-top: 12px;
 }
+
 
 .pause-card-header {
     display: flex;
@@ -782,175 +1287,243 @@ button {
     justify-content: space-between;
 }
 
+
 .pause-duration {
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
+
 
 .pause-card-time {
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .pause-card-content {
     margin-top: 12px;
+
     display: flex;
     flex-direction: column;
+
     gap: 10px;
 }
 
+
 .pause-card-content p {
     margin: 0;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
 }
 
+
 .pause-card-content strong {
     font-weight: 600;
+
     color: var(--color-text-primary);
 }
 
+
 .pause-card-content span {
     font-weight: 400;
+
     color: var(--color-text-secondary);
 }
 
-.history-page .bottom-tab-bar {
-    margin-top: 24px;
-    margin-bottom: 44px;
-}
 
-/* ===== Страница профиля ===== */
+/* ==========================================================
+   СТРАНИЦА ПРОФИЛЯ
+   ========================================================== */
+
 .profile-page {
     width: 100%;
+
     padding-bottom: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .user-identity-card {
     width: calc(100% - 48px);
+
     margin-top: 24px;
     padding: 20px;
-    background: var(--color-background-card);
-    border: 1px solid var(--color-border-default);
-    border-radius: 20px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-20);
 }
+
 
 .avatar-ring {
     width: 80px;
     height: 80px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: var(--color-surface-muted);
+
     border-radius: 50%;
 }
+
 
 .avatar-ring img {
     width: 32px;
     height: 32px;
+
     display: block;
 }
 
+
 .profile-meta {
     margin-top: 16px;
+
     text-align: center;
 }
 
+
 .profile-name {
     margin: 0;
+
     font-size: 20px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .profile-email {
     margin: 4px 0 0;
+
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+
     color: var(--color-text-secondary);
 }
 
+
 .btn-edit-profile {
     margin-top: 16px;
+
     padding: 8px 16px;
+
     border: 1px solid var(--color-border-active);
     border-radius: var(--radius-12);
+
     background: transparent;
+
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
 
+
 .profile-options {
     width: calc(100% - 48px);
+
     margin-top: 28px;
+
     display: flex;
     flex-direction: column;
+
     gap: 8px;
 }
+
 
 .option-row {
     width: 100%;
     min-height: 48px;
+
     padding: 14px 16px;
+
     display: flex;
     align-items: center;
+
     background: var(--color-background-card);
+
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-12);
+
     font-family: inherit;
+
     cursor: pointer;
 }
+
 
 .option-row > img:first-child {
     width: 18px;
     height: 18px;
+
     flex-shrink: 0;
+
     display: block;
 }
 
+
 .option-row span {
     margin-left: 12px;
+
     font-size: 16px;
     font-weight: 500;
     line-height: normal;
+
     color: var(--color-text-primary);
 }
+
 
 .option-row .option-arrow {
     width: 16px;
     height: 16px;
+
     margin-left: auto;
+
     flex-shrink: 0;
+
     display: block;
 }
 
-.profile-page .bottom-tab-bar {
-    margin-top: 24px;
-    margin-bottom: 44px;
-}
 
-/* ===== Медиа-запрос для больших экранов ===== */
+/* ==========================================================
+   ВРЕМЕННЫЙ MEDIA QUERY
+
+   Раньше он использовался для показа мобильного интерфейса
+   по центру большого экрана.
+
+   Когда начнём объединять desktop и mobile,
+   мы этот блок перепишем.
+   ========================================================== */
+
 @media (min-width: 768px) {
+
     body {
         min-height: 100vh;
+
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
 }
