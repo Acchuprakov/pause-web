@@ -58,7 +58,7 @@ button {
     background: var(--color-primary-green);
     font-family: inherit;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text-on-primary);
 }
 
@@ -71,7 +71,7 @@ button {
     background: var(--color-surface-muted);
     font-family: inherit;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text-accent);
 }
 
