@@ -1,69 +1,115 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <!-- ===== Базовые настройки документа ===== -->
+    <!-- ====================================================== -->
+    <!-- БАЗОВЫЕ НАСТРОЙКИ -->
+    <!-- ====================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Задай себе эти вопросы</title>
+    <title>Пауза — ПАУЗА</title>
 
-    <!-- ===== Подключение шрифта Manrope ===== -->
+
+    <!-- ====================================================== -->
+    <!-- ШРИФТ MANROPE -->
+    <!-- ====================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    <!-- ===== Основные стили проекта ===== -->
+
+    <!-- ====================================================== -->
+    <!-- ЕДИНЫЙ ФАЙЛ СТИЛЕЙ -->
+    <!-- ====================================================== -->
+
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
+
 <body>
 
-    <!-- ========================================================== -->
-    <!-- ===== СТРАНИЦА ПАУЗЫ (опросник) ===== -->
-    <!-- ========================================================== -->
+
+    <!-- ====================================================== -->
+    <!-- СТРАНИЦА ПАУЗЫ -->
+    <!--
+        Общего desktop-хедера и нижнего меню здесь нет.
+        Пользователь находится внутри отдельного сценария паузы.
+    -->
+    <!-- ====================================================== -->
+
     <main class="pause-page">
 
-        <!-- ===== Верхняя панель (шапка) ===== -->
+
+        <!-- ================================================== -->
+        <!-- ЛОКАЛЬНАЯ ШАПКА -->
+        <!--
+            Классы header-back и pause-time сохранены,
+            потому что их использт script.js.
+        -->
+        <!-- ================================================== -->
+
         <header class="header-bar">
 
-            <!-- ===== Кнопка "Назад" ===== -->
-            <button class="header-back" type="button">
-                <img src="../assets/icons/arrow-left.svg" alt="Назад">
+            <!-- Назад на главную -->
+
+            <button class="header-back" type="button" aria-label="Вернуться на главную">
+
+                <!--
+                    Inline SVG позволяет менять цвет стрелки
+                    через CSS-свойство color.
+                -->
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    aria-hidden="true">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+
             </button>
 
-            <!-- ===== Заголовок страницы ===== -->
+
+            <!-- Заголовок -->
+
             <h1 class="header-title">
                 Пауза
             </h1>
 
-            <!-- ===== Таймер паузы ===== -->
-            <div class="pause-time">
+
+            <!-- Таймер заполняется через script.js -->
+
+            <div class="pause-time" aria-live="polite">
                 00:00
             </div>
 
         </header>
 
-        <!-- ===== Первый вопрос ===== -->
-        <section class="question-card">
 
-            <h3 class="question-title">
+        <!-- ================================================== -->
+        <!-- ПЕРВЫЙ ВОПРОС -->
+        <!-- ================================================== -->
+
+        <section class="question-card" aria-labelledby="question-feelings">
+
+            <h2 class="question-title" id="question-feelings">
                 1. Что ты сейчас чувствуешь?
-            </h3>
+            </h2>
 
-            <!-- ===== Поле для ввода текста ===== -->
+
+            <!-- Поле ответа -->
+
             <div class="input-wrapper">
-        
-                <textarea
-                    placeholder="Напишите здесь..."
-                ></textarea>
+
+                <textarea aria-labelledby="question-feelings" placeholder="Напишите здесь..."></textarea>
 
             </div>
 
-            <!-- ===== Быстрые варианты-подсказки (чипсы) ===== -->
+
+            <!-- Быстрые варианты -->
+
             <div class="question-chips">
 
                 <button class="chip" type="button">усталость</button>
@@ -76,23 +122,29 @@
 
         </section>
 
-        <!-- ===== Второй вопрос ===== -->
-        <section class="question-card">
 
-            <h3 class="question-title">
+        <!-- ================================================== -->
+        <!-- ВТОРОЙ ВОПРОС -->
+        <!-- ================================================== -->
+
+        <section class="question-card" aria-labelledby="question-thoughts">
+
+            <h2 class="question-title" id="question-thoughts">
                 2. Что сейчас занимает твои мысли?
-            </h3>
+            </h2>
 
-            <!-- ===== Поле для ввода текста ===== -->
+
+            <!-- Поле ответа -->
+
             <div class="input-wrapper">
-        
-                <textarea
-                    placeholder="Напишите здесь..."
-                ></textarea>
+
+                <textarea aria-labelledby="question-thoughts" placeholder="Напишите здесь..."></textarea>
 
             </div>
 
-            <!-- ===== Быстрые варианты-подсказки ===== -->
+
+            <!-- Быстрые варианты -->
+
             <div class="question-chips">
 
                 <button class="chip" type="button">работа</button>
@@ -104,23 +156,29 @@
 
         </section>
 
-        <!-- ===== Третий вопрос ===== -->
-        <section class="question-card">
 
-            <h3 class="question-title">
+        <!-- ================================================== -->
+        <!-- ТРЕТИЙ ВОПРОС -->
+        <!-- ================================================== -->
+
+        <section class="question-card" aria-labelledby="question-support">
+
+            <h2 class="question-title" id="question-support">
                 3. Что тебе хочется сказать себе сейчас?
-            </h3>
+            </h2>
 
-            <!-- ===== Поле для ввода текста ===== -->
+
+            <!-- Поле ответа -->
+
             <div class="input-wrapper">
-        
-                <textarea
-                    placeholder="Напишите здесь..."
-                ></textarea>
+
+                <textarea aria-labelledby="question-support" placeholder="Напишите здесь..."></textarea>
 
             </div>
 
-            <!-- ===== Быстрые варианты-подсказки ===== -->
+
+            <!-- Быстрые варианты -->
+
             <div class="question-chips">
 
                 <button class="chip" type="button">отдохни</button>
@@ -133,15 +191,136 @@
 
         </section>
 
-        <!-- ===== Кнопка завершения паузы ===== -->
+
+        <!-- ================================================== -->
+        <!-- ЗАВЕРШЕНИЕ ПАУЗЫ -->
+        <!--
+            Класс pause-complete-button сохранён для script.js.
+        -->
+        <!-- ================================================== -->
+
         <button class="button-primary pause-complete-button" type="button">
             Завершить паузу
         </button>
 
+
     </main>
 
-    <!-- ===== Подключение JavaScript ===== -->
+
+    <!-- ====================================================== -->
+    <!-- DESKTOP: МОДАЛЬНОЕ ОКНО ЗАВЕРШЕНИЯ ПАУЗЫ -->
+    <!--
+        На экранах от 1200px JavaScript откроет это окно после
+        сохранения ответов. На мобильном пользователь, как и
+        раньше, перейдёт на отдельную страницу completed.html.
+
+        У модалки собственные классы completed-modal-*.
+        Поэтому она не пересекается с модалкой авторизации.
+    -->
+    <!-- ====================================================== -->
+
+    <div class="completed-modal" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-labelledby="completed-modal-heading">
+
+        <!-- Затемнённый фон -->
+
+        <div class="completed-modal-overlay"></div>
+
+
+        <!-- Карточка и кнопка закрытия -->
+
+        <div class="completed-modal-wrapper">
+
+            <div class="completed-modal-card">
+
+                <!-- Иконка завершения -->
+
+                <div class="checkmark-circle" aria-hidden="true">
+                    <img src="../assets/icons/check-circle.svg" alt="">
+                </div>
+
+
+                <!-- Заголовок и пояснение -->
+
+                <div class="completed-modal-title-block">
+
+                    <h2 id="completed-modal-heading">
+                        Пауза завершена
+                    </h2>
+
+                    <p>
+                        Спасибо, что уделили себе время и внимание.
+                    </p>
+
+                </div>
+
+
+                <!-- Дата и продолжительность заполняются через JS -->
+
+                <section class="meta-info-card" aria-label="Информация о завершённой паузе">
+
+                    <div class="meta-row">
+
+                        <img src="../assets/icons/calendar.svg" alt="">
+
+                        <span class="completed-modal-date">
+                            Дата паузы
+                        </span>
+
+                    </div>
+
+                    <div class="meta-row">
+
+                        <img src="../assets/icons/clock.svg" alt="">
+
+                        <span class="completed-modal-duration">
+                            Время паузы: 00:00
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Переходы после завершения -->
+
+                <a class="button-primary completed-button" href="history.html">
+                    Смотреть мои паузы
+                </a>
+
+                <a class="completed-home-link" href="home.html">
+                    На главную
+                </a>
+
+            </div>
+
+
+            <!--
+                После завершения паузы крестик возвращает
+                пользователя на главную страницу.
+            -->
+
+            <button class="completed-modal-close" type="button" aria-label="Закрыть и перейти на главную">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true">
+                    <path
+                        d="M3.775 2.891a.625.625 0 1 0-.884.884L9.116 10 2.89 16.225a.625.625 0 0 0 .884.883L10 10.885l6.224 6.224a.625.625 0 1 0 .884-.883L10.884 10l6.224-6.225a.625.625 0 1 0-.884-.884L10 9.116z" />
+                </svg>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ====================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ====================================================== -->
+
     <script src="../js/script.js"></script>
 
 </body>
+
 </html>

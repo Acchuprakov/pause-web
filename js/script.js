@@ -1,5 +1,10 @@
 "use strict";
 
+
+/* ==========================================================
+   ЭЛЕМЕНТЫ СТРАНИЦ ПАУЗЫ
+   ========================================================== */
+
 const startPauseButton = document.querySelector(".home-start-button");
 const completePauseButton = document.querySelector(".pause-complete-button");
 const pauseTime = document.querySelector(".pause-time");
@@ -9,6 +14,11 @@ const backButton = document.querySelector(".header-back");
 const pauseAnswers = document.querySelectorAll("textarea");
 const chips = document.querySelectorAll(".chip");
 const pausesList = document.querySelector(".pauses-list");
+
+
+/* ==========================================================
+   МОДАЛКА АВТОРИЗАЦИИ
+   ========================================================== */
 
 const authModalCard = document.querySelector(".auth-modal-card");
 const authModalHeading = document.querySelector(".auth-modal-heading");
@@ -23,8 +33,56 @@ const authModalClose = document.querySelector(".auth-modal-close");
 
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
-
 const authRequiredButtons = document.querySelectorAll(".auth-required-button");
+
+
+/* ==========================================================
+   DESKTOP-МОДАЛКА ЗАВЕРШЕНИЯ ПАУЗЫ
+   ========================================================== */
+
+const completedModal = document.querySelector(".completed-modal");
+const completedModalOverlay = document.querySelector(".completed-modal-overlay");
+const completedModalClose = document.querySelector(".completed-modal-close");
+const completedModalDate = document.querySelector(".completed-modal-date");
+const completedModalDuration = document.querySelector(".completed-modal-duration");
+
+
+/* ==========================================================
+   ОБЩЕЕ ФОРМАТИРОВАНИЕ ДАННЫХ ПАУЗЫ
+   ========================================================== */
+
+function formatPauseDuration(duration) {
+
+    const totalSeconds = Math.floor(Number(duration) / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+
+}
+
+
+function formatPauseDate(endTime) {
+
+    const date = new Date(Number(endTime));
+
+    return date.toLocaleString("ru-RU", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+}
+
+
+/* ==========================================================
+   НАЧАЛО ПАУЗЫ
+   ========================================================== */
 
 if (startPauseButton) {
 
@@ -40,39 +98,56 @@ if (startPauseButton) {
 
 }
 
+
+/* ==========================================================
+   ТАЙМЕР И ЗАВЕРШЕНИЕ ПАУЗЫ
+   ========================================================== */
+
 if (completePauseButton) {
 
     const savedStartTime = localStorage.getItem("startTime");
 
-    setInterval(function () {
+    /*
+       Обычно startTime создаётся на home.html.
+       Запасное значение не даёт таймеру сломаться,
+       если pause.html открыли напрямую.
+    */
 
-        const elapsedTime = Date.now() - Number(savedStartTime);
+    const startTimestamp = savedStartTime
+        ? Number(savedStartTime)
+        : Date.now();
 
-        const totalSeconds = Math.floor(elapsedTime / 1000);
 
-        const minutes = Math.floor(totalSeconds / 60);
+    function updatePauseTimer() {
 
-        const seconds = totalSeconds % 60;
+        if (!pauseTime) {
+            return;
+        }
 
-        const formattedMinutes = String(minutes).padStart(2, "0");
+        const elapsedTime = Date.now() - startTimestamp;
 
-        const formattedSeconds = String(seconds).padStart(2, "0");
+        pauseTime.textContent = formatPauseDuration(elapsedTime);
 
-        const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
+    }
 
-        pauseTime.textContent = formattedTime;
 
-    }, 1000);
+    /* Показываем актуальное значение сразу, затем обновляем раз в секунду. */
+
+    updatePauseTimer();
+
+    const pauseTimerId = setInterval(updatePauseTimer, 1000);
+
 
     completePauseButton.addEventListener("click", function () {
 
-        const feelings = pauseAnswers[0].value;
-        const thoughts = pauseAnswers[1].value;
-        const needs = pauseAnswers[2].value;
+        clearInterval(pauseTimerId);
+
+        const feelings = pauseAnswers[0] ? pauseAnswers[0].value : "";
+        const thoughts = pauseAnswers[1] ? pauseAnswers[1].value : "";
+        const needs = pauseAnswers[2] ? pauseAnswers[2].value : "";
 
         const endTime = Date.now();
-
-        const duration = endTime - Number(savedStartTime);
+        const duration = endTime - startTimestamp;
 
         const pauseData = {
             feelings: feelings,
@@ -82,79 +157,85 @@ if (completePauseButton) {
             endTime: endTime
         };
 
-        const savedPauses = localStorage.getItem("pauses");
 
+        /* Добавляем новую запись в общую историю пауз. */
+
+        const savedPauses = localStorage.getItem("pauses");
         const pauses = savedPauses ? JSON.parse(savedPauses) : [];
 
         pauses.push(pauseData);
 
         localStorage.setItem("pauses", JSON.stringify(pauses));
 
-        const pauseDataString = JSON.stringify(pauseData);
 
-        localStorage.setItem("pauseData", pauseDataString);
+        /* Эти значения использует мобильная completed.html. */
 
+        localStorage.setItem("pauseData", JSON.stringify(pauseData));
         localStorage.setItem("pauseDuration", duration);
-
         localStorage.setItem("pauseEndTime", endTime);
 
-        window.location.href = "completed.html";
+
+        /* Завершённая пауза больше не должна продолжать старый таймер. */
+
+        localStorage.removeItem("startTime");
+
+
+        /*
+           Desktop: остаёмся на pause.html и открываем модалку.
+           Mobile: переходим на существующую completed.html.
+        */
+
+        const isDesktop = window.matchMedia("(min-width: 1200px)").matches;
+
+        if (isDesktop && completedModal) {
+
+            openCompletedModal(pauseData);
+
+        } else {
+
+            window.location.href = "completed.html";
+
+        }
 
     });
 
 }
 
+
+/* ==========================================================
+   МОБИЛЬНАЯ СТРАНИЦА COMPLETED.HTML
+   ========================================================== */
+
 if (completedDuration) {
-
-    const savedPauses = localStorage.getItem("pauses");
-
-    const pauses = JSON.parse(savedPauses);
-
-    console.log(pauses);
-
-    const savedPauseData = localStorage.getItem("pauseData");
-
-    const parsedPauseData = JSON.parse(savedPauseData);
-
-    console.log(parsedPauseData);
-
-    console.log(parsedPauseData.feelings);
 
     const savedDuration = localStorage.getItem("pauseDuration");
 
-    const totalSeconds = Math.floor(Number(savedDuration) / 1000);
+    if (savedDuration !== null) {
 
-    const minutes = Math.floor(totalSeconds / 60);
+        completedDuration.textContent =
+            `Время паузы: ${formatPauseDuration(savedDuration)}`;
 
-    const seconds = totalSeconds % 60;
-
-    const formattedMinutes = String(minutes).padStart(2, "0");
-
-    const formattedSeconds = String(seconds).padStart(2, "0");
-
-    const formattedDuration = `${formattedMinutes}:${formattedSeconds}`;
-
-    completedDuration.textContent = `Время паузы: ${formattedDuration}`;
+    }
 
 }
+
 
 if (completedDate) {
 
     const savedEndTime = localStorage.getItem("pauseEndTime");
 
-    const date = new Date(Number(savedEndTime));
+    if (savedEndTime !== null) {
 
-    const formattedDate = date.toLocaleString("ru-RU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+        completedDate.textContent = formatPauseDate(savedEndTime);
 
-    completedDate.textContent = formattedDate;
+    }
 
 }
+
+
+/* ==========================================================
+   КНОПКА НАЗАД
+   ========================================================== */
 
 if (backButton) {
 
@@ -168,12 +249,16 @@ if (backButton) {
 
 }
 
+
+/* ==========================================================
+   БЫСТРЫЕ ВАРИАНТЫ ОТВЕТОВ
+   ========================================================== */
+
 chips.forEach(function (chip) {
 
     chip.addEventListener("click", function () {
 
         const questionCard = chip.closest(".question-card");
-
         const textarea = questionCard.querySelector("textarea");
 
         if (textarea.value) {
@@ -190,52 +275,41 @@ chips.forEach(function (chip) {
 
 });
 
+
+/* ==========================================================
+   ИСТОРИЯ ПАУЗ
+   ========================================================== */
+
 if (pausesList) {
 
     const savedPauses = localStorage.getItem("pauses");
-
     const pauses = savedPauses ? JSON.parse(savedPauses) : [];
 
     pausesList.innerHTML = "";
 
     const sections = {};
-
     const reversedPauses = [...pauses].reverse();
 
     reversedPauses.forEach(function (pause) {
 
         const pauseCard = document.createElement("article");
-
         pauseCard.classList.add("pause-card");
 
-        const cardHeader = document.createElement("div");
 
+        /* Шапка карточки: длительность и время завершения. */
+
+        const cardHeader = document.createElement("div");
         cardHeader.classList.add("pause-card-header");
 
         const durationElement = document.createElement("span");
-
         durationElement.classList.add("pause-duration");
-
-        const totalSeconds = Math.floor(pause.duration / 1000);
-
-        const minutes = Math.floor(totalSeconds / 60);
-
-        const seconds = totalSeconds % 60;
-
-        const formattedMinutes = String(minutes).padStart(2, "0");
-
-        const formattedSeconds = String(seconds).padStart(2, "0");
-
-        durationElement.textContent = `${formattedMinutes}:${formattedSeconds}`;
+        durationElement.textContent = formatPauseDuration(pause.duration);
 
         const timeElement = document.createElement("time");
-
         timeElement.classList.add("pause-card-time");
 
         const date = new Date(pause.endTime);
-
         const today = new Date();
-
         const yesterday = new Date();
 
         yesterday.setDate(today.getDate() - 1);
@@ -259,25 +333,25 @@ if (pausesList) {
 
         }
 
+
+        /* При первом появлении даты создаём её секцию. */
+
         if (!sections[sectionTitle]) {
 
             const pauseSection = document.createElement("section");
-
             pauseSection.classList.add("pause-section");
 
             const sectionLabel = document.createElement("h2");
-
             sectionLabel.classList.add("section-label");
-
             sectionLabel.textContent = sectionTitle;
 
             pauseSection.append(sectionLabel);
-
             pausesList.append(pauseSection);
 
             sections[sectionTitle] = pauseSection;
 
         }
+
 
         timeElement.textContent = date.toLocaleTimeString("ru-RU", {
             hour: "2-digit",
@@ -285,80 +359,50 @@ if (pausesList) {
         });
 
         cardHeader.append(durationElement);
-
         cardHeader.append(timeElement);
-
         pauseCard.append(cardHeader);
 
-        const cardContent = document.createElement("div");
 
+        /* Ответы пользователя. */
+
+        const cardContent = document.createElement("div");
         cardContent.classList.add("pause-card-content");
 
-        const feelingsRow = document.createElement("p");
+        const answers = [
+            ["Чувства: ", pause.feelings],
+            ["Мысли: ", pause.thoughts],
+            ["Себе: ", pause.needs]
+        ];
 
-        const feelingsLabel = document.createElement("strong");
+        answers.forEach(function (answer) {
 
-        feelingsLabel.textContent = "Чувства: ";
+            const row = document.createElement("p");
 
-        const feelingsText = document.createElement("span");
+            const label = document.createElement("strong");
+            label.textContent = answer[0];
 
-        feelingsText.textContent = pause.feelings;
+            const text = document.createElement("span");
+            text.textContent = answer[1];
 
-        feelingsRow.append(feelingsLabel);
+            row.append(label);
+            row.append(text);
+            cardContent.append(row);
 
-        feelingsRow.append(feelingsText);
-
-        cardContent.append(feelingsRow);
-
-        const thoughtsRow = document.createElement("p");
-
-        const thoughtsLabel = document.createElement("strong");
-
-        thoughtsLabel.textContent = "Мысли: ";
-
-        const thoughtsText = document.createElement("span");
-
-        thoughtsText.textContent = pause.thoughts;
-
-        thoughtsRow.append(thoughtsLabel);
-
-        thoughtsRow.append(thoughtsText);
-
-        cardContent.append(thoughtsRow);
-
-        const needsRow = document.createElement("p");
-
-        const needsLabel = document.createElement("strong");
-
-        needsLabel.textContent = "Себе: ";
-
-        const needsText = document.createElement("span");
-
-        needsText.textContent = pause.needs;
-
-        needsRow.append(needsLabel);
-
-        needsRow.append(needsText);
-
-        cardContent.append(needsRow);
+        });
 
         pauseCard.append(cardContent);
-
         sections[sectionTitle].append(pauseCard);
 
     });
 
 }
 
+
 /* ==========================================================
    МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ
    ========================================================== */
 
-
-/*
-   Переключает содержимое модалки
-   между регистрацией и входом.
-*/
+/* Переключает содержимое между регистрацией и входом. */
 
 function setAuthMode(mode) {
 
@@ -366,8 +410,6 @@ function setAuthMode(mode) {
         return;
     }
 
-
-    /* РЕГИСТРАЦИЯ */
 
     if (mode === "register") {
 
@@ -377,15 +419,11 @@ function setAuthMode(mode) {
             "Чтобы сохранить паузу —<br>создайте аккаунт";
 
         authModalSubmit.textContent = "Зарегистрироваться";
-
         authModalSwitchText.textContent = "Уже есть аккаунт?";
-
         authModeSwitch.textContent = "Войти";
 
     }
 
-
-    /* ВХОД */
 
     if (mode === "login") {
 
@@ -395,24 +433,13 @@ function setAuthMode(mode) {
             "Чтобы сохранить паузу —<br>войдите в аккаунт";
 
         authModalSubmit.textContent = "Войти";
-
         authModalSwitchText.textContent = "Нет аккаунта?";
-
         authModeSwitch.textContent = "Регистрация";
 
     }
 
 }
 
-
-/*
-   Открывает модалку.
-
-   mode может быть:
-   "register"
-   или
-   "login"
-*/
 
 function openAuthModal(mode) {
 
@@ -423,27 +450,10 @@ function openAuthModal(mode) {
     setAuthMode(mode);
 
     authModal.classList.add("auth-modal--open");
-
     document.body.classList.add("modal-open");
 
 }
 
-/* Пункты меню, которые требуют авторизации */
-
-authRequiredButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        openAuthModal("login");
-
-    });
-
-});
-
-
-/*
-   Закрывает модалку.
-*/
 
 function closeAuthModal() {
 
@@ -452,21 +462,12 @@ function closeAuthModal() {
     }
 
     authModal.classList.remove("auth-modal--open");
-
     document.body.classList.remove("modal-open");
 
 }
 
 
-/* ==========================================================
-   ОТКРЫТИЕ МОДАЛКИ
-   ========================================================== */
-
-
-/*
-   Desktop:
-   "Создать аккаунт"
-*/
+/* Desktop: «Создать аккаунт». */
 
 if (desktopRegisterButton) {
 
@@ -479,10 +480,7 @@ if (desktopRegisterButton) {
 }
 
 
-/*
-   Desktop:
-   "Войти в аккаунт"
-*/
+/* Desktop: «Войти в аккаунт». */
 
 if (desktopLoginButton) {
 
@@ -495,9 +493,20 @@ if (desktopLoginButton) {
 }
 
 
-/* ==========================================================
-   ПЕРЕКЛЮЧЕНИЕ РЕГИСТРАЦИЯ ↔ ВХОД
-   ========================================================== */
+/* Пункты меню гостя, для которых требуется вход. */
+
+authRequiredButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        openAuthModal("login");
+
+    });
+
+});
+
+
+/* Переключение «Регистрация ↔ Вход». */
 
 if (authModeSwitch) {
 
@@ -520,45 +529,104 @@ if (authModeSwitch) {
 }
 
 
-/* ==========================================================
-   ЗАКРЫТИЕ МОДАЛКИ
-   ========================================================== */
-
-
-/* Крестик */
-
 if (authModalClose) {
 
-    authModalClose.addEventListener("click", function () {
-
-        closeAuthModal();
-
-    });
+    authModalClose.addEventListener("click", closeAuthModal);
 
 }
 
-
-/* Клик по затемнённому фону */
 
 if (authModalOverlay) {
 
-    authModalOverlay.addEventListener("click", function () {
-
-        closeAuthModal();
-
-    });
+    authModalOverlay.addEventListener("click", closeAuthModal);
 
 }
 
 
-/* Клавиша Escape */
+/* ==========================================================
+   DESKTOP-МОДАЛКА ЗАВЕРШЕНИЯ ПАУЗЫ
+   ========================================================== */
+
+function openCompletedModal(pauseData) {
+
+    if (!completedModal) {
+        return;
+    }
+
+    if (completedModalDate) {
+        completedModalDate.textContent = formatPauseDate(pauseData.endTime);
+    }
+
+    if (completedModalDuration) {
+        completedModalDuration.textContent =
+            `Время паузы: ${formatPauseDuration(pauseData.duration)}`;
+    }
+
+    completedModal.classList.add("completed-modal--open");
+    completedModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("modal-open");
+
+    if (completedModalClose) {
+        completedModalClose.focus();
+    }
+
+}
+
+
+/*
+   Пауза уже сохранена, поэтому закрытие итогового окна
+   возвращает пользователя на главную.
+*/
+
+function closeCompletedModal() {
+
+    if (!completedModal) {
+        return;
+    }
+
+    completedModal.classList.remove("completed-modal--open");
+    completedModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("modal-open");
+
+    window.location.href = "home.html";
+
+}
+
+
+if (completedModalClose) {
+
+    completedModalClose.addEventListener("click", closeCompletedModal);
+
+}
+
+
+if (completedModalOverlay) {
+
+    completedModalOverlay.addEventListener("click", closeCompletedModal);
+
+}
+
+
+/* Escape закрывает ту модалку, которая сейчас открыта. */
 
 document.addEventListener("keydown", function (event) {
 
-    if (event.key === "Escape") {
+    if (event.key !== "Escape") {
+        return;
+    }
 
-        closeAuthModal();
+    if (
+        completedModal &&
+        completedModal.classList.contains("completed-modal--open")
+    ) {
+
+        closeCompletedModal();
+        return;
 
     }
+
+    closeAuthModal();
 
 });
