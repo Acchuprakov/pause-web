@@ -44,7 +44,7 @@
 
         <!-- Логотип -->
 
-        <div class="brand-logo">
+        <a class="brand-logo" href="home.html" aria-label="ПАУЗА — главная">
 
             <div class="logo-badge">
                 <span>П</span>
@@ -54,7 +54,7 @@
                 ПАУЗА
             </span>
 
-        </div>
+        </a>
 
 
         <!-- Навигация авторизованного пользователя -->
@@ -111,7 +111,14 @@
 
             <span class="avatar-small" aria-hidden="true">
 
-                <span class="icon-user">
+                <!-- Сохранённая фотография -->
+
+                <img class="user-avatar-image" alt="" hidden>
+
+
+                <!-- Иконка, если фотографии ещё нет -->
+
+                <span class="icon-user user-avatar-placeholder">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                         fill="currentColor">

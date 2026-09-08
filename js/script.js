@@ -6,30 +6,51 @@
    ========================================================== */
 
 const startPauseButton = document.querySelector(".home-start-button");
+const guestStartPauseButton = document.querySelector(".guest-start-button");
+
 const completePauseButton = document.querySelector(".pause-complete-button");
 const pauseTime = document.querySelector(".pause-time");
+
 const completedDuration = document.querySelector(".completed-duration");
 const completedDate = document.querySelector(".completed-date");
+
 const backButton = document.querySelector(".header-back");
-const pauseAnswers = document.querySelectorAll("textarea");
+
+const pauseAnswers = document.querySelectorAll(".question-card textarea");
 const chips = document.querySelectorAll(".chip");
 const pausesList = document.querySelector(".pauses-list");
+
+
+/* ==========================================================
+   МОДАЛКА ПОЛНОГО ПРОСМОТРА ПАУЗЫ
+   ========================================================== */
+
+const pauseDetailsModal = document.querySelector(".pause-details-modal");
+const pauseDetailsOverlay = document.querySelector(".pause-details-overlay");
+const pauseDetailsClose = document.querySelector(".pause-details-close");
+
+const pauseDetailsDate = document.querySelector(".pause-details-date");
+const pauseDetailsDuration = document.querySelector(".pause-details-duration");
+const pauseDetailsFeelings = document.querySelector(".pause-details-feelings");
+const pauseDetailsThoughts = document.querySelector(".pause-details-thoughts");
+const pauseDetailsNeeds = document.querySelector(".pause-details-needs");
+
+let lastOpenedPauseCard = null;
 
 
 /* ==========================================================
    МОДАЛКА АВТОРИЗАЦИИ
    ========================================================== */
 
+const authModal = document.querySelector(".auth-modal");
 const authModalCard = document.querySelector(".auth-modal-card");
+const authModalOverlay = document.querySelector(".auth-modal-overlay");
+const authModalClose = document.querySelector(".auth-modal-close");
+
 const authModalHeading = document.querySelector(".auth-modal-heading");
-const authModalSubtitle = document.querySelector(".auth-modal-subtitle");
 const authModalSubmit = document.querySelector(".auth-modal-submit");
 const authModalSwitchText = document.querySelector(".auth-modal-switch-text");
 const authModeSwitch = document.querySelector(".auth-mode-switch");
-
-const authModal = document.querySelector(".auth-modal");
-const authModalOverlay = document.querySelector(".auth-modal-overlay");
-const authModalClose = document.querySelector(".auth-modal-close");
 
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
@@ -48,12 +69,56 @@ const completedModalDuration = document.querySelector(".completed-modal-duration
 
 
 /* ==========================================================
-   ОБЩЕЕ ФОРМАТИРОВАНИЕ ДАННЫХ ПАУЗЫ
+   РЕДАКТИРОВАНИЕ ПРОФИЛЯ
+   ========================================================== */
+
+const profileEditButton = document.querySelector(".btn-edit-profile");
+
+const profileEditModal = document.querySelector(".profile-edit-modal");
+const profileEditOverlay = document.querySelector(".profile-edit-overlay");
+const profileEditClose = document.querySelector(".profile-edit-close");
+const profileEditForm = document.querySelector(".profile-edit-card");
+
+const profileEditName = document.querySelector("#profile-edit-name");
+const profileEditEmail = document.querySelector("#profile-edit-email");
+const profileEditPhone = document.querySelector("#profile-edit-phone");
+
+const profileAvatarInput = document.querySelector(".profile-avatar-input");
+
+const profileAvatarSelectButtons = document.querySelectorAll(
+    ".profile-edit-avatar-button, .profile-avatar-change-button"
+);
+
+const profileEditAvatarImage = document.querySelector(
+    ".profile-edit-avatar-image"
+);
+
+const profileEditAvatarPlaceholder = document.querySelector(
+    ".profile-edit-avatar-placeholder"
+);
+
+const profileName = document.querySelector(".profile-name");
+const profileEmail = document.querySelector(".profile-email");
+const profilePhone = document.querySelector(".profile-phone");
+
+const headerUserNames = document.querySelectorAll(".header-user-name");
+const userAvatarImages = document.querySelectorAll(".user-avatar-image");
+const userAvatarPlaceholders = document.querySelectorAll(
+    ".user-avatar-placeholder"
+);
+
+
+/* ==========================================================
+   ОБЩИЕ ФУНКЦИИ ДЛЯ ДАННЫХ ПАУЗЫ
    ========================================================== */
 
 function formatPauseDuration(duration) {
 
-    const totalSeconds = Math.floor(Number(duration) / 1000);
+    const totalSeconds = Math.max(
+        0,
+        Math.floor(Number(duration) / 1000)
+    );
+
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
@@ -80,19 +145,86 @@ function formatPauseDate(endTime) {
 }
 
 
+function getSavedPauses() {
+
+    const savedPauses = localStorage.getItem("pauses");
+
+    if (!savedPauses) {
+        return [];
+    }
+
+    try {
+
+        const parsedPauses = JSON.parse(savedPauses);
+
+        return Array.isArray(parsedPauses)
+            ? parsedPauses
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function getPauseAnswer(answer) {
+
+    if (typeof answer !== "string" || !answer.trim()) {
+        return "Ответ не добавлен.";
+    }
+
+    return answer.trim();
+
+}
+
+
 /* ==========================================================
-   НАЧАЛО ПАУЗЫ
+   НАЧАЛО ПАУЗЫ ДЛЯ АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ
    ========================================================== */
 
 if (startPauseButton) {
 
     startPauseButton.addEventListener("click", function () {
 
-        const startTime = Date.now();
+        localStorage.setItem(
+            "pauseUserStatus",
+            "authorized"
+        );
 
-        localStorage.setItem("startTime", startTime);
+        localStorage.setItem(
+            "startTime",
+            Date.now()
+        );
 
         window.location.href = "pause.html";
+
+    });
+
+}
+
+
+/* ==========================================================
+   НАЧАЛО ПАУЗЫ ДЛЯ ГОСТЯ
+   ========================================================== */
+
+if (guestStartPauseButton) {
+
+    guestStartPauseButton.addEventListener("click", function () {
+
+        localStorage.setItem(
+            "pauseUserStatus",
+            "guest"
+        );
+
+        localStorage.setItem(
+            "startTime",
+            Date.now()
+        );
+
+        window.location.href = "pages/pause.html";
 
     });
 
@@ -106,16 +238,14 @@ if (startPauseButton) {
 if (completePauseButton) {
 
     const savedStartTime = localStorage.getItem("startTime");
+    const parsedStartTime = Number(savedStartTime);
 
-    /*
-       Обычно startTime создаётся на home.html.
-       Запасное значение не даёт таймеру сломаться,
-       если pause.html открыли напрямую.
-    */
+    /* Запасное значение используется, если pause.html открыли напрямую. */
 
-    const startTimestamp = savedStartTime
-        ? Number(savedStartTime)
-        : Date.now();
+    const startTimestamp =
+        savedStartTime !== null && Number.isFinite(parsedStartTime)
+            ? parsedStartTime
+            : Date.now();
 
 
     function updatePauseTimer() {
@@ -131,20 +261,30 @@ if (completePauseButton) {
     }
 
 
-    /* Показываем актуальное значение сразу, затем обновляем раз в секунду. */
-
     updatePauseTimer();
 
-    const pauseTimerId = setInterval(updatePauseTimer, 1000);
+    const pauseTimerId = setInterval(
+        updatePauseTimer,
+        1000
+    );
 
 
     completePauseButton.addEventListener("click", function () {
 
         clearInterval(pauseTimerId);
 
-        const feelings = pauseAnswers[0] ? pauseAnswers[0].value : "";
-        const thoughts = pauseAnswers[1] ? pauseAnswers[1].value : "";
-        const needs = pauseAnswers[2] ? pauseAnswers[2].value : "";
+
+        const feelings = pauseAnswers[0]
+            ? pauseAnswers[0].value.trim()
+            : "";
+
+        const thoughts = pauseAnswers[1]
+            ? pauseAnswers[1].value.trim()
+            : "";
+
+        const needs = pauseAnswers[2]
+            ? pauseAnswers[2].value.trim()
+            : "";
 
         const endTime = Date.now();
         const duration = endTime - startTimestamp;
@@ -158,34 +298,74 @@ if (completePauseButton) {
         };
 
 
-        /* Добавляем новую запись в общую историю пауз. */
+        /* Эти данные использует completed.html и desktop-модалка. */
 
-        const savedPauses = localStorage.getItem("pauses");
-        const pauses = savedPauses ? JSON.parse(savedPauses) : [];
+        localStorage.setItem(
+            "pauseData",
+            JSON.stringify(pauseData)
+        );
 
-        pauses.push(pauseData);
+        localStorage.setItem(
+            "pauseDuration",
+            duration
+        );
 
-        localStorage.setItem("pauses", JSON.stringify(pauses));
-
-
-        /* Эти значения использует мобильная completed.html. */
-
-        localStorage.setItem("pauseData", JSON.stringify(pauseData));
-        localStorage.setItem("pauseDuration", duration);
-        localStorage.setItem("pauseEndTime", endTime);
-
-
-        /* Завершённая пауза больше не должна продолжать старый таймер. */
+        localStorage.setItem(
+            "pauseEndTime",
+            endTime
+        );
 
         localStorage.removeItem("startTime");
 
 
-        /*
-           Desktop: остаёмся на pause.html и открываем модалку.
-           Mobile: переходим на существующую completed.html.
-        */
+        const pauseUserStatus =
+            localStorage.getItem("pauseUserStatus");
 
-        const isDesktop = window.matchMedia("(min-width: 1200px)").matches;
+        const isDesktop = window.matchMedia(
+            "(min-width: 1200px)"
+        ).matches;
+
+
+        /* Гостевую паузу сохраняем отдельно до авторизации. */
+
+        if (pauseUserStatus === "guest") {
+
+            localStorage.setItem(
+                "pendingPause",
+                JSON.stringify(pauseData)
+            );
+
+            if (isDesktop) {
+
+                sessionStorage.setItem(
+                    "openAuthModal",
+                    "register"
+                );
+
+                window.location.href = "../index.html";
+
+            } else {
+
+                window.location.href = "registration.html";
+
+            }
+
+            return;
+
+        }
+
+
+        /* Авторизованную паузу добавляем в общую историю. */
+
+        const pauses = getSavedPauses();
+
+        pauses.push(pauseData);
+
+        localStorage.setItem(
+            "pauses",
+            JSON.stringify(pauses)
+        );
+
 
         if (isDesktop && completedModal) {
 
@@ -243,7 +423,21 @@ if (backButton) {
 
         localStorage.removeItem("startTime");
 
-        window.location.href = "home.html";
+        const pauseUserStatus =
+            localStorage.getItem("pauseUserStatus");
+
+        if (
+            completePauseButton &&
+            pauseUserStatus === "guest"
+        ) {
+
+            window.location.href = "../index.html";
+
+        } else {
+
+            window.location.href = "home.html";
+
+        }
 
     });
 
@@ -259,21 +453,133 @@ chips.forEach(function (chip) {
     chip.addEventListener("click", function () {
 
         const questionCard = chip.closest(".question-card");
+
+        if (!questionCard) {
+            return;
+        }
+
         const textarea = questionCard.querySelector("textarea");
 
-        if (textarea.value) {
+        if (!textarea) {
+            return;
+        }
 
-            textarea.value += `, ${chip.textContent}`;
+        const chipText = chip.textContent.trim();
+
+        if (textarea.value.trim()) {
+
+            textarea.value += `, ${chipText}`;
 
         } else {
 
-            textarea.value = chip.textContent;
+            textarea.value = chipText;
 
         }
+
+        textarea.focus();
 
     });
 
 });
+
+
+/* ==========================================================
+   ПОЛНЫЙ ПРОСМОТР ПАУЗЫ
+   ========================================================== */
+
+function openPauseDetailsModal(pause, pauseCard) {
+
+    if (!pauseDetailsModal) {
+        return;
+    }
+
+    lastOpenedPauseCard = pauseCard;
+
+
+    if (pauseDetailsDate) {
+        pauseDetailsDate.textContent = formatPauseDate(pause.endTime);
+    }
+
+    if (pauseDetailsDuration) {
+
+        pauseDetailsDuration.textContent =
+            `Время паузы: ${formatPauseDuration(pause.duration)}`;
+
+    }
+
+    if (pauseDetailsFeelings) {
+        pauseDetailsFeelings.textContent = getPauseAnswer(pause.feelings);
+    }
+
+    if (pauseDetailsThoughts) {
+        pauseDetailsThoughts.textContent = getPauseAnswer(pause.thoughts);
+    }
+
+    if (pauseDetailsNeeds) {
+        pauseDetailsNeeds.textContent = getPauseAnswer(pause.needs);
+    }
+
+
+    pauseDetailsModal.classList.add(
+        "pause-details-modal--open"
+    );
+
+    pauseDetailsModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add("modal-open");
+
+    if (pauseDetailsClose) {
+        pauseDetailsClose.focus();
+    }
+
+}
+
+
+function closePauseDetailsModal() {
+
+    if (!pauseDetailsModal) {
+        return;
+    }
+
+    pauseDetailsModal.classList.remove(
+        "pause-details-modal--open"
+    );
+
+    pauseDetailsModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove("modal-open");
+
+    if (lastOpenedPauseCard) {
+        lastOpenedPauseCard.focus();
+    }
+
+}
+
+
+if (pauseDetailsClose) {
+
+    pauseDetailsClose.addEventListener(
+        "click",
+        closePauseDetailsModal
+    );
+
+}
+
+
+if (pauseDetailsOverlay) {
+
+    pauseDetailsOverlay.addEventListener(
+        "click",
+        closePauseDetailsModal
+    );
+
+}
 
 
 /* ==========================================================
@@ -282,33 +588,38 @@ chips.forEach(function (chip) {
 
 if (pausesList) {
 
-    const savedPauses = localStorage.getItem("pauses");
-    const pauses = savedPauses ? JSON.parse(savedPauses) : [];
+    const pauses = getSavedPauses();
 
     pausesList.innerHTML = "";
 
     const sections = {};
     const reversedPauses = [...pauses].reverse();
 
+
     reversedPauses.forEach(function (pause) {
 
         const pauseCard = document.createElement("article");
+
         pauseCard.classList.add("pause-card");
 
 
         /* Шапка карточки: длительность и время завершения. */
 
         const cardHeader = document.createElement("div");
+
         cardHeader.classList.add("pause-card-header");
 
         const durationElement = document.createElement("span");
+
         durationElement.classList.add("pause-duration");
         durationElement.textContent = formatPauseDuration(pause.duration);
 
         const timeElement = document.createElement("time");
+
         timeElement.classList.add("pause-card-time");
 
-        const date = new Date(pause.endTime);
+
+        const date = new Date(Number(pause.endTime));
         const today = new Date();
         const yesterday = new Date();
 
@@ -326,23 +637,24 @@ if (pausesList) {
 
         } else {
 
-            sectionTitle = date.toLocaleDateString("ru-RU", {
-                day: "numeric",
-                month: "long"
-            }).toUpperCase();
+            sectionTitle = date
+                .toLocaleDateString("ru-RU", {
+                    day: "numeric",
+                    month: "long"
+                })
+                .toUpperCase();
 
         }
 
 
-        /* При первом появлении даты создаём её секцию. */
-
         if (!sections[sectionTitle]) {
 
             const pauseSection = document.createElement("section");
-            pauseSection.classList.add("pause-section");
-
             const sectionLabel = document.createElement("h2");
+
+            pauseSection.classList.add("pause-section");
             sectionLabel.classList.add("section-label");
+
             sectionLabel.textContent = sectionTitle;
 
             pauseSection.append(sectionLabel);
@@ -358,6 +670,8 @@ if (pausesList) {
             minute: "2-digit"
         });
 
+        timeElement.dateTime = date.toISOString();
+
         cardHeader.append(durationElement);
         cardHeader.append(timeElement);
         pauseCard.append(cardHeader);
@@ -366,6 +680,7 @@ if (pausesList) {
         /* Ответы пользователя. */
 
         const cardContent = document.createElement("div");
+
         cardContent.classList.add("pause-card-content");
 
         const answers = [
@@ -377,12 +692,11 @@ if (pausesList) {
         answers.forEach(function (answer) {
 
             const row = document.createElement("p");
-
             const label = document.createElement("strong");
-            label.textContent = answer[0];
-
             const text = document.createElement("span");
-            text.textContent = answer[1];
+
+            label.textContent = answer[0];
+            text.textContent = getPauseAnswer(answer[1]);
 
             row.append(label);
             row.append(text);
@@ -391,6 +705,41 @@ if (pausesList) {
         });
 
         pauseCard.append(cardContent);
+
+
+        /* Карточка открывается мышью и клавиатурой. */
+
+        pauseCard.tabIndex = 0;
+
+        pauseCard.setAttribute("role", "button");
+        pauseCard.setAttribute("aria-haspopup", "dialog");
+        pauseCard.setAttribute(
+            "aria-label",
+            `Открыть запись паузы от ${timeElement.textContent}`
+        );
+
+        pauseCard.addEventListener("click", function () {
+
+            openPauseDetailsModal(pause, pauseCard);
+
+        });
+
+        pauseCard.addEventListener("keydown", function (event) {
+
+            const isOpenKey =
+                event.key === "Enter" ||
+                event.key === " ";
+
+            if (!isOpenKey) {
+                return;
+            }
+
+            event.preventDefault();
+
+            openPauseDetailsModal(pause, pauseCard);
+
+        });
+
         sections[sectionTitle].append(pauseCard);
 
     });
@@ -402,11 +751,15 @@ if (pausesList) {
    МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ
    ========================================================== */
 
-/* Переключает содержимое между регистрацией и входом. */
-
 function setAuthMode(mode) {
 
-    if (!authModalCard) {
+    if (
+        !authModalCard ||
+        !authModalHeading ||
+        !authModalSubmit ||
+        !authModalSwitchText ||
+        !authModeSwitch
+    ) {
         return;
     }
 
@@ -450,6 +803,8 @@ function openAuthModal(mode) {
     setAuthMode(mode);
 
     authModal.classList.add("auth-modal--open");
+    authModal.setAttribute("aria-hidden", "false");
+
     document.body.classList.add("modal-open");
 
 }
@@ -462,12 +817,31 @@ function closeAuthModal() {
     }
 
     authModal.classList.remove("auth-modal--open");
+    authModal.setAttribute("aria-hidden", "true");
+
     document.body.classList.remove("modal-open");
 
 }
 
 
-/* Desktop: «Создать аккаунт». */
+/* Автоматически открываем авторизацию после гостевой паузы. */
+
+const requestedAuthMode = sessionStorage.getItem("openAuthModal");
+
+if (
+    authModal &&
+    (
+        requestedAuthMode === "register" ||
+        requestedAuthMode === "login"
+    )
+) {
+
+    sessionStorage.removeItem("openAuthModal");
+
+    openAuthModal(requestedAuthMode);
+
+}
+
 
 if (desktopRegisterButton) {
 
@@ -480,8 +854,6 @@ if (desktopRegisterButton) {
 }
 
 
-/* Desktop: «Войти в аккаунт». */
-
 if (desktopLoginButton) {
 
     desktopLoginButton.addEventListener("click", function () {
@@ -492,8 +864,6 @@ if (desktopLoginButton) {
 
 }
 
-
-/* Пункты меню гостя, для которых требуется вход. */
 
 authRequiredButtons.forEach(function (button) {
 
@@ -506,11 +876,13 @@ authRequiredButtons.forEach(function (button) {
 });
 
 
-/* Переключение «Регистрация ↔ Вход». */
-
 if (authModeSwitch) {
 
     authModeSwitch.addEventListener("click", function () {
+
+        if (!authModalCard) {
+            return;
+        }
 
         const currentMode = authModalCard.dataset.authMode;
 
@@ -531,14 +903,20 @@ if (authModeSwitch) {
 
 if (authModalClose) {
 
-    authModalClose.addEventListener("click", closeAuthModal);
+    authModalClose.addEventListener(
+        "click",
+        closeAuthModal
+    );
 
 }
 
 
 if (authModalOverlay) {
 
-    authModalOverlay.addEventListener("click", closeAuthModal);
+    authModalOverlay.addEventListener(
+        "click",
+        closeAuthModal
+    );
 
 }
 
@@ -558,8 +936,10 @@ function openCompletedModal(pauseData) {
     }
 
     if (completedModalDuration) {
+
         completedModalDuration.textContent =
             `Время паузы: ${formatPauseDuration(pauseData.duration)}`;
+
     }
 
     completedModal.classList.add("completed-modal--open");
@@ -573,11 +953,6 @@ function openCompletedModal(pauseData) {
 
 }
 
-
-/*
-   Пауза уже сохранена, поэтому закрытие итогового окна
-   возвращает пользователя на главную.
-*/
 
 function closeCompletedModal() {
 
@@ -597,19 +972,394 @@ function closeCompletedModal() {
 
 if (completedModalClose) {
 
-    completedModalClose.addEventListener("click", closeCompletedModal);
+    completedModalClose.addEventListener(
+        "click",
+        closeCompletedModal
+    );
 
 }
 
 
 if (completedModalOverlay) {
 
-    completedModalOverlay.addEventListener("click", closeCompletedModal);
+    completedModalOverlay.addEventListener(
+        "click",
+        closeCompletedModal
+    );
 
 }
 
 
-/* Escape закрывает ту модалку, которая сейчас открыта. */
+/* ==========================================================
+   ДАННЫЕ ПРОФИЛЯ И АВАТАРКА
+   ========================================================== */
+
+const defaultProfileData = {
+    name: "Александра",
+    email: "alexandra@example.com",
+    phone: ""
+};
+
+
+function getSavedProfileData() {
+
+    const savedProfileData = localStorage.getItem("profileData");
+
+    if (!savedProfileData) {
+        return { ...defaultProfileData };
+    }
+
+    try {
+
+        const parsedProfileData = JSON.parse(savedProfileData);
+
+        return {
+            ...defaultProfileData,
+            ...parsedProfileData
+        };
+
+    } catch (error) {
+
+        return { ...defaultProfileData };
+
+    }
+
+}
+
+
+let currentProfileData = getSavedProfileData();
+let pendingAvatarSource = null;
+
+
+function displayProfileData(profileData) {
+
+    const displayedName = profileData.name
+        ? profileData.name.trim()
+        : defaultProfileData.name;
+
+
+    if (profileName) {
+        profileName.textContent = displayedName;
+    }
+
+
+    if (profileEmail) {
+
+        const email = profileData.email
+            ? profileData.email.trim()
+            : "";
+
+        profileEmail.textContent = email;
+        profileEmail.hidden = !email;
+
+    }
+
+
+    if (profilePhone) {
+
+        const phone = profileData.phone
+            ? profileData.phone.trim()
+            : "";
+
+        profilePhone.textContent = phone;
+        profilePhone.hidden = !phone;
+
+    }
+
+
+    headerUserNames.forEach(function (nameElement) {
+
+        nameElement.textContent = displayedName;
+
+    });
+
+}
+
+
+function displayUserAvatar(avatarSource) {
+
+    if (!avatarSource) {
+        return;
+    }
+
+    userAvatarImages.forEach(function (image) {
+
+        image.src = avatarSource;
+        image.hidden = false;
+
+    });
+
+    userAvatarPlaceholders.forEach(function (placeholder) {
+
+        placeholder.hidden = true;
+
+    });
+
+}
+
+
+function displayProfileEditAvatar(avatarSource) {
+
+    if (!profileEditAvatarImage || !profileEditAvatarPlaceholder) {
+        return;
+    }
+
+    if (avatarSource) {
+
+        profileEditAvatarImage.src = avatarSource;
+        profileEditAvatarImage.hidden = false;
+
+        profileEditAvatarPlaceholder.hidden = true;
+
+    } else {
+
+        profileEditAvatarImage.removeAttribute("src");
+        profileEditAvatarImage.hidden = true;
+
+        profileEditAvatarPlaceholder.hidden = false;
+
+    }
+
+}
+
+
+/* Загружаем сохранённые данные на всех авторизованных страницах. */
+
+displayProfileData(currentProfileData);
+
+const savedUserAvatar = localStorage.getItem("userAvatar");
+
+if (savedUserAvatar) {
+    displayUserAvatar(savedUserAvatar);
+}
+
+
+function openProfileEditModal() {
+
+    if (
+        !profileEditModal ||
+        !profileEditName ||
+        !profileEditEmail ||
+        !profileEditPhone
+    ) {
+        return;
+    }
+
+    currentProfileData = getSavedProfileData();
+
+    profileEditName.value = currentProfileData.name || "";
+    profileEditEmail.value = currentProfileData.email || "";
+    profileEditPhone.value = currentProfileData.phone || "";
+
+    pendingAvatarSource = localStorage.getItem("userAvatar");
+
+    displayProfileEditAvatar(pendingAvatarSource);
+
+    profileEditModal.classList.add("profile-edit-modal--open");
+    profileEditModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("modal-open");
+
+    profileEditName.focus();
+
+}
+
+
+function closeProfileEditModal() {
+
+    if (!profileEditModal) {
+        return;
+    }
+
+    profileEditModal.classList.remove("profile-edit-modal--open");
+    profileEditModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("modal-open");
+
+    pendingAvatarSource = null;
+
+    if (profileEditButton) {
+        profileEditButton.focus();
+    }
+
+}
+
+
+if (profileEditButton) {
+
+    profileEditButton.addEventListener(
+        "click",
+        openProfileEditModal
+    );
+
+}
+
+
+if (profileEditClose) {
+
+    profileEditClose.addEventListener(
+        "click",
+        closeProfileEditModal
+    );
+
+}
+
+
+if (profileEditOverlay) {
+
+    profileEditOverlay.addEventListener(
+        "click",
+        closeProfileEditModal
+    );
+
+}
+
+
+profileAvatarSelectButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        if (profileAvatarInput) {
+            profileAvatarInput.click();
+        }
+
+    });
+
+});
+
+
+if (profileAvatarInput) {
+
+    profileAvatarInput.addEventListener("change", function () {
+
+        const selectedFile = profileAvatarInput.files[0];
+
+        if (!selectedFile) {
+            return;
+        }
+
+        if (!selectedFile.type.startsWith("image/")) {
+
+            alert("Пожалуйста, выберите изображение.");
+
+            profileAvatarInput.value = "";
+
+            return;
+
+        }
+
+        const maximumAvatarSize = 2 * 1024 * 1024;
+
+        if (selectedFile.size > maximumAvatarSize) {
+
+            alert("Выберите изображение размером не больше 2 МБ.");
+
+            profileAvatarInput.value = "";
+
+            return;
+
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.addEventListener("load", function () {
+
+            pendingAvatarSource = fileReader.result;
+
+            displayProfileEditAvatar(pendingAvatarSource);
+
+        });
+
+        fileReader.readAsDataURL(selectedFile);
+
+        profileAvatarInput.value = "";
+
+    });
+
+}
+
+
+if (profileEditForm) {
+
+    profileEditForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        if (
+            !profileEditName ||
+            !profileEditEmail ||
+            !profileEditPhone
+        ) {
+            return;
+        }
+
+        const updatedProfileData = {
+            name: profileEditName.value.trim(),
+            email: profileEditEmail.value.trim(),
+            phone: profileEditPhone.value.trim()
+        };
+
+
+        /* Пользователь должен оставить хотя бы один способ связи. */
+
+        if (
+            !updatedProfileData.email &&
+            !updatedProfileData.phone
+        ) {
+
+            alert("Укажите email или номер телефона.");
+
+            return;
+
+        }
+
+
+        if (pendingAvatarSource) {
+
+            try {
+
+                localStorage.setItem(
+                    "userAvatar",
+                    pendingAvatarSource
+                );
+
+            } catch (error) {
+
+                alert(
+                    "Не удалось сохранить фотографию. Выберите файл меньшего размера."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        localStorage.setItem(
+            "profileData",
+            JSON.stringify(updatedProfileData)
+        );
+
+        currentProfileData = updatedProfileData;
+
+        displayProfileData(currentProfileData);
+
+        if (pendingAvatarSource) {
+            displayUserAvatar(pendingAvatarSource);
+        }
+
+        closeProfileEditModal();
+
+    });
+
+}
+
+
+/* ==========================================================
+   КЛАВИША ESCAPE
+   Проверяем все модалки в одном обработчике.
+   ========================================================== */
 
 document.addEventListener("keydown", function (event) {
 
@@ -617,16 +1367,56 @@ document.addEventListener("keydown", function (event) {
         return;
     }
 
+
     if (
-        completedModal &&
-        completedModal.classList.contains("completed-modal--open")
+        profileEditModal &&
+        profileEditModal.classList.contains(
+            "profile-edit-modal--open"
+        )
     ) {
 
-        closeCompletedModal();
+        closeProfileEditModal();
+
         return;
 
     }
 
-    closeAuthModal();
+
+    if (
+        pauseDetailsModal &&
+        pauseDetailsModal.classList.contains(
+            "pause-details-modal--open"
+        )
+    ) {
+
+        closePauseDetailsModal();
+
+        return;
+
+    }
+
+
+    if (
+        completedModal &&
+        completedModal.classList.contains(
+            "completed-modal--open"
+        )
+    ) {
+
+        closeCompletedModal();
+
+        return;
+
+    }
+
+
+    if (
+        authModal &&
+        authModal.classList.contains("auth-modal--open")
+    ) {
+
+        closeAuthModal();
+
+    }
 
 });

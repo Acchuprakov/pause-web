@@ -32,7 +32,7 @@
 
         <!-- Логотип -->
 
-        <div class="brand-logo">
+        <a class="brand-logo" href="home.html" aria-label="ПАУЗА — главная">
 
             <div class="logo-badge">
                 <span>П</span>
@@ -42,7 +42,7 @@
                 ПАУЗА
             </span>
 
-        </div>
+        </a>
 
 
         <!-- Навигация авторизованного пользователя -->
@@ -87,7 +87,14 @@
 
             <span class="avatar-small" aria-hidden="true">
 
-                <span class="icon-user">
+                <!-- Сохранённая фотография -->
+
+                <img class="user-avatar-image" alt="" hidden>
+
+
+                <!-- Иконка, если фотографии ещё нет -->
+
+                <span class="icon-user user-avatar-placeholder">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                         fill="currentColor">
@@ -224,6 +231,89 @@
         </nav>
 
     </main>
+
+    <!-- ======================================================
+         ПОЛНЫЙ ПРОСМОТР ЗАПИСИ ПАУЗЫ
+         Одна модалка используется для всех карточек.
+         Содержимое подставляется через JavaScript.
+         ====================================================== -->
+
+    <div class="pause-details-modal" aria-hidden="true">
+
+        <!-- Затемнённый фон -->
+
+        <div class="pause-details-overlay"></div>
+
+
+        <!-- Контейнер карточки и кнопки закрытия -->
+
+        <div class="pause-details-wrapper">
+
+            <div class="pause-details-card" role="dialog" aria-modal="true" aria-labelledby="pause-details-heading">
+
+                <!-- Заголовок -->
+
+                <div class="pause-details-title-block">
+
+                    <h2 id="pause-details-heading">
+                        Запись паузы
+                    </h2>
+
+                    <p class="pause-details-date"></p>
+
+                </div>
+
+
+                <!-- Продолжительность -->
+
+                <div class="pause-details-duration-row">
+
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M20.182 12c0-4.589-3.698-8.248-8.182-8.248S3.818 7.41 3.818 12 7.516 20.248 12 20.248 20.182 16.59 20.182 12m-9.091-5.474c0-.484.407-.876.909-.876s.909.392.909.876v4.942l3.147 1.58a.86.86 0 0 1 .386 1.181.926.926 0 0 1-1.226.373l-4.125-2.07zM22 12c0 5.489-4.443 10-10 10S2 17.49 2 12C2 6.512 6.443 2 12 2s10 4.512 10 10" />
+                    </svg>
+
+                    <span class="pause-details-duration"></span>
+
+                </div>
+
+
+                <!-- Полные ответы пользователя -->
+
+                <div class="pause-details-content">
+
+                    <p>
+                        <strong>Чувства:</strong>
+                        <span class="pause-details-feelings"></span>
+                    </p>
+
+                    <p>
+                        <strong>Мысли:</strong>
+                        <span class="pause-details-thoughts"></span>
+                    </p>
+
+                    <p>
+                        <strong>Себе:</strong>
+                        <span class="pause-details-needs"></span>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Закрытие модалки -->
+
+            <button class="pause-details-close" type="button" aria-label="Закрыть запись">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M3.775 2.891a.625.625 0 1 0-.884.884L9.116 10 2.89 16.225a.625.625 0 0 0 .884.883L10 10.885l6.224 6.224a.625.625 0 1 0 .884-.883L10.884 10l6.224-6.225a.625.625 0 1 0-.884-.884L10 9.116z" />
+                </svg>
+            </button>
+
+        </div>
+
+    </div>
 
 
     <!-- Сохраняем существующую логику страницы.

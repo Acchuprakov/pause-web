@@ -10,7 +10,7 @@
     --color-button-secondary-hover: #FDF0D9;
     --color-surface-success: #E8EFE9;
     --color-background-card: #FFFFFF;
-    
+
     --color-border-default: #EBE6DD;
     --color-border-active: #3D5A45;
 
@@ -164,95 +164,6 @@ button {
 
 
 /* ==========================================================
-   СТАРОЕ НИЖНЕЕ МЕНЮ
-
-   Пока оно остаётся для:
-   home.html
-   history.html
-   profile.html
-
-   Позже заменим его новым меню.
-   ========================================================== */
-
-.home-page > .bottom-tab-bar,
-.history-page > .bottom-tab-bar,
-.profile-page > .bottom-tab-bar {
-    width: 100%;
-    height: 72px;
-
-    padding: 0 32px;
-
-    margin-top: 24px;
-    margin-bottom: 44px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background: var(--color-background);
-
-    border-top: 1px solid var(--color-border-default);
-    border-bottom: 1px solid var(--color-border-default);
-}
-
-
-.home-page > .bottom-tab-bar a,
-.history-page > .bottom-tab-bar a,
-.profile-page > .bottom-tab-bar a {
-    text-decoration: none;
-}
-
-
-.tab-home,
-.tab-pauses,
-.tab-profile,
-.tab-lenta {
-    width: 80px;
-    height: 43px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 4px;
-
-    color: var(--color-text-tertiary);
-
-    transition: color 0.2s ease;
-}
-
-
-.tab-home svg,
-.tab-pauses svg,
-.tab-profile svg,
-.tab-lenta svg {
-    width: 24px;
-    height: 24px;
-
-    display: block;
-}
-
-
-.tab-home span,
-.tab-pauses span,
-.tab-profile span,
-.tab-lenta span {
-    font-size: 12px;
-    font-weight: 700;
-    line-height: normal;
-}
-
-
-.tab-home.active,
-.tab-pauses.active,
-.tab-profile.active,
-.tab-lenta.active {
-    color: var(--color-primary-green);
-}
-
-
-/* ==========================================================
    МОБИЛЬНАЯ ШАПКА
    ========================================================== */
 
@@ -270,8 +181,9 @@ button {
 
 
 .header-back {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
 
     padding: 0;
 
@@ -279,13 +191,16 @@ button {
     align-items: center;
     justify-content: center;
 
-    border: none;
+    color: var(--color-primary-green);
+    background: var(--color-background-card);
 
-    background: transparent;
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
 }
 
 
-.header-back img {
+.header-back img,
+.header-back svg {
     width: 24px;
     height: 24px;
 
@@ -1374,8 +1289,8 @@ button {
 
 .home-page .stat-value {
     margin: 0;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 500;
     line-height: 1.2;
     color: var(--color-text-accent);
 }
@@ -1385,7 +1300,6 @@ button {
 .home-page .bottom-tab-bar-container {
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
 }
-
 
 
 /* ==========================================================
@@ -1531,12 +1445,16 @@ button {
 
 .history-page {
     width: 100%;
+    max-width: none;
 
-    padding-bottom: 0;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border: none;
+    border-radius: 0;
 }
 
 
@@ -1654,8 +1572,11 @@ button {
 
 .profile-page {
     width: 100%;
+    max-width: 420px;
 
-    padding-bottom: 0;
+    margin: 0 auto;
+
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
 
     display: flex;
     flex-direction: column;
@@ -1684,21 +1605,19 @@ button {
     width: 80px;
     height: 80px;
 
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
+    overflow: hidden;
+
     background: var(--color-surface-muted);
 
     border-radius: 50%;
-}
 
-
-.avatar-ring img {
-    width: 32px;
-    height: 32px;
-
-    display: block;
+    color: var(--color-primary-green);
 }
 
 
@@ -1720,7 +1639,8 @@ button {
 }
 
 
-.profile-email {
+.profile-email,
+.profile-phone {
     margin: 4px 0 0;
 
     font-size: 14px;
@@ -1728,6 +1648,11 @@ button {
     line-height: normal;
 
     color: var(--color-text-secondary);
+}
+
+.profile-email[hidden],
+.profile-phone[hidden] {
+    display: none;
 }
 
 
@@ -1866,6 +1791,10 @@ button {
         align-items: center;
 
         gap: 8px;
+
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
     }
 
 
@@ -2310,6 +2239,10 @@ button {
        Общую шапку и навигацию используем из index.html.
        ====================================================== */
 
+    .header-action-link {
+        text-decoration: none;
+    }
+
     .header-action {
         /* Сохраняем ширину прежней кнопки входа. */
         width: 157px;
@@ -2600,7 +2533,6 @@ button {
 }
 
 
-
 /* ------------------------------------------------------
    SEGMENT CONTROL
    Email / Телефон
@@ -2697,10 +2629,6 @@ button {
 
 
 /* ------------------------------------------------------
-   "Уже есть аккаунт? Войти"
-   ------------------------------------------------------ */
-
-/* ------------------------------------------------------
    Нижнее переключение:
    "Уже есть аккаунт? Войти"
    ------------------------------------------------------ */
@@ -2717,34 +2645,6 @@ button {
     color: var(--color-text-primary);
 }
 
-
-.auth-mode-switch {
-    margin-left: 4px;
-
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-
-    color: var(--color-text-accent);
-
-    cursor: pointer;
-}
-
-
-/* ------------------------------------------------------
-   Кнопка "Войти"
-
-   Визуально она выглядит как текстовая ссылка,
-   но технически это button,
-   потому что она не открывает другую страницу,
-   а переключает состояние этой же модалки.
-   ------------------------------------------------------ */
 
 .auth-mode-switch {
     margin-left: 4px;
@@ -2840,24 +2740,7 @@ button {
 
 /* ==========================================================
    HISTORY — МОБИЛЬНАЯ И DESKTOP-ВЕРСИЯ
-   Добавить в самый конец существующего style.css.
-   Отдельное подключение этого файла в HTML не требуется.
    ========================================================== */
-
-/* Ссылки в desktop-хедере оформлены как существующие пункты. */
-
-.history-desktop-header .header-tab {
-    text-decoration: none;
-}
-
-/* Мобильная страница без общей рамки. */
-
-.history-page {
-    max-width: none;
-    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
-    border: none;
-    border-radius: 0;
-}
 
 /* Контейнер содержимого: на мобильном сохраняем ширину 420px. */
 
@@ -2865,19 +2748,6 @@ button {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
-}
-
-/* Сохраняем класс кнопки, используемый существующим JavaScript. */
-
-.history-page .header-back {
-    color: var(--color-primary-green);
-    flex-shrink: 0;
-}
-
-.history-page .header-back svg {
-    display: block;
-    width: 24px;
-    height: 24px;
 }
 
 /* Между группами дней — 32px. */
@@ -2910,12 +2780,48 @@ button {
 .history-page .pause-card {
     min-width: 0;
     margin-top: 0;
+
+    cursor: pointer;
+
+    transition: border-color 0.2s ease;
+}
+
+
+/* Hover включаем только на устройствах с мышью */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .history-page .pause-card:hover {
+        border-color: var(--color-border-active);
+    }
+
+}
+
+
+/* Фокус при управлении клавиатурой */
+
+.history-page .pause-card:focus-visible {
+    border-color: var(--color-border-active);
+
+    outline: 2px solid var(--color-border-active);
+    outline-offset: 2px;
 }
 
 /* В истории ответы отображаются полностью. */
 
 .history-page .pause-card-content {
-    overflow-wrap: anywhere;
+    min-width: 0;
+}
+
+/* Каждый ответ занимает максимум одну строку */
+
+.history-page .pause-card-content p {
+    min-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .history-page .bottom-tab-bar-container {
@@ -2940,25 +2846,15 @@ button {
         max-width: 800px;
     }
 
-    /* Строка: круглая кнопка назад и заголовок. */
+    /* На desktop отдельная кнопка назад не нужна. */
 
     .history-page .header-bar {
         height: auto;
         padding: 0;
-        gap: 16px;
     }
 
     .history-page .header-back {
-        width: 32px;
-        height: 32px;
-        background: var(--color-background-card);
-        border: 1px solid var(--color-border-default);
-        border-radius: 50%;
-    }
-
-    .history-page .header-back svg {
-        width: 16px;
-        height: 16px;
+        display: none;
     }
 
     .history-page .header-title {
@@ -2991,36 +2887,242 @@ button {
 }
 
 /* ==========================================================
-   HISTORY — КНОПКА НАЗАД
-   На мобильном видна, на desktop скрыта.
+   МОДАЛКА ПРОСМОТРА ПАУЗЫ
+   ========================================================== */
+
+.pause-details-modal {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 16px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1200;
+}
+
+
+.pause-details-modal.pause-details-modal--open {
+    display: flex;
+}
+
+
+/* Затемнённый фон */
+
+.pause-details-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(43, 46, 42, 0.35);
+}
+
+
+/* Контейнер карточки */
+
+.pause-details-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 640px;
+
+    z-index: 1;
+}
+
+
+/* Карточка с полным содержимым */
+
+.pause-details-card {
+    width: 100%;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+
+    padding: 32px 24px;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-24);
+}
+
+
+/* Заголовок и дата */
+
+.pause-details-title-block {
+    padding-right: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.pause-details-title-block h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    color: var(--color-text-primary);
+}
+
+
+.pause-details-title-block p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: var(--color-text-secondary);
+}
+
+
+/* Продолжительность */
+
+.pause-details-duration-row {
+    margin-top: 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--color-primary-green);
+}
+
+
+.pause-details-duration-row svg {
+    flex-shrink: 0;
+}
+
+
+.pause-details-duration {
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--color-text-secondary);
+}
+
+
+/* Полные ответы */
+
+.pause-details-content {
+    margin-top: 24px;
+    padding-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+    border-top: 1px solid var(--color-border-default);
+}
+
+
+.pause-details-content p {
+    margin: 0;
+}
+
+
+.pause-details-content strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    color: var(--color-text-primary);
+}
+
+
+.pause-details-content span {
+    display: block;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: var(--color-text-secondary);
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* Кнопка закрытия */
+
+.pause-details-close {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-primary-green);
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
+}
+
+
+.pause-details-close svg {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ==========================================================
+   МОДАЛКА ПРОСМОТРА ПАУЗЫ — DESKTOP
    ========================================================== */
 
 @media (min-width: 1200px) {
 
-    .history-page .header-back {
-        display: none;
+    .pause-details-card {
+        padding: 40px;
+    }
+
+
+    .pause-details-title-block {
+        padding-right: 0;
+    }
+
+
+    /* На desktop крестик находится справа от карточки */
+
+    .pause-details-close {
+        top: 0;
+        right: auto;
+        left: calc(100% + 8px);
     }
 
 }
 
 /* ==========================================================
    PAUSE — АДАПТИВНАЯ СТРАНИЦА ОПРОСНИКА
-
-   Добавить в самый конец style.css.
-   Мобильные стили выше остаются без изменений.
    ========================================================== */
-
-/* Inline-стрелка наследует зелёный цвет от кнопки. */
-
-.pause-page .header-back {
-    color: var(--color-primary-green);
-}
-
-.pause-page .header-back svg {
-    display: block;
-    width: 24px;
-    height: 24px;
-}
 
 
 /* ==========================================================
@@ -3061,28 +3163,6 @@ button {
         padding: 0;
 
         gap: 16px;
-    }
-
-
-    /* Круглая кнопка назад 32 × 32px. */
-
-    .pause-page .header-back {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-
-        background: var(--color-background-card);
-
-        border: 1px solid var(--color-border-default);
-        border-radius: 50%;
-    }
-
-
-    /* Стрелка внутри круга 16 × 16px. */
-
-    .pause-page .header-back svg {
-        width: 16px;
-        height: 16px;
     }
 
 
@@ -3131,10 +3211,7 @@ button {
 
 /* ==========================================================
    DESKTOP-МОДАЛКА ЗАВЕРШЕНИЯ ПАУЗЫ
-
-   Добавить в самый конец style.css.
-   На мобильном модалка всегда скрыта: после завершения
-   открывается отдельная страница completed.html.
+   На мобильном после завершения открывается completed.html.
    ========================================================== */
 
 .completed-modal {
@@ -3310,6 +3387,606 @@ button {
 
         width: 20px;
         height: 20px;
+    }
+
+}
+
+/* Общая обёртка содержимого. */
+
+.profile-page .profile-content {
+    width: 100%;
+}
+
+
+/* На мобильном блоки располагаются вертикально. */
+
+.profile-page .profile-layout {
+    width: 100%;
+}
+
+
+/* Центрируем карточку пользователя на мобильном. */
+
+.profile-page .user-identity-card {
+    margin: 24px auto 0;
+}
+
+
+/* Обёртка настроек. */
+
+.profile-page .profile-settings-column {
+    width: 100%;
+
+    margin-top: 28px;
+}
+
+
+/*
+   В первоначальном мобильном дизайне
+   заголовка «НАСТРОЙКИ» не было.
+*/
+
+.profile-page .profile-settings-title {
+    display: none;
+}
+
+
+/* Центрируем список настроек на мобильном. */
+
+.profile-page .profile-options {
+    margin: 0 auto;
+}
+
+
+/* Иконки пунктов настроек. */
+
+.profile-page .option-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    display: block;
+
+    color: var(--color-primary-green);
+}
+
+
+/* Стрелка справа. */
+
+.profile-page .option-arrow {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    margin-left: auto;
+
+    display: block;
+
+    color: var(--color-text-tertiary);
+}
+
+
+/* Место для фиксированного нижнего меню. */
+
+.profile-page .bottom-tab-bar-container {
+    padding-bottom:
+        calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+
+/* ==========================================================
+   PROFILE — DESKTOP ОТ 1200px
+   Все элементы располагаются одной колонкой шириной 440px.
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    /* Основная страница. */
+
+    .profile-page {
+        max-width: none;
+
+        margin: 0;
+        padding: 48px 0 80px;
+
+        align-items: center;
+    }
+
+
+    /*
+       Общий контейнер страницы.
+
+       Заголовок, карточка пользователя
+       и настройки имеют ширину 440px.
+    */
+
+    .profile-page .profile-content {
+        width: 440px;
+        max-width: 440px;
+
+        margin: 0 auto;
+    }
+
+
+    /* ------------------------------------------------------
+       Заголовок страницы
+       ------------------------------------------------------ */
+
+    .profile-page .header-bar {
+        width: 100%;
+        height: auto;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .profile-page .header-title {
+        position: static;
+
+        left: auto;
+        transform: none;
+
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.2;
+
+        text-align: center;
+    }
+
+
+    /* ------------------------------------------------------
+       Основное содержимое
+
+       Карточка пользователя и настройки
+       располагаются друг под другом.
+       ------------------------------------------------------ */
+
+    .profile-page .profile-layout {
+        width: 100%;
+
+        margin-top: 32px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 32px;
+    }
+
+
+    /* ------------------------------------------------------
+       Карточка пользователя
+       ------------------------------------------------------ */
+
+    .profile-page .user-identity-card {
+        width: 100%;
+        height: 275px;
+
+        margin: 0;
+        padding: 24px;
+
+        justify-content: center;
+    }
+
+
+    /* Кнопка редактирования 155 × 45px. */
+
+    .profile-page .btn-edit-profile {
+        width: 155px;
+        height: 45px;
+
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* ------------------------------------------------------
+       Настройки под карточкой пользователя
+       ------------------------------------------------------ */
+
+    .profile-page .profile-settings-column {
+        width: 100%;
+
+        margin: 0;
+    }
+
+
+    /* Заголовок «НАСТРОЙКИ». */
+
+    .profile-page .profile-settings-title {
+        display: block;
+
+        margin: 0 0 12px;
+
+        font-size: 12px;
+        font-weight: 600;
+        line-height: normal;
+
+        color: var(--color-text-secondary);
+    }
+
+
+    /* Список настроек занимает все 440px. */
+
+    .profile-page .profile-options {
+        width: 100%;
+
+        margin: 0;
+
+        gap: 8px;
+    }
+
+
+    /* Отдельный пункт настроек. */
+
+    .profile-page .option-row {
+        width: 100%;
+        min-height: 56px;
+
+        padding: 16px 20px;
+    }
+
+
+    /* Иконки настроек 20 × 20px. */
+
+    .profile-page .option-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+}
+
+/* ==========================================================
+   МОДАЛКА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
+   ========================================================== */
+
+.profile-edit-modal {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 16px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    overflow-y: auto;
+
+    z-index: 1100;
+}
+
+.profile-edit-modal.profile-edit-modal--open {
+    display: flex;
+}
+
+
+/* Затемнение страницы. */
+
+.profile-edit-overlay {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(43, 46, 42, 0.35);
+}
+
+
+/* Общий контейнер. */
+
+.profile-edit-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 520px;
+
+    z-index: 1;
+}
+
+
+/* Карточка модалки. */
+
+.profile-edit-card {
+    width: 100%;
+    max-height: calc(100vh - 32px);
+
+    padding: 32px 24px;
+
+    overflow-y: auto;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-24);
+}
+
+
+/* Заголовок как в модалке авторизации. */
+
+.profile-edit-title-block {
+    width: 100%;
+
+    padding-right: 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.profile-edit-title-block h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    color: var(--color-text-primary);
+}
+
+.profile-edit-title-block p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    color: var(--color-text-secondary);
+}
+
+
+/* Выбор аватарки. */
+
+.profile-edit-avatar-row {
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+.profile-edit-avatar-button {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: var(--color-surface-muted);
+
+    border: none;
+    border-radius: 50%;
+
+    color: var(--color-primary-green);
+}
+
+.profile-edit-avatar-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.profile-edit-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-edit-avatar-placeholder svg {
+    width: 32px;
+    height: 32px;
+}
+
+
+/* Кнопка выбора фотографии. */
+
+.profile-avatar-actions {
+    min-width: 0;
+}
+
+.profile-avatar-change-button {
+    padding: 8px 16px;
+
+    background: var(--color-surface-muted);
+
+    border: none;
+    border-radius: var(--radius-18);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: var(--color-text-accent);
+}
+
+.profile-avatar-actions p {
+    margin: 8px 0 0;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--color-text-tertiary);
+}
+
+
+/* Поля формы. */
+
+.profile-edit-form {
+    width: 100%;
+
+    margin-top: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.profile-edit-card .form-field,
+.profile-edit-card .input-container {
+    width: 100%;
+}
+
+
+/* Основная кнопка. */
+
+.profile-edit-card .profile-edit-save {
+    width: 100%;
+
+    margin-top: 28px;
+}
+
+
+/* Крестик на мобильном находится внутри карточки. */
+
+.profile-edit-close {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
+
+    color: var(--color-primary-green);
+}
+
+.profile-edit-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ==========================================================
+   АВАТАРКИ ПОЛЬЗОВАТЕЛЯ
+   ========================================================== */
+
+.avatar-small {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Фотография заполняет большую и маленькую аватарки. */
+
+.profile-page .avatar-ring > .user-avatar-image,
+.avatar-small > .user-avatar-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 2;
+}
+
+
+/* Иконка-заглушка большой аватарки. */
+
+.profile-page .avatar-ring > .user-avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    display: block;
+
+    color: var(--color-primary-green);
+
+    z-index: 1;
+}
+
+
+/* Если SVG обёрнут в span, центрируем его внутри обёртки. */
+
+.profile-page .avatar-ring > span.user-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-page .avatar-ring > .user-avatar-placeholder svg {
+    width: 32px;
+    height: 32px;
+
+    display: block;
+}
+
+
+/* hidden всегда имеет приоритет над обычным display. */
+
+.user-avatar-image[hidden],
+.user-avatar-placeholder[hidden],
+.profile-edit-avatar-image[hidden],
+.profile-edit-avatar-placeholder[hidden] {
+    display: none !important;
+}
+
+
+/*
+   Дополнительная защита для SVG-заглушки:
+   если у соседнего изображения уже появился src,
+   заглушка скрывается даже в браузере, где свойство
+   hidden у SVG не отражается как HTML-атрибут.
+*/
+
+.user-avatar-image[src]:not([src=""]):not([hidden])
+    + .user-avatar-placeholder {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   МОДАЛКА ПРОФИЛЯ — DESKTOP
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    .profile-edit-card {
+        padding: 40px;
+    }
+
+    .profile-edit-title-block {
+        padding-right: 0;
+    }
+
+
+    /* Крестик справа от карточки, как в auth-модалке. */
+
+    .profile-edit-close {
+        top: 0;
+        right: auto;
+        left: calc(100% + 8px);
     }
 
 }
