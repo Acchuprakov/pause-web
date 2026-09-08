@@ -24,6 +24,8 @@ const authModalClose = document.querySelector(".auth-modal-close");
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
 
+const authRequiredButtons = document.querySelectorAll(".auth-required-button");
+
 if (startPauseButton) {
 
     startPauseButton.addEventListener("click", function () {
@@ -425,6 +427,18 @@ function openAuthModal(mode) {
     document.body.classList.add("modal-open");
 
 }
+
+/* Пункты меню, которые требуют авторизации */
+
+authRequiredButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        openAuthModal("login");
+
+    });
+
+});
 
 
 /*

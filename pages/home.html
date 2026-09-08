@@ -57,47 +57,57 @@
         </div>
 
 
-        <!-- Навигация.
-             Подключение действий desktop-меню — отдельный шаг. -->
+        <!-- Навигация авторизованного пользователя -->
 
         <nav class="header-tabs" aria-label="Основная навигация">
 
-            <button class="header-tab header-tab--active" type="button" aria-current="page">
+            <!-- Текущая страница -->
+
+            <a class="header-tab header-tab--active" href="home.html" aria-current="page">
                 Главная
-            </button>
+            </a>
 
-            <button class="header-tab" type="button">
+
+            <!-- История пауз -->
+
+            <a class="header-tab" href="history.html">
                 Паузы
-            </button>
+            </a>
 
-            <button class="header-tab" type="button">
+
+            <!-- Лента -->
+
+            <a class="header-tab" href="lenta.html">
                 Лента
-            </button>
+            </a>
+
+
+            <!-- Страница Пауза+ пока не подключена -->
 
             <button class="header-tab" type="button">
                 Пауза+
             </button>
 
-            <button class="header-tab" type="button">
+
+            <!-- Профиль -->
+
+            <a class="header-tab" href="profile.html">
                 Профиль
-            </button>
+            </a>
 
         </nav>
 
 
         <!-- Пользователь.
-             Имя пока задано в разметке. -->
+             Имя пока задано непосредственно в HTML. -->
 
-        <div class="header-action">
+        <!-- Переход в профиль пользователя -->
+
+        <a class="header-action" href="profile.html" aria-label="Открыть профиль Александры">
 
             <span class="header-user-name">
                 Александра
             </span>
-
-
-            <!-- Аватарка без фотографии:
-                 круг 32 × 32, рамка иконки 18 × 18,
-                 сама иконка 16 × 16. -->
 
             <span class="avatar-small" aria-hidden="true">
 
@@ -113,7 +123,7 @@
 
             </span>
 
-        </div>
+        </a>
 
     </header>
 

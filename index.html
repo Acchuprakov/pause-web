@@ -36,7 +36,7 @@
 
     <!-- ====================================================== -->
     <!-- DESKTOP HEADER -->
-    <!-- На мобильной версии будет скрыт через CSS -->
+    <!-- На мобильной версии скрыт через CSS -->
     <!-- ====================================================== -->
 
     <header class="desktop-header">
@@ -57,34 +57,54 @@
         </div>
 
 
-        <!-- Навигация -->
+        <!-- ================================================== -->
+        <!-- Навигация для неавторизованного пользователя -->
+        <!--
+            Ссылки переводят на доступные страницы.
+            Кнопки Паузы и Профиль откроют модалку входа.
+        -->
+        <!-- ================================================== -->
 
-        <nav class="header-tabs">
+        <nav class="header-tabs" aria-label="Основная навигация">
 
-            <button class="header-tab header-tab--active" type="button">
+            <!-- Главная — текущая страница -->
+
+            <a class="header-tab header-tab--active" href="index.html" aria-current="page">
                 Главная
-            </button>
+            </a>
 
-            <button class="header-tab" type="button">
+
+            <!-- Для просмотра пауз гостю нужно войти -->
+
+            <button class="header-tab auth-required-button" type="button">
                 Паузы
             </button>
 
-            <button class="header-tab" type="button">
+
+            <!-- Лента доступна как отдельная страница -->
+
+            <a class="header-tab" href="pages/lenta.html">
                 Лента
-            </button>
+            </a>
+
+
+            <!-- Страница Пауза+ пока не подключена -->
 
             <button class="header-tab" type="button">
                 Пауза+
             </button>
 
-            <button class="header-tab" type="button">
+
+            <!-- Для просмотра профиля гостю нужно войти -->
+
+            <button class="header-tab auth-required-button" type="button">
                 Профиль
             </button>
 
         </nav>
 
 
-        <!-- Вход -->
+        <!-- Открывает модалку в режиме входа -->
 
         <button class="desktop-login-button" type="button">
             Войти в аккаунт
@@ -102,7 +122,7 @@
 
         <!-- ================================================== -->
         <!-- HERO SECTION -->
-        <!-- ОДНА секция и для mobile, и для desktop -->
+        <!-- Одна секция для mobile и desktop -->
         <!-- ================================================== -->
 
         <section class="hero-section">
@@ -134,10 +154,7 @@
                     </h2>
 
 
-                    <!--
-                        На desktop показываем.
-                        На mobile скроем через CSS.
-                    -->
+                    <!-- На desktop показываем, на mobile скрываем -->
 
                     <p class="hero-description">
                         Сделайте осознанным обычный день.
@@ -162,7 +179,7 @@
 
                 <!-- ========================================== -->
                 <!-- MOBILE: предложение создать аккаунт -->
-                <!-- На desktop этот блок будет скрыт -->
+                <!-- На desktop этот блок скрыт -->
                 <!-- ========================================== -->
 
                 <div class="profile-prompt">
@@ -192,8 +209,8 @@
 
                     <!--
                         Вторая кнопка нужна на desktop.
-                        На mobile её скроем,
-                        потому что там есть profile-prompt.
+                        На mobile она скрыта, потому что там
+                        используется блок profile-prompt.
                     -->
 
                     <button class="hero-secondary-button" type="button">
@@ -210,7 +227,6 @@
 
         <!-- ================================================== -->
         <!-- FEATURES SECTION -->
-        <!-- Только desktop -->
         <!-- ================================================== -->
 
         <section class="features-section">
@@ -287,21 +303,19 @@
 
         <!-- ================================================== -->
         <!-- MOBILE BOTTOM NAVIGATION -->
-        <!-- На desktop будет скрыта -->
+        <!-- На desktop скрыта -->
         <!-- ================================================== -->
 
-        <nav class="bottom-tab-bar-container">
+        <nav class="bottom-tab-bar-container" aria-label="Мобильная навигация">
 
             <div class="bottom-tab-bar">
 
 
-                <!-- ========================================== -->
                 <!-- Главная -->
-                <!-- ========================================== -->
 
-                <a class="bottom-tab active" href="index.html">
+                <a class="bottom-tab active" href="index.html" aria-current="page">
 
-                    <span class="bottom-tab-icon">
+                    <span class="bottom-tab-icon" aria-hidden="true">
 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -318,13 +332,11 @@
                 </a>
 
 
-                <!-- ========================================== -->
                 <!-- Паузы -->
-                <!-- ========================================== -->
 
                 <a class="bottom-tab" href="pages/history.html">
 
-                    <span class="bottom-tab-icon">
+                    <span class="bottom-tab-icon" aria-hidden="true">
 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -341,13 +353,11 @@
                 </a>
 
 
-                <!-- ========================================== -->
                 <!-- Лента -->
-                <!-- ========================================== -->
 
                 <a class="bottom-tab" href="pages/lenta.html">
 
-                    <span class="bottom-tab-icon">
+                    <span class="bottom-tab-icon" aria-hidden="true">
 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -364,13 +374,11 @@
                 </a>
 
 
-                <!-- ========================================== -->
                 <!-- Пауза+ -->
-                <!-- ========================================== -->
 
                 <a class="bottom-tab" href="#">
 
-                    <span class="bottom-tab-icon">
+                    <span class="bottom-tab-icon" aria-hidden="true">
 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -387,13 +395,11 @@
                 </a>
 
 
-                <!-- ========================================== -->
                 <!-- Профиль -->
-                <!-- ========================================== -->
 
                 <a class="bottom-tab" href="pages/profile.html">
 
-                    <span class="bottom-tab-icon">
+                    <span class="bottom-tab-icon" aria-hidden="true">
 
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
@@ -417,34 +423,31 @@
 
     </main>
 
+
     <!-- ====================================================== -->
-    <!-- DESKTOP MODAL — РЕГИСТРАЦИЯ -->
+    <!-- DESKTOP MODAL — РЕГИСТРАЦИЯ И ВХОД -->
     <!-- ====================================================== -->
 
     <div class="auth-modal" id="authModal">
 
         <!-- Затемнённый фон вокруг модалки -->
+
         <div class="auth-modal-overlay"></div>
 
 
         <!-- Общий контейнер карточки и кнопки закрытия -->
+
         <div class="auth-modal-wrapper">
 
 
-            <!-- ================================================== -->
-            <!-- Карточка регистрации -->
-            <!-- ================================================== -->
-
-            <!-- ================================================== -->
+            <!-- ============================================== -->
             <!-- Карточка авторизации -->
-            <!-- ================================================== -->
+            <!-- ============================================== -->
 
             <div class="auth-modal-card" data-auth-mode="register">
 
 
-                <!-- ============================================== -->
                 <!-- TitleBlock -->
-                <!-- ============================================== -->
 
                 <div class="auth-modal-title-block">
 
@@ -460,9 +463,7 @@
                 </div>
 
 
-                <!-- ============================================== -->
                 <!-- Email / Телефон -->
-                <!-- ============================================== -->
 
                 <div class="segment-tabs">
 
@@ -477,18 +478,12 @@
                 </div>
 
 
-                <!-- ============================================== -->
-                <!-- Форма -->
                 <!-- Одна форма для регистрации и входа -->
-                <!-- ============================================== -->
 
                 <form class="auth-modal-form">
 
 
-                    <!-- ========================================== -->
-                    <!-- Имя -->
-                    <!-- Только регистрация -->
-                    <!-- ========================================== -->
+                    <!-- Имя: только для регистрации -->
 
                     <div class="form-field auth-register-only">
 
@@ -505,9 +500,7 @@
                     </div>
 
 
-                    <!-- ========================================== -->
                     <!-- Email -->
-                    <!-- ========================================== -->
 
                     <div class="form-field">
 
@@ -524,9 +517,7 @@
                     </div>
 
 
-                    <!-- ========================================== -->
                     <!-- Пароль -->
-                    <!-- ========================================== -->
 
                     <div class="form-field">
 
@@ -539,7 +530,7 @@
                             <input id="modal-password" type="password" placeholder="Введите пароль">
 
 
-                            <!-- Показать / скрыть пароль -->
+                            <!-- Показать или скрыть пароль -->
 
                             <button class="password-toggle" type="button" aria-label="Показать пароль">
 
@@ -555,18 +546,14 @@
                 </form>
 
 
-                <!-- ============================================== -->
                 <!-- Основная кнопка -->
-                <!-- ============================================== -->
 
                 <button class="button-primary auth-modal-submit" type="button">
                     Зарегистрироваться
                 </button>
 
 
-                <!-- ============================================== -->
                 <!-- Переключение Регистрация / Вход -->
-                <!-- ============================================== -->
 
                 <p class="auth-modal-switch">
 
@@ -584,19 +571,18 @@
             </div>
 
 
-            <!-- ================================================== -->
             <!-- Кнопка закрытия -->
-            <!-- На desktop будет справа от карточки с расстоянием 8px -->
-            <!-- ================================================== -->
 
             <button class="auth-modal-close" type="button" aria-label="Закрыть">
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true">
                     <path
                         d="M3.775 2.891a.625.625 0 1 0-.884.884L9.116 10 2.89 16.225a.625.625 0 0 0 .884.883L10 10.885l6.224 6.224a.625.625 0 1 0 .884-.883L10.884 10l6.224-6.225a.625.625 0 1 0-.884-.884L10 9.116z" />
                 </svg>
 
             </button>
+
 
         </div>
 

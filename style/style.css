@@ -1917,6 +1917,10 @@ button {
     .header-tab {
     padding: 8px 20px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: transparent;
 
     border: none;
@@ -1927,8 +1931,10 @@ button {
 
     color: var(--color-text-secondary);
 
+    text-decoration: none;
+
     transition: color 0.2s ease;
-    }
+}
 
     /* Hover только для неактивных пунктов меню */
 
@@ -2315,6 +2321,7 @@ button {
         align-items: center;
         justify-content: flex-end;
         gap: 12px;
+        text-decoration: none;
     }
 
     .header-user-name {
@@ -2830,6 +2837,171 @@ button {
     .home-page .today-history-box .pause-card-content p {
         -webkit-line-clamp: 2;
         line-clamp: 2;
+    }
+
+}
+
+/* ==========================================================
+   HISTORY — МОБИЛЬНАЯ И DESKTOP-ВЕРСИЯ
+   Добавить в самый конец существующего style.css.
+   Отдельное подключение этого файла в HTML не требуется.
+   ========================================================== */
+
+/* Ссылки в desktop-хедере оформлены как существующие пункты. */
+
+.history-desktop-header .header-tab {
+    text-decoration: none;
+}
+
+/* Мобильная страница без общей рамки. */
+
+.history-page {
+    max-width: none;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+    border: none;
+    border-radius: 0;
+}
+
+/* Контейнер содержимого: на мобильном сохраняем ширину 420px. */
+
+.history-page .history-content {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Сохраняем класс кнопки, используемый существующим JavaScript. */
+
+.history-page .header-back {
+    color: var(--color-primary-green);
+    flex-shrink: 0;
+}
+
+.history-page .header-back svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+/* Между группами дней — 32px. */
+
+.history-page .pauses-list {
+    width: calc(100% - 48px);
+    margin: 24px auto 0;
+    gap: 32px;
+}
+
+/* На мобильном карточки идут в одну колонку. */
+
+.history-page .pause-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+}
+
+/* Отступы теперь задаёт gap у контейнеров. */
+
+.history-page .pause-section + .pause-section {
+    margin-top: 0;
+}
+
+.history-page .pause-section > .section-label {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+.history-page .pause-card {
+    min-width: 0;
+    margin-top: 0;
+}
+
+/* В истории ответы отображаются полностью. */
+
+.history-page .pause-card-content {
+    overflow-wrap: anywhere;
+}
+
+.history-page .bottom-tab-bar-container {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ==========================================================
+   HISTORY — DESKTOP ОТ 1200px
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    /* Внешний контейнер: 48px сверху, 80px снизу. */
+
+    .history-page {
+        padding: 48px 0 80px;
+    }
+
+    /* Центральная область с заголовком и карточками. */
+
+    .history-page .history-content {
+        max-width: 800px;
+    }
+
+    /* Строка: круглая кнопка назад и заголовок. */
+
+    .history-page .header-bar {
+        height: auto;
+        padding: 0;
+        gap: 16px;
+    }
+
+    .history-page .header-back {
+        width: 32px;
+        height: 32px;
+        background: var(--color-background-card);
+        border: 1px solid var(--color-border-default);
+        border-radius: 50%;
+    }
+
+    .history-page .header-back svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .history-page .header-title {
+        position: static;
+        left: auto;
+        transform: none;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    /* От заголовка страницы до первой группы — 32px. */
+
+    .history-page .pauses-list {
+        width: 100%;
+        margin-top: 32px;
+    }
+
+    /*
+       392px + 16px + 392px = 800px.
+       Заголовок дня занимает обе колонки благодаря
+       правилу grid-column: 1 / -1 выше.
+    */
+
+    .history-page .pause-section {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+}
+
+/* ==========================================================
+   HISTORY — КНОПКА НАЗАД
+   На мобильном видна, на desktop скрыта.
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    .history-page .header-back {
+        display: none;
     }
 
 }
