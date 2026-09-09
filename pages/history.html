@@ -24,89 +24,40 @@
 
     <!-- ======================================================
          DESKTOP HEADER
-         На мобильном скрывается через CSS.
-         Активный раздел — Паузы.
+         На мобильном скрывается существующими стилями.
+         Для переходов между страницами используем ссылки.
          ====================================================== -->
 
     <header class="desktop-header history-desktop-header">
 
-        <!-- Логотип -->
-
-        <a class="brand-logo" href="home.html" aria-label="ПАУЗА — главная">
-
-            <div class="logo-badge">
-                <span>П</span>
-            </div>
-
-            <span class="brand-name">
-                ПАУЗА
-            </span>
-
-        </a>
-
-
-        <!-- Навигация авторизованного пользователя -->
+        <div class="brand-logo">
+            <div class="logo-badge"><span>П</span></div>
+            <span class="brand-name">ПАУЗА</span>
+        </div>
 
         <nav class="header-tabs" aria-label="Основная навигация">
-
-            <a class="header-tab" href="home.html">
-                Главная
-            </a>
-
-            <a class="header-tab header-tab--active" href="history.html" aria-current="page">
-                Паузы
-            </a>
-
-            <a class="header-tab" href="lenta.html">
-                Лента
-            </a>
-
-            <!-- Страница Пауза+ пока не подключена -->
-
-            <button class="header-tab" type="button">
-                Пауза+
-            </button>
-
-            <a class="header-tab" href="profile.html">
-                Профиль
-            </a>
-
+            <a class="header-tab" href="home.html">Главная</a>
+            <a class="header-tab header-tab--active" href="history.html" aria-current="page">Паузы</a>
+            <a class="header-tab" href="lenta.html">Лента</a>
+            <a class="header-tab" href="#">Пауза+</a>
+            <a class="header-tab" href="profile.html">Профиль</a>
         </nav>
 
+        <!-- Пауза+ пока ведёт на #, как в существующем меню.
+             Имя пользователя пока задано в разметке. -->
 
-        <!-- Имя и аватарка являются одной ссылкой на профиль -->
-
-        <a class="header-action" href="profile.html" aria-label="Открыть профиль Александры">
-
-            <span class="header-user-name">
-                Александра
-            </span>
-
-
-            <!-- Аватарка без фотографии -->
-
+        <div class="header-action">
+            <span class="header-user-name">Александра</span>
             <span class="avatar-small" aria-hidden="true">
-
-                <!-- Сохранённая фотография -->
-
-                <img class="user-avatar-image" alt="" hidden>
-
-
-                <!-- Иконка, если фотографии ещё нет -->
-
-                <span class="icon-user user-avatar-placeholder">
-
+                <span class="icon-user">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
                             d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z" />
                     </svg>
-
                 </span>
-
             </span>
-
-        </a>
+        </div>
 
     </header>
 
@@ -165,7 +116,7 @@
 
                 <!-- Главная -->
 
-                <a class="bottom-tab" href="../pages/home.html">
+                <a class="bottom-tab" href="home.html">
                     <span class="bottom-tab-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -178,7 +129,7 @@
                 </a>
                 <!-- Паузы -->
 
-                <a class="bottom-tab active" href="../pages/history.html" aria-current="page">
+                <a class="bottom-tab active" href="history.html" aria-current="page">
                     <span class="bottom-tab-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -191,7 +142,7 @@
                 </a>
                 <!-- Лента -->
 
-                <a class="bottom-tab" href="../pages/lenta.html">
+                <a class="bottom-tab" href="lenta.html">
                     <span class="bottom-tab-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -215,7 +166,7 @@
                 </a>
                 <!-- Профиль -->
 
-                <a class="bottom-tab" href="../pages/profile.html">
+                <a class="bottom-tab" href="profile.html">
                     <span class="bottom-tab-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -232,88 +183,92 @@
 
     </main>
 
+
     <!-- ======================================================
-         ПОЛНЫЙ ПРОСМОТР ЗАПИСИ ПАУЗЫ
-         Одна модалка используется для всех карточек.
-         Содержимое подставляется через JavaScript.
+         ОБЩИЙ FOOTER
+         Юридические ссылки ведут на разделы, которые будут
+         созданы отдельным этапом.
          ====================================================== -->
 
-    <div class="pause-details-modal" aria-hidden="true">
+    <footer class="site-footer site-footer--with-mobile-nav">
 
-        <!-- Затемнённый фон -->
+        <div class="site-footer-container">
 
-        <div class="pause-details-overlay"></div>
+            <div class="footer-grid">
 
+                <div class="footer-brand">
 
-        <!-- Контейнер карточки и кнопки закрытия -->
+                    <a class="footer-brand-link" href="home.html" aria-label="ПАУЗА — главная">
+                        <span class="footer-brand-mark" aria-hidden="true">П</span>
+                        <span class="footer-brand-name">ПАУЗА</span>
+                    </a>
 
-        <div class="pause-details-wrapper">
-
-            <div class="pause-details-card" role="dialog" aria-modal="true" aria-labelledby="pause-details-heading">
-
-                <!-- Заголовок -->
-
-                <div class="pause-details-title-block">
-
-                    <h2 id="pause-details-heading">
-                        Запись паузы
-                    </h2>
-
-                    <p class="pause-details-date"></p>
-
-                </div>
-
-
-                <!-- Продолжительность -->
-
-                <div class="pause-details-duration-row">
-
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path
-                            d="M20.182 12c0-4.589-3.698-8.248-8.182-8.248S3.818 7.41 3.818 12 7.516 20.248 12 20.248 20.182 16.59 20.182 12m-9.091-5.474c0-.484.407-.876.909-.876s.909.392.909.876v4.942l3.147 1.58a.86.86 0 0 1 .386 1.181.926.926 0 0 1-1.226.373l-4.125-2.07zM22 12c0 5.489-4.443 10-10 10S2 17.49 2 12C2 6.512 6.443 2 12 2s10 4.512 10 10" />
-                    </svg>
-
-                    <span class="pause-details-duration"></span>
-
-                </div>
-
-
-                <!-- Полные ответы пользователя -->
-
-                <div class="pause-details-content">
-
-                    <p>
-                        <strong>Чувства:</strong>
-                        <span class="pause-details-feelings"></span>
-                    </p>
-
-                    <p>
-                        <strong>Мысли:</strong>
-                        <span class="pause-details-thoughts"></span>
-                    </p>
-
-                    <p>
-                        <strong>Себе:</strong>
-                        <span class="pause-details-needs"></span>
+                    <p class="footer-description">
+                        Пространство для коротких пауз, внимания к себе
+                        и осознанных практик.
                     </p>
 
                 </div>
+
+
+                <nav class="footer-column" aria-label="Разделы сайта">
+
+                    <h2 class="footer-column-title">РАЗДЕЛЫ</h2>
+
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="home.html">Главная</a></li>
+                        <li><a class="footer-link" href="lenta.html" data-page-link="feed">Лента</a></li>
+                        <li><a class="footer-link" href="../pause-plus/">Пауза+</a></li>
+                        <li><a class="footer-link" href="../pause-plus/practicums/">Практикумы</a></li>
+                        <li><a class="footer-link" href="../pause-plus/consultations/">Консультации</a></li>
+                    </ul>
+
+                </nav>
+
+
+                <nav class="footer-column" aria-label="Юридические документы">
+
+                    <h2 class="footer-column-title">ДОКУМЕНТЫ</h2>
+
+                    <ul class="footer-links">
+                        <li><a class="footer-link" href="../legal/offer/">Публичная оферта</a></li>
+                        <li><a class="footer-link" href="../legal/privacy/">Политика обработки персональных данных</a>
+                        </li>
+                        <li><a class="footer-link" href="../legal/consent/">Согласие на обработку персональных
+                                данных</a></li>
+                        <li><a class="footer-link" href="../legal/terms/">Пользовательское соглашение</a></li>
+                        <li><a class="footer-link" href="../legal/refunds/">Правила возврата</a></li>
+                    </ul>
+
+                </nav>
+
+
+                <nav class="footer-column" aria-label="Контактная информация">
+
+                    <h2 class="footer-column-title">СВЯЗЬ</h2>
+
+                    <ul class="footer-links">
+                        <li>
+                            <a class="footer-link" href="../legal/offer/#contacts">
+                                Реквизиты и контакты
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
 
             </div>
 
 
-            <!-- Закрытие модалки -->
-
-            <button class="pause-details-close" type="button" aria-label="Закрыть запись">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                        d="M3.775 2.891a.625.625 0 1 0-.884.884L9.116 10 2.89 16.225a.625.625 0 0 0 .884.883L10 10.885l6.224 6.224a.625.625 0 1 0 .884-.883L10.884 10l6.224-6.225a.625.625 0 1 0-.884-.884L10 9.116z" />
-                </svg>
-            </button>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2026 ПАУЗА. Все права защищены.
+                </p>
+            </div>
 
         </div>
 
-    </div>
+    </footer>
 
 
     <!-- Сохраняем существующую логику страницы.

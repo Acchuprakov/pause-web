@@ -191,7 +191,6 @@ const feedPosts = [
         author: "ПАУЗА.",
         publishedAt: "09.09.2026, 12:52",
         avatar: "../assets/images/pause-avatar.png",
-
         text: [
             "Большая часть жизни — это не путешествия, праздники и важные события.",
             "",
@@ -203,7 +202,6 @@ const feedPosts = [
             "",
             "Но, может быть, самое важное — научиться замечать её в самом обычном."
         ].join("\n"),
-
         likes: 0,
         comments: 0
     },
@@ -213,7 +211,6 @@ const feedPosts = [
         author: "ПАУЗА.",
         publishedAt: "08.09.2026, 19:10",
         avatar: "../assets/images/pause-avatar.png",
-
         text: [
             "Мы привыкли оценивать день по результатам.",
             "",
@@ -223,7 +220,6 @@ const feedPosts = [
             "",
             "Пауза — это про то, как ты прожил день, а не только о том, что успел."
         ].join("\n"),
-
         likes: 0,
         comments: 0
     },
@@ -233,7 +229,6 @@ const feedPosts = [
         author: "ПАУЗА.",
         publishedAt: "07.09.2026, 16:40",
         avatar: "../assets/images/pause-avatar.png",
-
         text: [
             "Бывает, одна мысль цепляется за тебя и не отпускает.",
             "",
@@ -253,7 +248,6 @@ const feedPosts = [
             "",
             "И верни внимание туда, где ты находишься."
         ].join("\n"),
-
         likes: 0,
         comments: 0
     },
@@ -263,7 +257,6 @@ const feedPosts = [
         author: "ПАУЗА.",
         publishedAt: "06.09.2026, 21:05",
         avatar: "../assets/images/pause-avatar.png",
-
         text: [
             "Не нужно убегать от того, что ты чувствуешь.",
             "",
@@ -277,7 +270,6 @@ const feedPosts = [
             "",
             "И, возможно, когда ты признаешь это состояние, оно начнёт понемногу отпускать."
         ].join("\n"),
-
         likes: 0,
         comments: 0
     },
@@ -287,7 +279,6 @@ const feedPosts = [
         author: "ПАУЗА.",
         publishedAt: "05.09.2026, 20:30",
         avatar: "../assets/images/pause-avatar.png",
-
         text: [
             "Сегодня вечером просто посиди у окна.",
             "",
@@ -301,7 +292,6 @@ const feedPosts = [
             "",
             "Пауза."
         ].join("\n"),
-
         likes: 0,
         comments: 0
     },
@@ -2227,6 +2217,20 @@ function createFeedCommentRow(comment, isReply) {
 }
 
 
+function createFeedCommentDeleteButton(ariaLabel) {
+
+    const deleteButton = document.createElement("button");
+
+    deleteButton.classList.add("post-comment-delete");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Удалить";
+    deleteButton.setAttribute("aria-label", ariaLabel);
+
+    return deleteButton;
+
+}
+
+
 function renderFeedPosts() {
 
     if (!feedPostsContainer) {
@@ -2450,13 +2454,17 @@ function renderFeedPosts() {
             userComments.innerHTML = "";
             userComments.hidden = !postState.userComments.length;
 
-            postState.userComments.forEach(function (comment) {
+            postState.userComments.forEach(function (
+                comment,
+                commentIndex
+            ) {
 
                 const commentThread = document.createElement("article");
                 const commentElements = createFeedCommentRow(
                     comment,
                     false
                 );
+                const commentActions = document.createElement("div");
                 const replyButton = document.createElement("button");
                 const replyForm = document.createElement("form");
                 const replyInput = document.createElement("input");
@@ -2464,6 +2472,7 @@ function renderFeedPosts() {
                 const repliesContainer = document.createElement("div");
 
                 commentThread.classList.add("post-comment-thread");
+                commentActions.classList.add("post-comment-actions");
                 replyButton.classList.add("post-reply-button");
                 replyForm.classList.add("post-reply-form");
                 replyInput.classList.add(
@@ -2497,15 +2506,100 @@ function renderFeedPosts() {
                 replyForm.append(replyInput);
                 replyForm.append(replySubmit);
 
-                commentElements.body.append(replyButton);
+                commentActions.append(replyButton);
+
+                if (comment.isCurrentUser) {
+
+                    const deleteCommentButton =
+                        createFeedCommentDeleteButton(
+                            "Удалить комментарий"
+                        );
+
+                    commentActions.append(deleteCommentButton);
+
+                    deleteCommentButton.addEventListener(
+                        "click",
+                        function () {
+
+                            if (!requestFeedAuthorization()) {
+                                return;
+                            }
+
+                            const hasReplies =
+                                comment.replies.length > 0;
+
+                            const confirmationText = hasReplies
+                                ? "Удалить комментарий и все ответы на него?"
+                                : "Удалить комментарий?";
+
+                            if (!window.confirm(confirmationText)) {
+                                return;
+                            }
+
+                            postState.userComments.splice(
+                                commentIndex,
+                                1
+                            );
+
+                            updateCommentSummary();
+                            renderUserComments();
+                            saveFeedState();
+
+                        }
+                    );
+
+                }
+
+                commentElements.body.append(commentActions);
                 commentElements.body.append(replyForm);
 
-                comment.replies.forEach(function (reply) {
+                comment.replies.forEach(function (
+                    reply,
+                    replyIndex
+                ) {
 
                     const replyElements = createFeedCommentRow(
                         reply,
                         true
                     );
+
+                    if (reply.isCurrentUser) {
+
+                        const replyActions =
+                            document.createElement("div");
+                        const deleteReplyButton =
+                            createFeedCommentDeleteButton(
+                                "Удалить ответ"
+                            );
+
+                        replyActions.classList.add(
+                            "post-comment-actions"
+                        );
+                        replyActions.append(deleteReplyButton);
+                        replyElements.body.append(replyActions);
+
+                        deleteReplyButton.addEventListener(
+                            "click",
+                            function () {
+
+                                if (!requestFeedAuthorization()) {
+                                    return;
+                                }
+
+                                if (!window.confirm("Удалить ответ?")) {
+                                    return;
+                                }
+
+                                comment.replies.splice(replyIndex, 1);
+
+                                updateCommentSummary();
+                                renderUserComments();
+                                saveFeedState();
+
+                            }
+                        );
+
+                    }
 
                     repliesContainer.append(replyElements.row);
 
