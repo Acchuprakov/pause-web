@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <!-- ======================================================
+         БАЗОВЫЕ НАСТРОЙКИ
+         ====================================================== -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Пауза+ — ПАУЗА</title>
+
+
+    <!-- ======================================================
+         ШРИФТ MANROPE
+         ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ======================================================
+         ОБЩИЕ СТИЛИ САЙТА
+         ====================================================== -->
+
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+
+    <!-- ======================================================
+         DESKTOP HEADER
+         Активный пункт — «Пауза+».
+         На мобильном скрывается через CSS.
+         ====================================================== -->
+
+    <header class="desktop-header pause-plus-desktop-header">
+
+        <a class="brand-logo" href="../pages/home.html" aria-label="ПАУЗА — главная">
+            <div class="logo-badge">
+                <span>П</span>
+            </div>
+
+            <span class="brand-name">ПАУЗА</span>
+        </a>
+
+
+        <nav class="header-tabs" aria-label="Основная навигация">
+            <a class="header-tab" href="../pages/home.html">
+                Главная
+            </a>
+
+            <a class="header-tab" href="../pages/history.html">
+                Паузы
+            </a>
+
+            <a class="header-tab" href="../pages/lenta.html">
+                Лента
+            </a>
+
+            <a class="header-tab header-tab--active" href="index.html" aria-current="page">
+                Пауза+
+            </a>
+
+            <a class="header-tab" href="../pages/profile.html">
+                Профиль
+            </a>
+        </nav>
+
+
+        <!-- Имя и аватарка ведут на страницу профиля.
+             Сохранённые данные подставляются через script.js. -->
+
+        <a class="header-action header-action-link" href="../pages/profile.html" aria-label="Открыть профиль">
+            <span class="header-user-name">Александра</span>
+
+            <span class="avatar-small" aria-hidden="true">
+                <img class="user-avatar-image" alt="" hidden>
+
+                <span class="icon-user user-avatar-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z">
+                    </svg>
+                </span>
+            </span>
+        </a>
+
+    </header>
+
+
+    <!-- ======================================================
+         СТРАНИЦА ПАУЗА+
+         Контент ограничен шириной 800px на desktop.
+         ====================================================== -->
+
+    <main class="pause-plus-page">
+
+        <div class="pause-plus-content">
+
+            <!-- Заголовок страницы. -->
+
+            <header class="header-bar pause-plus-header-bar">
+                <h1 class="header-title">Пауза+</h1>
+            </header>
+
+
+            <!-- ==================================================
+                 ПРАКТИКУМЫ И КОНСУЛЬТАЦИИ
+                 ================================================== -->
+
+            <section class="programs-section" aria-labelledby="programs-heading">
+
+                <h2 class="programs-section-title" id="programs-heading">
+                    ПРАКТИКУМЫ И КОНСУЛЬТАЦИИ
+                </h2>
+
+
+                <div class="courses-grid">
+
+                    <!-- Практикум «Заметить жизнь». -->
+
+                    <a class="course-card" href="practicums/notice-life/">
+
+                        <div class="course-cover">
+                            <img src="../assets/images/card-practicum.png" width="392" height="151"
+                                alt="Практикум «Заметить жизнь»">
+                        </div>
+
+
+                        <div class="course-card-content">
+
+                            <div class="course-meta-row">
+                                <span class="course-badge">
+                                    8 уроков · Стоимость практикума: 490 руб
+                                </span>
+
+                                <svg class="course-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+
+
+                            <div class="course-info-block">
+                                <h3 class="course-title">Заметить жизнь</h3>
+
+                                <p class="course-description">
+                                    Восемь небольших остановок, чтобы увидеть, куда уходит ваше внимание,
+                                    услышать себя и вернуться к тому, что уже происходит.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- Личная консультация психолога. -->
+
+                    <a class="course-card" href="consultations/personal/">
+
+                        <div class="course-cover">
+                            <img src="../assets/images/psychologist-consultation.jpg" width="392" height="151"
+                                alt="Личная консультация психолога">
+                        </div>
+
+
+                        <div class="course-card-content">
+
+                            <div class="course-meta-row">
+                                <span class="course-badge">
+                                    Стоимость консультации: 3500 руб
+                                </span>
+
+                                <svg class="course-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+
+
+                            <div class="course-info-block">
+                                <h3 class="course-title">Личная консультация психолога</h3>
+
+                                <p class="course-description">
+                                    Бережная встреча с психологом, чтобы разобраться в волнующей ситуации,
+                                    лучше понять себя и наметить дальнейшие шаги.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- Анонс новой программы.
+                         Карточка пока не является ссылкой, потому что
+                         отдельная страница программы ещё не готова. -->
+
+                    <article class="course-card course-card--coming-soon">
+
+                        <div class="course-cover course-cover--coming-soon">
+
+                            <span class="course-coming-soon-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M10.437 12.959c.973 0 1.769.806 1.769 1.793v5.455c0 .987-.796 1.793-1.77 1.793H8.808c-.973 0-1.77-.806-1.77-1.793v-5.456c0-.986.797-1.792 1.77-1.792zm-1.63 1.422a.37.37 0 0 0-.365.37v5.456c0 .209.169.37.365.37h1.63c.205 0 .364-.17.364-.37v-5.456a.37.37 0 0 0-.364-.37zm11.424-2.523c.973 0 1.769.806 1.769 1.792v1.652c0 .986-.796 1.792-1.77 1.792h-5.383c-.974 0-1.77-.806-1.77-1.792V13.65c0-.986.796-1.792 1.77-1.792zm-5.384 1.423a.37.37 0 0 0-.366.37v1.65c0 .21.17.37.366.37h5.384a.37.37 0 0 0 .364-.37v-1.65a.37.37 0 0 0-.364-.37zM9.153 6.99c.974 0 1.77.806 1.77 1.793v1.66c0 .987-.796 1.793-1.77 1.793H3.77c-.974 0-1.77-.806-1.77-1.793v-1.66c0-.987.796-1.794 1.77-1.794zM15.455 2a1.78 1.78 0 0 1 1.77 1.793v5.456c0 .986-.796 1.792-1.77 1.792h-1.629c-.974 0-1.77-.806-1.77-1.792V3.793c0-.987.797-1.793 1.77-1.793zM3.77 8.414a.37.37 0 0 0-.365.37v1.66c0 .2.16.37.365.37h5.383a.37.37 0 0 0 .366-.37v-1.66a.37.37 0 0 0-.366-.37zm10.056-4.99a.37.37 0 0 0-.365.369v5.456c0 .208.168.37.365.37h1.63a.37.37 0 0 0 .364-.37V3.793a.37.37 0 0 0-.365-.37z">
+                                </svg>
+                            </span>
+
+                            <span class="course-coming-soon-label">СКОРО</span>
+
+                        </div>
+
+
+                        <div class="course-card-content">
+
+                            <div class="course-meta-row">
+                                <span class="course-badge course-badge--status">
+                                    В разработке
+                                </span>
+                            </div>
+
+
+                            <div class="course-info-block">
+                                <h3 class="course-title">Новая программа</h3>
+
+                                <p class="course-description">
+                                    Мы уже готовим новый формат для ПАУЗА+.
+                                    Скоро здесь появятся подробности и дата запуска.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ==================================================
+             МОБИЛЬНОЕ НИЖНЕЕ МЕНЮ
+             Активный пункт — «Пауза+».
+             ================================================== -->
+
+        <nav class="bottom-tab-bar-container" aria-label="Мобильная навигация">
+
+            <div class="bottom-tab-bar">
+
+                <a class="bottom-tab" href="../pages/home.html">
+                    <span class="bottom-tab-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M10.213 2.704c.966-.945 2.607-.945 3.615.04l7.056 6.08C21.617 9.54 22 10.445 22 11.407v8.14C22 20.9 20.875 22 19.501 22H4.507C3.124 22 2 20.9 2 19.548v-8.14c0-.962.383-1.866 1.074-2.542zm1.774.93a.9.9 0 0 0-.633.26l-7.138 6.152c-.333.335-.55.848-.55 1.36v8.141a.83.83 0 0 0 .84.824H10V15.6c0-.56 0-.84.11-1.055a1 1 0 0 1 .436-.437C10.76 14 11.04 14 11.6 14h.8c.56 0 .84-.001 1.054.108a1 1 0 0 1 .437.437C14 14.76 14 15.04 14 15.6v4.77h5.501a.83.83 0 0 0 .833-.823v-8.14c0-.522-.209-1.019-.592-1.394l-7.055-6.087a1 1 0 0 0-.7-.293" />
+                        </svg>
+
+                    </span>
+                    <span class="bottom-tab-label">Главная</span>
+                </a>
+
+
+                <a class="bottom-tab" href="../pages/history.html">
+                    <span class="bottom-tab-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M11.306 22c-.493 0-4.787-.058-6.547-2.18-.63-.759-.872-1.708-.71-2.74l.016-.09c.016-.075.024-.14.04-.207l.299-1.205c.258-.916.524-1.692.823-2.418.331-.793.759-1.552 1.348-2.386.76-1.081 1.671-2.303 2.898-3.054.412-.247 1.058-.536 1.817-.487.767-.05 1.404.231 1.816.487 1.179.718 2.09 1.89 2.906 3.054a13 13 0 0 1 1.348 2.386c.372.875.687 1.84.96 2.938l.17.685c.25 1.106.057 2.122-.58 2.939C16.205 21.942 11.805 22 11.305 22M5.88 16.338l-.226.949c-.097.627.008 1.081.34 1.47 1.089 1.311 4.205 1.6 5.31 1.6h.009c1.13 0 4.303-.297 5.352-1.65.331-.421.412-.917.266-1.544l-.153-.644a20 20 0 0 0-.88-2.699c-.29-.685-.662-1.345-1.178-2.088-.662-.95-1.445-2.006-2.414-2.592-.323-.19-.646-.28-.928-.256l-.073.008-.08-.008c-.275-.025-.606.066-.913.256-.96.586-1.752 1.643-2.414 2.592-.516.743-.888 1.403-1.178 2.088a18 18 0 0 0-.743 2.17zm11.02-7.99c-1.711 0-3.1-1.42-3.1-3.17S15.19 2 16.9 2 20 3.42 20 5.17s-1.389 3.178-3.1 3.178m0-4.697c-.823 0-1.485.685-1.485 1.519s.67 1.518 1.485 1.518 1.486-.685 1.486-1.518c0-.834-.67-1.52-1.486-1.52">
+                        </svg>
+                    </span>
+                    <span class="bottom-tab-label">Паузы</span>
+                </a>
+
+
+                <a class="bottom-tab" href="../pages/lenta.html">
+                    <span class="bottom-tab-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M16.673 2A5.327 5.327 0 0 1 22 7.327v9.346A5.327 5.327 0 0 1 16.673 22H7.327A5.327 5.327 0 0 1 2 16.673V7.327A5.327 5.327 0 0 1 7.327 2zM7.327 3.589A3.74 3.74 0 0 0 3.59 7.327v9.346a3.74 3.74 0 0 0 3.738 3.738h9.346a3.74 3.74 0 0 0 3.738-3.738V7.327a3.74 3.74 0 0 0-3.738-3.738zM8 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2m8 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zM8 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2m8 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2z">
+                        </svg>
+                    </span>
+                    <span class="bottom-tab-label">Лента</span>
+                </a>
+
+
+                <a class="bottom-tab active" href="index.html" aria-current="page">
+                    <span class="bottom-tab-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            viewBox="0 0 25 25">
+                            <path
+                                d="M11.437 13.959c.973 0 1.77.806 1.77 1.793v5.455c0 .986-.797 1.793-1.77 1.793h-1.63c-.974 0-1.77-.806-1.77-1.793v-5.455c0-.987.796-1.793 1.77-1.793zm9.794-1.101c.973 0 1.769.806 1.769 1.793v1.65c0 .987-.796 1.794-1.77 1.794h-5.383c-.974 0-1.77-.807-1.77-1.793V14.65c0-.987.796-1.793 1.77-1.793zM10.154 7.99c.973 0 1.77.806 1.77 1.793v1.66c0 .986-.796 1.792-1.77 1.793H4.77c-.974 0-1.77-.807-1.77-1.793v-1.66c0-.987.796-1.793 1.77-1.793zM16.456 3a1.78 1.78 0 0 1 1.769 1.793v5.455c0 .987-.796 1.793-1.77 1.793h-1.63c-.973 0-1.769-.806-1.769-1.793V4.793c0-.987.796-1.793 1.77-1.793z" />
+                        </svg>
+
+                    </span>
+                    <span class="bottom-tab-label">Пауза+</span>
+                </a>
+
+
+                <a class="bottom-tab" href="../pages/profile.html">
+                    <span class="bottom-tab-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z">
+                        </svg>
+                    </span>
+                    <span class="bottom-tab-label">Профиль</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+    </main>
+
+
+    <!-- ======================================================
+         ОБЩИЙ FOOTER
+         ====================================================== -->
+
+    <site-footer data-root=".." data-home="../pages/home.html"></site-footer>
+
+
+    <!-- ======================================================
+         JAVASCRIPT
+         ====================================================== -->
+
+    <script src="../js/footer.js"></script>
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

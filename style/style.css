@@ -4725,8 +4725,342 @@ button {
 
 
 /* ==========================================================
+   ПАУЗА+ — MOBILE
+   ========================================================== */
+
+.pause-plus-page {
+    width: 100%;
+    max-width: 420px;
+
+    margin: 0 auto;
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+}
+
+.pause-plus-content {
+    width: 100%;
+}
+
+
+/* Заголовок страницы. */
+
+.pause-plus-header-bar {
+    width: calc(100% - 48px);
+    height: auto;
+
+    margin: 24px auto 0;
+    padding: 0;
+
+    justify-content: center;
+}
+
+
+/* Раздел с программами. */
+
+.programs-section {
+    width: calc(100% - 48px);
+
+    margin: 32px auto 0;
+}
+
+.programs-section-title {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    color: var(--color-text-secondary);
+}
+
+.courses-grid {
+    width: 100%;
+
+    margin-top: 16px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 16px;
+}
+
+
+/* Вся карточка является ссылкой. */
+
+.course-card {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    color: inherit;
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-card);
+
+    text-decoration: none;
+
+    transition: border-color 0.2s ease;
+}
+
+.course-card:hover {
+    border-color: var(--color-border-active);
+}
+
+.course-card:focus-visible {
+    border-color: var(--color-border-active);
+    outline: 2px solid var(--color-border-active);
+    outline-offset: 3px;
+}
+
+
+/* Анонс ещё не опубликованной программы. */
+
+.course-card--coming-soon {
+    cursor: default;
+}
+
+.course-card--coming-soon:hover {
+    border-color: var(--color-border-default);
+}
+
+
+/* Обложка карточки. */
+
+.course-cover {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+
+    aspect-ratio: 392 / 151;
+
+    overflow: hidden;
+
+    background: var(--color-surface-muted);
+
+    border-bottom: 1px solid var(--color-border-default);
+}
+
+.course-cover img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.course-cover--coming-soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    color: var(--color-primary-green);
+    background: var(--color-surface-muted);
+}
+
+.course-coming-soon-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-primary-green);
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
+}
+
+.course-coming-soon-icon svg {
+    width: 28px;
+    height: 28px;
+
+    display: block;
+}
+
+.course-coming-soon-label {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* Текстовая часть карточки. */
+
+.course-card-content {
+    min-height: 168px;
+
+    padding: 20px;
+}
+
+.course-meta-row {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.course-badge {
+    min-width: 0;
+    min-height: 24px;
+
+    padding: 3px 10px;
+
+    display: inline-flex;
+    align-items: center;
+
+    background: var(--color-surface-muted);
+
+    border-radius: var(--radius-12);
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+
+    color: var(--color-text-accent);
+}
+
+.course-badge--status {
+    background: var(--color-surface-success);
+}
+
+.course-arrow {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    display: block;
+
+    color: var(--color-text-tertiary);
+}
+
+.course-info-block {
+    margin-top: 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.course-title {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    color: var(--color-text-primary);
+}
+
+.course-description {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    color: var(--color-text-secondary);
+}
+
+
+/* ==========================================================
+   ПАУЗА+ — DESKTOP
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    .pause-plus-page {
+        max-width: none;
+
+        margin: 0;
+        padding: 48px 0 80px;
+    }
+
+    .pause-plus-content {
+        width: 800px;
+        max-width: 800px;
+
+        margin: 0 auto;
+    }
+
+    .pause-plus-header-bar {
+        width: 100%;
+
+        margin: 0;
+
+        justify-content: flex-start;
+    }
+
+    .pause-plus-page .pause-plus-header-bar .header-title {
+        position: static;
+
+        left: auto;
+        transform: none;
+
+        font-size: 32px;
+    }
+
+    .programs-section {
+        width: 100%;
+
+        margin-top: 36px;
+    }
+
+    .courses-grid {
+        grid-template-columns: repeat(2, 392px);
+    }
+
+    .course-card {
+        width: 392px;
+    }
+
+    .course-cover {
+        height: 151px;
+
+        aspect-ratio: auto;
+    }
+
+    .course-card-content {
+        height: 168px;
+        min-height: 168px;
+    }
+
+    .course-badge {
+        font-size: 14px;
+    }
+
+    .course-description {
+        line-height: 1.35;
+    }
+
+}
+
+
+/* ==========================================================
    ОБЩИЙ FOOTER
    ========================================================== */
+
+site-footer {
+    width: 100%;
+
+    display: block;
+}
 
 .site-footer {
     width: 100%;
