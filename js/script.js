@@ -20,6 +20,10 @@ const pauseAnswers = document.querySelectorAll(".question-card textarea");
 const chips = document.querySelectorAll(".chip");
 const pausesList = document.querySelector(".pauses-list");
 
+const profileDocumentsButton = document.querySelector(
+    ".profile-documents-button"
+);
+
 
 /* Карточка последней паузы на home.html. */
 
@@ -74,6 +78,7 @@ const authModeSwitch = document.querySelector(".auth-mode-switch");
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
 const authRequiredButtons = document.querySelectorAll(".auth-required-button");
+const passwordToggleButtons = document.querySelectorAll(".password-toggle");
 
 let authModalContext = "pause";
 
@@ -1124,6 +1129,84 @@ if (pausesList) {
    МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ
    ========================================================== */
 
+function setPasswordVisibility(toggleButton, isVisible) {
+
+    const inputContainer = toggleButton.closest(".input-container");
+
+    if (!inputContainer) {
+        return;
+    }
+
+    const passwordInput = inputContainer.querySelector(".password-input");
+    const showIcon = toggleButton.querySelector(
+        ".password-toggle-icon--show"
+    );
+    const hideIcon = toggleButton.querySelector(
+        ".password-toggle-icon--hide"
+    );
+
+    if (!passwordInput || !showIcon || !hideIcon) {
+        return;
+    }
+
+    passwordInput.type = isVisible
+        ? "text"
+        : "password";
+
+    showIcon.hidden = isVisible;
+    hideIcon.hidden = !isVisible;
+
+    toggleButton.setAttribute(
+        "aria-pressed",
+        String(isVisible)
+    );
+
+    toggleButton.setAttribute(
+        "aria-label",
+        isVisible
+            ? "Скрыть пароль"
+            : "Показать пароль"
+    );
+
+}
+
+
+function resetPasswordVisibility() {
+
+    passwordToggleButtons.forEach(function (toggleButton) {
+
+        setPasswordVisibility(toggleButton, false);
+
+    });
+
+}
+
+
+passwordToggleButtons.forEach(function (toggleButton) {
+
+    toggleButton.addEventListener("click", function () {
+
+        const inputContainer = toggleButton.closest(".input-container");
+        const passwordInput = inputContainer
+            ? inputContainer.querySelector(".password-input")
+            : null;
+
+        if (!passwordInput) {
+            return;
+        }
+
+        const shouldShowPassword =
+            passwordInput.type === "password";
+
+        setPasswordVisibility(
+            toggleButton,
+            shouldShowPassword
+        );
+
+    });
+
+});
+
 function setAuthMode(mode) {
 
     if (
@@ -1135,6 +1218,8 @@ function setAuthMode(mode) {
     ) {
         return;
     }
+
+    resetPasswordVisibility();
 
 
     if (mode === "register") {
@@ -1197,6 +1282,8 @@ function closeAuthModal() {
 
     authModal.classList.remove("auth-modal--open");
     authModal.setAttribute("aria-hidden", "true");
+
+    resetPasswordVisibility();
 
     document.body.classList.remove("modal-open");
 
@@ -1654,6 +1741,19 @@ if (profileEditButton) {
         "click",
         openProfileEditModal
     );
+
+}
+
+
+/* Переход из настроек профиля в общий раздел документов. */
+
+if (profileDocumentsButton) {
+
+    profileDocumentsButton.addEventListener("click", function () {
+
+        window.location.href = "../legal/";
+
+    });
 
 }
 

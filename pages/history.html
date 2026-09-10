@@ -30,10 +30,10 @@
 
     <header class="desktop-header history-desktop-header">
 
-        <div class="brand-logo">
+        <a class="brand-logo" href="home.html" aria-label="ПАУЗА — главная">
             <div class="logo-badge"><span>П</span></div>
             <span class="brand-name">ПАУЗА</span>
-        </div>
+        </a>
 
         <nav class="header-tabs" aria-label="Основная навигация">
             <a class="header-tab" href="home.html">Главная</a>
@@ -43,21 +43,27 @@
             <a class="header-tab" href="profile.html">Профиль</a>
         </nav>
 
-        <!-- Пауза+ пока ведёт на #, как в существующем меню.
-             Имя пользователя пока задано в разметке. -->
+        <!-- Имя и аватарка ведут на страницу профиля.
+             Сохранённая фотография подставляется через script.js. -->
 
-        <div class="header-action">
+        <a class="header-action header-action-link" href="profile.html">
             <span class="header-user-name">Александра</span>
+
             <span class="avatar-small" aria-hidden="true">
-                <span class="icon-user">
+
+                <img class="user-avatar-image" alt="" hidden>
+
+                <span class="icon-user user-avatar-placeholder">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
                             d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z" />
                     </svg>
                 </span>
+
             </span>
-        </div>
+
+        </a>
 
     </header>
 
@@ -118,12 +124,11 @@
 
                 <a class="bottom-tab" href="home.html">
                     <span class="bottom-tab-icon" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
                             <path
-                                d="M10.213 2.704c.966-.945 2.607-.945 3.615.04l7.056 6.08C21.617 9.54 22 10.445 22 11.407v8.14C22 20.9 20.875 22 19.501 22H4.507C3.124 22 2 20.9 2 19.548v-8.14c0-.962.383-1.866 1.074-2.542zm1.774.93a.9.9 0 0 0-.633.26l-7.138 6.152c-.333.335-.55.848-.55 1.36v8.141a.83.83 0 0 0 .84.824H10V15.6c0-.56 0-.84.11-1.055a1 1 0 0 1 .436-.437C10.76 14 11.04 14 11.6 14h.8c.56 0 .84-.001 1.054.108a1 1 0 0 1 .437.437C14 14.76 14 15.04 14 15.6v4.77h5.501a.83.83 0 0 0 .833-.823v-8.14c0-.522-.209-1.019-.592-1.394l-7.055-6.087a1 1 0 0 0-.7-.293" />
+                                d="M10.213 2.704c.966-.945 2.607-.945 3.615.04l7.056 6.08C21.617 9.54 22 10.445 22 11.407v8.14C22 20.9 20.875 22 19.501 22H14v-7a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v7H4.507C3.124 22 2 20.9 2 19.548v-8.14c0-.962.383-1.866 1.074-2.542z" />
                         </svg>
-
                     </span>
                     <span class="bottom-tab-label">Главная</span>
                 </a>
@@ -131,12 +136,11 @@
 
                 <a class="bottom-tab active" href="history.html" aria-current="page">
                     <span class="bottom-tab-icon" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
                             <path
-                                d="M11.29 7.233c.767-.05 1.404.231 1.816.487 1.179.718 2.09 1.89 2.906 3.054.581.834 1.01 1.593 1.348 2.385.372.875.686 1.841.96 2.939l.17.685c.25 1.106.057 2.122-.58 2.939C16.205 21.942 11.805 22 11.304 22c-.494 0-4.787-.059-6.546-2.18-.63-.759-.872-1.708-.71-2.74l.015-.09c.016-.075.025-.14.04-.207l.3-1.205c.258-.916.524-1.692.823-2.419.33-.792.759-1.551 1.348-2.385.759-1.081 1.671-2.303 2.898-3.054.412-.248 1.058-.537 1.817-.487M16.9 2C18.612 2 20 3.42 20 5.17s-1.388 3.178-3.1 3.178c-1.71 0-3.1-1.42-3.1-3.17S15.189 2 16.9 2" />
+                                d="M11.306 22c-.493 0-4.787-.058-6.547-2.18-.63-.759-.872-1.708-.71-2.74l.016-.09c.016-.075.024-.14.04-.207l.299-1.205c.258-.916.524-1.692.823-2.418.331-.793.759-1.552 1.348-2.386.76-1.081 1.671-2.303 2.898-3.054.412-.247 1.058-.536 1.817-.487.767-.05 1.404.231 1.816.487 1.179.718 2.09 1.89 2.906 3.054a13 13 0 0 1 1.348 2.386c.372.875.687 1.84.96 2.938l.17.685c.25 1.106.057 2.122-.58 2.939C16.205 21.942 11.805 22 11.305 22M5.88 16.338l-.226.949c-.097.627.008 1.081.34 1.47 1.089 1.311 4.205 1.6 5.31 1.6h.009c1.13 0 4.303-.297 5.352-1.65.331-.421.412-.917.266-1.544l-.153-.644a20 20 0 0 0-.88-2.699c-.29-.685-.662-1.345-1.178-2.088-.662-.95-1.445-2.006-2.414-2.592-.323-.19-.646-.28-.928-.256l-.073.008-.08-.008c-.275-.025-.606.066-.913.256-.96.586-1.752 1.643-2.414 2.592-.516.743-.888 1.403-1.178 2.088a18 18 0 0 0-.743 2.17zm11.02-7.99c-1.711 0-3.1-1.42-3.1-3.17S15.19 2 16.9 2 20 3.42 20 5.17s-1.389 3.178-3.1 3.178m0-4.697c-.823 0-1.485.685-1.485 1.519s.67 1.518 1.485 1.518 1.486-.685 1.486-1.518c0-.834-.67-1.52-1.486-1.52" />
                         </svg>
-
                     </span>
                     <span class="bottom-tab-label">Паузы</span>
                 </a>
@@ -190,90 +194,92 @@
          созданы отдельным этапом.
          ====================================================== -->
 
-    <footer class="site-footer site-footer--with-mobile-nav">
+    <site-footer data-root=".." data-home="home.html"></site-footer>
 
-        <div class="site-footer-container">
 
-            <div class="footer-grid">
+    <!-- ======================================================
+         МОДАЛЬНОЕ ОКНО ПОЛНОГО ПРОСМОТРА ПАУЗЫ
+         Содержимое заполняется через script.js после нажатия
+         на карточку истории.
+         ====================================================== -->
 
-                <div class="footer-brand">
+    <div class="pause-details-modal" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-labelledby="pause-details-heading">
 
-                    <a class="footer-brand-link" href="home.html" aria-label="ПАУЗА — главная">
-                        <span class="footer-brand-mark" aria-hidden="true">П</span>
-                        <span class="footer-brand-name">ПАУЗА</span>
-                    </a>
+        <div class="pause-details-overlay"></div>
 
-                    <p class="footer-description">
-                        Пространство для коротких пауз, внимания к себе
-                        и осознанных практик.
+
+        <div class="pause-details-wrapper">
+
+            <article class="pause-details-card">
+
+                <div class="pause-details-title-block">
+
+                    <h2 id="pause-details-heading">
+                        Запись паузы
+                    </h2>
+
+                    <p class="pause-details-date">
+                        Дата паузы
                     </p>
 
                 </div>
 
 
-                <nav class="footer-column" aria-label="Разделы сайта">
+                <div class="pause-details-duration-row">
 
-                    <h2 class="footer-column-title">РАЗДЕЛЫ</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M20.182 12c0-4.589-3.698-8.248-8.182-8.248S3.818 7.41 3.818 12 7.516 20.248 12 20.248 20.182 16.59 20.182 12m-9.091-5.474c0-.484.407-.876.909-.876s.909.392.909.876v4.942l3.147 1.58a.86.86 0 0 1 .386 1.181.926.926 0 0 1-1.226.373l-4.125-2.07zM22 12c0 5.489-4.443 10-10 10S2 17.49 2 12C2 6.512 6.443 2 12 2s10 4.512 10 10" />
+                    </svg>
 
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="home.html">Главная</a></li>
-                        <li><a class="footer-link" href="lenta.html" data-page-link="feed">Лента</a></li>
-                        <li><a class="footer-link" href="../pause-plus/">Пауза+</a></li>
-                        <li><a class="footer-link" href="../pause-plus/practicums/">Практикумы</a></li>
-                        <li><a class="footer-link" href="../pause-plus/consultations/">Консультации</a></li>
-                    </ul>
+                    <span class="pause-details-duration">
+                        Время паузы: 00:00
+                    </span>
 
-                </nav>
-
-
-                <nav class="footer-column" aria-label="Юридические документы">
-
-                    <h2 class="footer-column-title">ДОКУМЕНТЫ</h2>
-
-                    <ul class="footer-links">
-                        <li><a class="footer-link" href="../legal/offer/">Публичная оферта</a></li>
-                        <li><a class="footer-link" href="../legal/privacy/">Политика обработки персональных данных</a>
-                        </li>
-                        <li><a class="footer-link" href="../legal/consent/">Согласие на обработку персональных
-                                данных</a></li>
-                        <li><a class="footer-link" href="../legal/terms/">Пользовательское соглашение</a></li>
-                        <li><a class="footer-link" href="../legal/refunds/">Правила возврата</a></li>
-                    </ul>
-
-                </nav>
+                </div>
 
 
-                <nav class="footer-column" aria-label="Контактная информация">
+                <div class="pause-details-content">
 
-                    <h2 class="footer-column-title">СВЯЗЬ</h2>
+                    <p>
+                        <strong>Чувства:</strong>
+                        <span class="pause-details-feelings"></span>
+                    </p>
 
-                    <ul class="footer-links">
-                        <li>
-                            <a class="footer-link" href="../legal/offer/#contacts">
-                                Реквизиты и контакты
-                            </a>
-                        </li>
-                    </ul>
+                    <p>
+                        <strong>Мысли:</strong>
+                        <span class="pause-details-thoughts"></span>
+                    </p>
 
-                </nav>
+                    <p>
+                        <strong>Себе:</strong>
+                        <span class="pause-details-needs"></span>
+                    </p>
 
-            </div>
+                </div>
+
+            </article>
 
 
-            <div class="footer-bottom">
-                <p class="footer-copyright">
-                    © 2026 ПАУЗА. Все права защищены.
-                </p>
-            </div>
+            <button class="pause-details-close" type="button" aria-label="Закрыть запись паузы">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                    aria-hidden="true">
+                    <path
+                        d="M3.463 2.251a.857.857 0 0 0-1.212 1.212L10.788 12 2.25 20.537a.857.857 0 0 0 1.212 1.212L12 13.212l8.537 8.537a.857.857 0 0 0 1.212-1.212L13.212 12l8.537-8.537a.857.857 0 0 0-1.212-1.212L12 10.788z" />
+                </svg>
+            </button>
 
         </div>
 
-    </footer>
+    </div>
 
 
     <!-- Сохраняем существующую логику страницы.
          history.html находится в pages, поэтому путь через ../. -->
 
+    <script src="../js/footer.js"></script>
     <script src="../js/script.js"></script>
 
 </body>

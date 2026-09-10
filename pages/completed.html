@@ -2,6 +2,10 @@
 <html lang="ru">
 
 <head>
+    <!-- ======================================================
+         БАЗОВЫЕ НАСТРОЙКИ
+         ====================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +13,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
@@ -18,20 +21,26 @@
 
 <body>
 
+    <!-- ======================================================
+         МОБИЛЬНАЯ СТРАНИЦА ЗАВЕРШЕНИЯ ПАУЗЫ
+         На desktop результат показывается в модальном окне
+         внутри pause.html.
+         ====================================================== -->
+
     <main class="completed-page">
 
-        <!-- Иконка завершения -->
+        <!-- Иконка успешного завершения -->
+
         <div class="checkmark-circle">
             <img src="../assets/icons/check-circle.svg" alt="Пауза завершена">
         </div>
 
 
-        <!-- Текст -->
+        <!-- Заголовок и пояснение -->
+
         <div class="congrats-text">
 
-            <h2>
-                Пауза завершена
-            </h2>
+            <h2>Пауза завершена</h2>
 
             <p>
                 Спасибо, что уделили себе время и внимание.
@@ -40,29 +49,44 @@
         </div>
 
 
-        <!-- Информация о паузе -->
-        <section class="meta-info-card">
+        <!-- Дата и продолжительность заполняются через script.js -->
+
+        <section class="meta-info-card" aria-label="Информация о завершённой паузе">
 
             <div class="meta-row">
-                <img src="../assets/icons/calendar-outline.svg" alt="">
+
+                <svg class="meta-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M19.2 11.091H4.8v8.181c0 .502.403.91.9.91h12.6c.497 0 .9-.408.9-.91zm-4.5-4.546v-.909H9.3v.909a.905.905 0 0 1-.9.91.905.905 0 0 1-.9-.91v-.909H5.7c-.497 0-.9.407-.9.909v2.728h14.4V6.545a.905.905 0 0 0-.9-.909h-1.8v.909a.905.905 0 0 1-.9.91.905.905 0 0 1-.9-.91M21 19.272C21 20.778 19.791 22 18.3 22H5.7C4.209 22 3 20.778 3 19.272V6.545c0-1.506 1.209-2.727 2.7-2.727h1.8v-.909c0-.502.403-.909.9-.909s.9.407.9.909v.909h5.4v-.909c0-.502.403-.909.9-.909s.9.407.9.909v.909h1.8c1.491 0 2.7 1.221 2.7 2.727z" />
+                </svg>
 
                 <span class="completed-date">
-                    19 августа 2026, 14:32
+                    Дата паузы
                 </span>
+
             </div>
 
+
             <div class="meta-row">
-                <img src="../assets/icons/clock-outline.svg" alt="">
+
+                <svg class="meta-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M20.182 12c0-4.589-3.698-8.248-8.182-8.248S3.818 7.41 3.818 12 7.516 20.248 12 20.248 20.182 16.59 20.182 12m-9.091-5.474c0-.484.407-.876.909-.876s.909.392.909.876v4.942l3.147 1.58a.86.86 0 0 1 .386 1.181.926.926 0 0 1-1.226.373l-4.125-2.07zM22 12c0 5.489-4.443 10-10 10S2 17.49 2 12C2 6.512 6.443 2 12 2s10 4.512 10 10" />
+                </svg>
 
                 <span class="completed-duration">
-                    Время паузы: 03:17
+                    Время паузы: 00:00
                 </span>
+
             </div>
 
         </section>
 
 
-        <!-- Действия -->
+        <!-- Действия после завершения -->
+
         <a class="button-primary completed-button" href="history.html">
             Смотреть мои паузы
         </a>
@@ -72,6 +96,7 @@
         </a>
 
     </main>
+
 
     <script src="../js/script.js"></script>
 
