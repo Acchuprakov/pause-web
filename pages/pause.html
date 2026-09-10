@@ -2,19 +2,19 @@
 <html lang="ru">
 
 <head>
-    <!-- ======================================================
-         БАЗОВЫЕ НАСТРОЙКИ
-         ====================================================== -->
+    <!-- ====================================================== -->
+    <!-- БАЗОВЫЕ НАСТРОЙКИ -->
+    <!-- ====================================================== -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Профиль — ПАУЗА</title>
+    <title>Пауза — ПАУЗА</title>
 
 
-    <!-- ======================================================
-         ШРИФТ MANROPE
-         ====================================================== -->
+    <!-- ====================================================== -->
+    <!-- ШРИФТ MANROPE -->
+    <!-- ====================================================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,9 +23,9 @@
         rel="stylesheet">
 
 
-    <!-- ======================================================
-         ОСНОВНЫЕ СТИЛИ
-         ====================================================== -->
+    <!-- ====================================================== -->
+    <!-- ЕДИНЫЙ ФАЙЛ СТИЛЕЙ -->
+    <!-- ====================================================== -->
 
     <link rel="stylesheet" href="../style/style.css">
 </head>
@@ -34,577 +34,281 @@
 <body>
 
 
-    <!-- ======================================================
-         DESKTOP HEADER
-         На мобильном скрывается через CSS.
-         Активный пункт — «Профиль».
-         ====================================================== -->
+    <!-- ====================================================== -->
+    <!-- СТРАНИЦА ПАУЗЫ -->
+    <!--
+        Общего desktop-хедера и нижнего меню здесь нет.
+        Пользователь находится внутри отдельного сценария паузы.
+    -->
+    <!-- ====================================================== -->
 
-    <header class="desktop-header profile-desktop-header">
+    <main class="pause-page">
 
 
-        <!-- Логотип -->
+        <!-- ================================================== -->
+        <!-- ЛОКАЛЬНАЯ ШАПКА -->
+        <!--
+            Классы header-back и pause-time сохранены,
+            потому что их использт script.js.
+        -->
+        <!-- ================================================== -->
 
-        <a class="brand-logo" href="home.html" aria-label="ПАУЗА — главная">
+        <header class="header-bar">
 
-            <div class="logo-badge">
-                <span>П</span>
+            <!-- Назад на главную -->
+
+            <button class="header-back" type="button" aria-label="Вернуться на главную">
+
+                <!--
+                    Inline SVG позволяет менять цвет стрелки
+                    через CSS-свойство color.
+                -->
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    aria-hidden="true">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+
+            </button>
+
+
+            <!-- Заголовок -->
+
+            <h1 class="header-title">
+                Вернуться назад
+            </h1>
+
+
+            <!-- Таймер заполняется через script.js -->
+
+            <div class="pause-time" aria-live="polite">
+                00:00
             </div>
 
-            <span class="brand-name">
-                ПАУЗА
-            </span>
+        </header>
 
-        </a>
 
+        <!-- ================================================== -->
+        <!-- ПЕРВЫЙ ВОПРОС -->
+        <!-- ================================================== -->
 
-        <!-- Основная навигация -->
+        <section class="question-card" aria-labelledby="question-feelings">
 
-        <nav class="header-tabs" aria-label="Основная навигация">
+            <h2 class="question-title" id="question-feelings">
+                1. Что ты сейчас чувствуешь?
+            </h2>
 
-            <a class="header-tab" href="home.html">
-                Главная
-            </a>
 
-            <a class="header-tab" href="history.html">
-                Паузы
-            </a>
+            <!-- Поле ответа -->
 
-            <a class="header-tab" href="lenta.html">
-                Лента
-            </a>
+            <div class="input-wrapper">
 
-            <a class="header-tab" href="#">
-                Пауза+
-            </a>
-
-            <a class="header-tab header-tab--active" href="profile.html" aria-current="page">
-                Профиль
-            </a>
-
-        </nav>
-
-
-        <!-- Имя и аватарка тоже ведут в профиль -->
-
-        <a class="header-action header-action-link" href="profile.html" aria-label="Профиль Александры">
-
-            <span class="header-user-name">
-                Александра
-            </span>
-
-            <span class="avatar-small" aria-hidden="true">
-
-                <!-- Загруженная фотография -->
-
-                <img class="user-avatar-image" alt="" hidden>
-
-
-                <!-- Иконка по умолчанию -->
-
-                <span class="icon-user user-avatar-placeholder">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z" />
-                    </svg>
-
-                </span>
-
-            </span>
-
-        </a>
-
-    </header>
-
-
-    <!-- ======================================================
-         СТРАНИЦА ПРОФИЛЯ
-         Одна разметка для mobile и desktop.
-         ====================================================== -->
-
-    <main class="profile-page">
-
-        <div class="profile-content">
-
-
-            <!-- ==================================================
-                 ЗАГОЛОВОК СТРАНИЦЫ
-                 ================================================== -->
-
-            <header class="header-bar">
-
-                <h1 class="header-title">
-                    Профиль
-                </h1>
-
-            </header>
-
-
-            <!-- ==================================================
-                 ОСНОВНАЯ СЕТКА
-                 Desktop: две колонки.
-                 Mobile: блоки располагаются вертикально.
-                 ================================================== -->
-
-            <div class="profile-layout">
-
-
-                <!-- ==============================================
-                     ЛЕВАЯ КОЛОНКА
-                     Данные пользователя.
-                     ============================================== -->
-
-                <section class="user-identity-card" aria-label="Данные пользователя">
-
-                    <!-- Аватарка -->
-
-                    <div class="avatar-ring" aria-hidden="true">
-
-                        <!-- Загруженная фотография -->
-
-                        <img class="user-avatar-image" alt="" hidden>
-
-
-                        <!--
-                            Иконка обёрнута в span.
-                            Теперь JavaScript сможет корректно применить hidden.
-                        -->
-
-                        <span class="user-avatar-placeholder">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <path
-                                    d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z" />
-                            </svg>
-
-                        </span>
-
-                    </div>
-
-
-                    <!-- Имя и электронная почта -->
-
-                    <div class="profile-meta">
-
-                        <p class="profile-name">
-                            Александра
-                        </p>
-
-                        <p class="profile-email" hidden></p>
-
-                        <p class="profile-phone" hidden></p>
-
-                    </div>
-
-
-                    <!-- Редактирование профиля -->
-
-                    <button class="btn-edit-profile" type="button">
-                        Редактировать
-                    </button>
-
-                </section>
-
-
-                <!-- ==============================================
-                     ПРАВАЯ КОЛОНКА
-                     Настройки.
-                     ============================================== -->
-
-                <section class="profile-settings-column" aria-labelledby="profile-settings-heading">
-
-                    <!-- На мобильном этот заголовок скрыт -->
-
-                    <h2 class="section-label profile-settings-title" id="profile-settings-heading">
-                        НАСТРОЙКИ
-                    </h2>
-
-
-                    <div class="profile-options">
-
-
-                        <!-- Безопасность -->
-
-                        <button class="option-row" type="button">
-
-                            <svg class="option-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M19.2 12.909a.904.904 0 0 0-.9-.909H5.7c-.497 0-.9.407-.9.909v6.363c0 .502.403.91.9.91h12.6c.497 0 .9-.408.9-.91zm-3.6-5.455c0-.964-.38-1.889-1.055-2.57A3.58 3.58 0 0 0 12 3.817a3.58 3.58 0 0 0-2.545 1.065A3.66 3.66 0 0 0 8.4 7.454v2.728h7.2zm1.8 2.728h.9c1.491 0 2.7 1.22 2.7 2.727v6.363C21 20.778 19.791 22 18.3 22H5.7C4.209 22 3 20.778 3 19.272V12.91c0-1.506 1.209-2.727 2.7-2.727h.9V7.454c0-1.446.57-2.833 1.582-3.856A5.37 5.37 0 0 1 12 2c1.432 0 2.805.575 3.818 1.598A5.48 5.48 0 0 1 17.4 7.454z" />
-                            </svg>
-
-                            <span>
-                                Безопасность
-                            </span>
-
-                            <svg class="option-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-
-                        </button>
-
-
-                        <!-- Уведомления -->
-
-                        <button class="option-row" type="button">
-
-                            <svg class="option-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M12.779 19.728a.895.895 0 0 1 1.228-.333c.43.25.578.807.33 1.242a2.7 2.7 0 0 1-.988.997 2.68 2.68 0 0 1-3.689-.997.914.914 0 0 1 .33-1.242.895.895 0 0 1 1.23.332.9.9 0 0 0 .779.455.9.9 0 0 0 .78-.454m3.72-11.364a4.57 4.57 0 0 0-1.318-3.214A4.48 4.48 0 0 0 12 3.818 4.48 4.48 0 0 0 8.818 5.15 4.57 4.57 0 0 0 7.5 8.364c0 2.14-.332 3.634-.87 4.785-.532 1.136-1.237 1.87-1.83 2.487h14.4c-.594-.618-1.298-1.352-1.83-2.487-.537-1.15-.87-2.645-.87-4.785m1.8 0c0 1.95.303 3.162.698 4.008.397.848.915 1.396 1.514 2.02l.01.01.01.01a1.83 1.83 0 0 1 .315 1.96 1.8 1.8 0 0 1-.665.788 1.8 1.8 0 0 1-.981.294H4.799c-.349 0-.69-.103-.983-.296a1.8 1.8 0 0 1-.663-.789 1.84 1.84 0 0 1 .317-1.958l.009-.01.01-.01c.598-.623 1.116-1.171 1.512-2.02.396-.845.698-2.058.698-4.007 0-1.688.664-3.306 1.846-4.5A6.27 6.27 0 0 1 11.999 2c1.67 0 3.274.67 4.455 1.864a6.4 6.4 0 0 1 1.846 4.5" />
-                            </svg>
-
-                            <span>
-                                Уведомления
-                            </span>
-
-                            <svg class="option-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-
-                        </button>
-
-
-                        <!-- О приложении -->
-
-                        <button class="option-row" type="button">
-
-                            <svg class="option-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M20.19 11.01c0-2.555-.505-4.24-1.14-5.695a7.4 7.4 0 0 1-2.312 1.56c-1.316.576-3.045.963-5.605 1.463l-.01.002-.009.001a5.42 5.42 0 0 0-3.382 2.057 5.54 5.54 0 0 0-.949 4.773c.475-.207.99-.37 1.542-.48l.37-.084c.868-.22 1.752-.593 2.538-1.02.904-.491 1.615-1.019 1.985-1.393a.897.897 0 0 1 1.28 0 .925.925 0 0 1 0 1.296c-.536.541-1.41 1.167-2.41 1.71-.88.48-1.909.92-2.96 1.186l-.451.102a6 6 0 0 0-1.145.35q.357.533.833.974a5.4 5.4 0 0 0 3.68 1.44h.002c4.24 0 8.144-3.727 8.144-8.242m1.81 0c0 5.559-4.745 10.073-9.951 10.073v.001h-.002a7.2 7.2 0 0 1-4.903-1.92 7.3 7.3 0 0 1-1.114-1.307c-.801.83-1.22 1.95-1.22 3.227a.91.91 0 0 1-.905.916.91.91 0 0 1-.905-.916c0-2.003.782-3.746 2.19-4.932A7.39 7.39 0 0 1 6.3 9.278a7.22 7.22 0 0 1 4.49-2.739c2.597-.507 4.126-.862 5.23-1.345 1.042-.455 1.723-1.032 2.562-2.085L19.465 2l.63 1.274C21.03 5.164 22 7.31 22 11.01" />
-                            </svg>
-
-                            <span>
-                                О приложении
-                            </span>
-
-                            <svg class="option-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-
-                        </button>
-
-                        <!-- Документы -->
-
-                        <button class="option-row profile-documents-button" type="button">
-
-                            <svg class="option-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M17.875 2.25a2.875 2.875 0 0 1 2.875 2.875v7.519a5.74 5.74 0 0 1 2 4.356A5.75 5.75 0 0 1 17 22.75a5.74 5.74 0 0 1-4.356-2H5.125a2.875 2.875 0 0 1-2.875-2.875V5.125A2.874 2.874 0 0 1 5.125 2.25zM17 12.75a4.25 4.25 0 1 0 .001 8.501A4.25 4.25 0 0 0 17 12.75m0 6.15a.8.8 0 1 1-.001 1.601.8.8 0 0 1 .001-1.6M5.125 3.75c-.76 0-1.375.615-1.375 1.375v12.75c0 .76.615 1.375 1.375 1.375h6.582a5.75 5.75 0 0 1 7.543-7.543V5.125c0-.76-.615-1.375-1.375-1.375zM17 13.749a2.314 2.314 0 0 1 0 4.626.75.75 0 0 1 0-1.5.814.814 0 0 0 0-1.626.81.81 0 0 0-.807.78.75.75 0 0 1-1.498-.06A2.31 2.31 0 0 1 17 13.75m-8 .501a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1 0-1.5zm2-4a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1 0-1.5zm5-4a.75.75 0 0 1 0 1.5H6a.75.75 0 0 1 0-1.5z" />
-                            </svg>
-
-                            <span>
-                                Документы
-                            </span>
-
-                            <svg class="option-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-
-                        </button>
-
-
-
-                        <!-- Выход -->
-
-                        <button class="option-row" type="button">
-
-                            <svg class="option-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M2 19V5c0-.796.31-1.558.861-2.121A2.9 2.9 0 0 1 4.94 2h3.919a.99.99 0 0 1 .98 1 .99.99 0 0 1-.98 1h-3.92a.97.97 0 0 0-.693.293A1 1 0 0 0 3.96 5v14c0 .265.104.52.287.707A.97.97 0 0 0 4.94 20h3.919a.99.99 0 0 1 .98 1 .99.99 0 0 1-.98 1h-3.92c-.78 0-1.527-.316-2.078-.879A3.03 3.03 0 0 1 2 19M15.023 6.293a.966.966 0 0 1 1.386 0L22 12l-5.591 5.707a.965.965 0 0 1-1.386 0 1.014 1.014 0 0 1 0-1.414L18.25 13H8.858a.99.99 0 0 1-.98-1c0-.552.439-1 .98-1h9.392l-3.227-3.293a1.015 1.015 0 0 1 0-1.414" />
-                            </svg>
-
-                            <span>
-                                Выйти из аккаунта
-                            </span>
-
-                            <svg class="option-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" />
-                            </svg>
-
-                        </button>
-
-                    </div>
-
-                </section>
+                <textarea aria-labelledby="question-feelings" placeholder="Напишите здесь..."></textarea>
 
             </div>
 
-        </div>
 
+            <!-- Быстрые варианты -->
 
-        <!-- ==================================================
-             НОВОЕ МОБИЛЬНОЕ МЕНЮ
-             Активный пункт — «Профиль».
-             ================================================== -->
+            <div class="question-chips">
 
-        <nav class="bottom-tab-bar-container" aria-label="Мобильная навигация">
-
-            <div class="bottom-tab-bar">
-
-
-                <!-- Главная -->
-
-                <a class="bottom-tab" href="home.html">
-
-                    <span class="bottom-tab-icon" aria-hidden="true">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path
-                                d="M10.213 2.704c.966-.945 2.607-.945 3.615.04l7.056 6.08C21.617 9.54 22 10.445 22 11.407v8.14C22 20.9 20.875 22 19.501 22H4.507C3.124 22 2 20.9 2 19.548v-8.14c0-.962.383-1.866 1.074-2.542zm1.774.93a.9.9 0 0 0-.633.26l-7.138 6.152c-.333.335-.55.848-.55 1.36v8.141a.83.83 0 0 0 .84.824H10V15.6c0-.56 0-.84.11-1.055a1 1 0 0 1 .436-.437C10.76 14 11.04 14 11.6 14h.8c.56 0 .84-.001 1.054.108a1 1 0 0 1 .437.437C14 14.76 14 15.04 14 15.6v4.77h5.501a.83.83 0 0 0 .833-.823v-8.14c0-.522-.209-1.019-.592-1.394l-7.055-6.087a1 1 0 0 0-.7-.293" />
-                        </svg>
-
-                    </span>
-
-                    <span class="bottom-tab-label">
-                        Главная
-                    </span>
-
-                </a>
-
-
-                <!-- Паузы -->
-
-                <a class="bottom-tab" href="history.html">
-
-                    <span class="bottom-tab-icon" aria-hidden="true">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path
-                                d="M11.306 22c-.493 0-4.787-.058-6.547-2.18-.63-.759-.872-1.708-.71-2.74l.016-.09c.016-.075.024-.14.04-.207l.299-1.205c.258-.916.524-1.692.823-2.418.331-.793.759-1.552 1.348-2.386.76-1.081 1.671-2.303 2.898-3.054.412-.247 1.058-.536 1.817-.487.767-.05 1.404.231 1.816.487 1.179.718 2.09 1.89 2.906 3.054a13 13 0 0 1 1.348 2.386c.372.875.687 1.84.96 2.938l.17.685c.25 1.106.057 2.122-.58 2.939C16.205 21.942 11.805 22 11.305 22M5.88 16.338l-.226.949c-.097.627.008 1.081.34 1.47 1.089 1.311 4.205 1.6 5.31 1.6h.009c1.13 0 4.303-.297 5.352-1.65.331-.421.412-.917.266-1.544l-.153-.644a20 20 0 0 0-.88-2.699c-.29-.685-.662-1.345-1.178-2.088-.662-.95-1.445-2.006-2.414-2.592-.323-.19-.646-.28-.928-.256l-.073.008-.08-.008c-.275-.025-.606.066-.913.256-.96.586-1.752 1.643-2.414 2.592-.516.743-.888 1.403-1.178 2.088a18 18 0 0 0-.743 2.17zm11.02-7.99c-1.711 0-3.1-1.42-3.1-3.17S15.19 2 16.9 2 20 3.42 20 5.17s-1.389 3.178-3.1 3.178m0-4.697c-.823 0-1.485.685-1.485 1.519s.67 1.518 1.485 1.518 1.486-.685 1.486-1.518c0-.834-.67-1.52-1.486-1.52" />
-                        </svg>
-
-                    </span>
-
-                    <span class="bottom-tab-label">
-                        Паузы
-                    </span>
-
-                </a>
-
-
-                <!-- Лента -->
-
-                <a class="bottom-tab" href="lenta.html">
-
-                    <span class="bottom-tab-icon" aria-hidden="true">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path
-                                d="M16.673 2A5.327 5.327 0 0 1 22 7.327v9.346A5.327 5.327 0 0 1 16.673 22H7.327A5.327 5.327 0 0 1 2 16.673V7.327A5.327 5.327 0 0 1 7.327 2zM7.327 3.589A3.74 3.74 0 0 0 3.59 7.327v9.346a3.74 3.74 0 0 0 3.738 3.738h9.346a3.74 3.74 0 0 0 3.738-3.738V7.327a3.74 3.74 0 0 0-3.738-3.738zM8 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2m8 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zM8 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2m8 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2z" />
-                        </svg>
-
-                    </span>
-
-                    <span class="bottom-tab-label">
-                        Лента
-                    </span>
-
-                </a>
-
-
-                <!-- Пауза+ -->
-
-                <a class="bottom-tab" href="#">
-
-                    <span class="bottom-tab-icon" aria-hidden="true">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <path
-                                d="M10.437 12.959c.973 0 1.769.806 1.769 1.793v5.455c0 .987-.796 1.793-1.77 1.793H8.808c-.973 0-1.77-.806-1.77-1.793v-5.456c0-.986.797-1.792 1.77-1.792zm-1.63 1.422a.37.37 0 0 0-.365.37v5.456c0 .209.169.37.365.37h1.63c.205 0 .364-.17.364-.37v-5.456a.37.37 0 0 0-.364-.37zm11.424-2.523c.973 0 1.769.806 1.769 1.792v1.652c0 .986-.796 1.792-1.77 1.792h-5.383c-.974 0-1.77-.806-1.77-1.792V13.65c0-.986.796-1.792 1.77-1.792zm-5.384 1.423a.37.37 0 0 0-.366.37v1.65c0 .21.17.37.366.37h5.384a.37.37 0 0 0 .364-.37v-1.65a.37.37 0 0 0-.364-.37zM9.153 6.99c.974 0 1.77.806 1.77 1.793v1.66c0 .987-.796 1.793-1.77 1.793H3.77c-.974 0-1.77-.806-1.77-1.793v-1.66c0-.987.796-1.794 1.77-1.794zM15.455 2a1.78 1.78 0 0 1 1.77 1.793v5.456c0 .986-.796 1.792-1.77 1.792h-1.629c-.974 0-1.77-.806-1.77-1.792V3.793c0-.987.797-1.793 1.77-1.793zM3.77 8.414a.37.37 0 0 0-.365.37v1.66c0 .2.16.37.365.37h5.383a.37.37 0 0 0 .366-.37v-1.66a.37.37 0 0 0-.366-.37zm10.056-4.99a.37.37 0 0 0-.365.369v5.456c0 .208.168.37.365.37h1.63a.37.37 0 0 0 .364-.37V3.793a.37.37 0 0 0-.365-.37z" />
-                        </svg>
-
-                    </span>
-
-                    <span class="bottom-tab-label">
-                        Пауза+
-                    </span>
-
-                </a>
-
-
-                <!-- Профиль -->
-
-                <a class="bottom-tab active" href="profile.html" aria-current="page">
-
-                    <span class="bottom-tab-icon" aria-hidden="true">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M16.13 12.95c2.137 0 3.87 2.035 3.87 4.525S18.267 22 16.13 22H7.87C5.733 22 4 19.974 4 17.475s1.74-4.525 3.87-4.525zM12 2c2.5 0 4.533 2.068 4.533 4.612S14.501 11.23 12 11.23c-2.5 0-4.533-2.068-4.533-4.612C7.467 4.068 9.499 2 12 2m.454 9.116-.014.002z" />
-                        </svg>
-
-
-                    </span>
-
-                    <span class="bottom-tab-label">
-                        Профиль
-                    </span>
-
-                </a>
+                <button class="chip" type="button">усталость</button>
+                <button class="chip" type="button">напряжение</button>
+                <button class="chip" type="button">грусть</button>
+                <button class="chip" type="button">радость</button>
+                <button class="chip" type="button">другое</button>
 
             </div>
 
-        </nav>
+        </section>
+
+
+        <!-- ================================================== -->
+        <!-- ВТОРОЙ ВОПРОС -->
+        <!-- ================================================== -->
+
+        <section class="question-card" aria-labelledby="question-thoughts">
+
+            <h2 class="question-title" id="question-thoughts">
+                2. Что сейчас занимает твои мысли?
+            </h2>
+
+
+            <!-- Поле ответа -->
+
+            <div class="input-wrapper">
+
+                <textarea aria-labelledby="question-thoughts" placeholder="Напишите здесь..."></textarea>
+
+            </div>
+
+
+            <!-- Быстрые варианты -->
+
+            <div class="question-chips">
+
+                <button class="chip" type="button">работа</button>
+                <button class="chip" type="button">отношения</button>
+                <button class="chip" type="button">будущее</button>
+                <button class="chip" type="button">другое</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================== -->
+        <!-- ТРЕТИЙ ВОПРОС -->
+        <!-- ================================================== -->
+
+        <section class="question-card" aria-labelledby="question-support">
+
+            <h2 class="question-title" id="question-support">
+                3. Что тебе хочется сказать себе сейчас?
+            </h2>
+
+
+            <!-- Поле ответа -->
+
+            <div class="input-wrapper">
+
+                <textarea aria-labelledby="question-support" placeholder="Напишите здесь..."></textarea>
+
+            </div>
+
+
+            <!-- Быстрые варианты -->
+
+            <div class="question-chips">
+
+                <button class="chip" type="button">отдохни</button>
+                <button class="chip" type="button">я справлюсь</button>
+                <button class="chip" type="button">я устал</button>
+                <button class="chip" type="button">больше не могу</button>
+                <button class="chip" type="button">другое</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================== -->
+        <!-- ЗАВЕРШЕНИЕ ПАУЗЫ -->
+        <!--
+            Класс pause-complete-button сохранён для script.js.
+        -->
+        <!-- ================================================== -->
+
+        <button class="button-primary pause-complete-button" type="button">
+            Завершить паузу
+        </button>
+
 
     </main>
 
-    <!-- ======================================================
-     МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-     ====================================================== -->
 
-    <div class="profile-edit-modal" role="dialog" aria-modal="true" aria-hidden="true"
-        aria-labelledby="profile-edit-heading">
+    <!-- ====================================================== -->
+    <!-- DESKTOP: МОДАЛЬНОЕ ОКНО ЗАВЕРШЕНИЯ ПАУЗЫ -->
+    <!--
+        На экранах от 1200px JavaScript откроет это окно после
+        сохранения ответов. На мобильном пользователь, как и
+        раньше, перейдёт на отдельную страницу completed.html.
+
+        У модалки собственные классы completed-modal-*.
+        Поэтому она не пересекается с модалкой авторизации.
+    -->
+    <!-- ====================================================== -->
+
+    <div class="completed-modal" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-labelledby="completed-modal-heading">
 
         <!-- Затемнённый фон -->
 
-        <div class="profile-edit-overlay"></div>
+        <div class="completed-modal-overlay"></div>
 
 
         <!-- Карточка и кнопка закрытия -->
 
-        <div class="profile-edit-wrapper">
+        <div class="completed-modal-wrapper">
 
-            <form class="profile-edit-card">
+            <div class="completed-modal-card">
 
-                <!-- Заголовок -->
+                <!-- Иконка завершения -->
 
-                <div class="profile-edit-title-block">
+                <div class="checkmark-circle" aria-hidden="true">
+                    <img src="../assets/icons/check-circle.svg" alt="">
+                </div>
 
-                    <h2 id="profile-edit-heading">
-                        Редактировать профиль
+
+                <!-- Заголовок и пояснение -->
+
+                <div class="completed-modal-title-block">
+
+                    <h2 id="completed-modal-heading">
+                        Пауза завершена
                     </h2>
 
                     <p>
-                        Обновите личные данные и фотографию
+                        Спасибо, что уделили себе время и внимание.
                     </p>
 
                 </div>
 
 
-                <!-- Аватарка -->
+                <!-- Дата и продолжительность заполняются через JS -->
 
-                <div class="profile-edit-avatar-row">
+                <section class="meta-info-card" aria-label="Информация о завершённой паузе">
 
-                    <button class="profile-edit-avatar-button" type="button" aria-label="Выбрать новую фотографию">
+                    <div class="meta-row">
 
-                        <img class="profile-edit-avatar-image" alt="" hidden>
+                        <svg class="meta-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M19.2 11.091H4.8v8.181c0 .502.403.91.9.91h12.6c.497 0 .9-.408.9-.91zm-4.5-4.546v-.909H9.3v.909a.905.905 0 0 1-.9.91.905.905 0 0 1-.9-.91v-.909H5.7c-.497 0-.9.407-.9.909v2.728h14.4V6.545a.905.905 0 0 0-.9-.909h-1.8v.909a.905.905 0 0 1-.9.91.905.905 0 0 1-.9-.91M21 19.272C21 20.778 19.791 22 18.3 22H5.7C4.209 22 3 20.778 3 19.272V6.545c0-1.506 1.209-2.727 2.7-2.727h1.8v-.909c0-.502.403-.909.9-.909s.9.407.9.909v.909h5.4v-.909c0-.502.403-.909.9-.909s.9.407.9.909v.909h1.8c1.491 0 2.7 1.221 2.7 2.727z" />
+                        </svg>
 
-                        <span class="profile-edit-avatar-placeholder">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                fill="currentColor" aria-hidden="true">
-                                <path
-                                    d="M12 11.09c-2.452 0-4.444-2.036-4.444-4.541C7.556 4.037 9.548 2 12 2s4.444 2.037 4.444 4.542-1.992 4.549-4.444 4.549m0-7.856c-1.787 0-3.237 1.488-3.237 3.308S10.22 9.85 12 9.85s3.237-1.487 3.237-3.308S13.787 3.234 12 3.234M16.13 22H7.87C5.733 22 4 19.965 4 17.454c0-2.51 1.74-4.545 3.87-4.545h8.26c2.137 0 3.87 2.044 3.87 4.545S18.267 22 16.13 22m-8.26-7.395c-1.336 0-2.426 1.28-2.426 2.85 0 1.568 1.09 2.849 2.426 2.849h8.26c1.336 0 2.426-1.28 2.426-2.85 0-1.568-1.09-2.849-2.426-2.849z" />
-                            </svg>
-
+                        <span class="completed-modal-date">
+                            Дата паузы
                         </span>
 
-                    </button>
+                    </div>
 
+                    <div class="meta-row">
 
-                    <div class="profile-avatar-actions">
+                        <svg class="meta-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M20.182 12c0-4.589-3.698-8.248-8.182-8.248S3.818 7.41 3.818 12 7.516 20.248 12 20.248 20.182 16.59 20.182 12m-9.091-5.474c0-.484.407-.876.909-.876s.909.392.909.876v4.942l3.147 1.58a.86.86 0 0 1 .386 1.181.926.926 0 0 1-1.226.373l-4.125-2.07zM22 12c0 5.489-4.443 10-10 10S2 17.49 2 12C2 6.512 6.443 2 12 2s10 4.512 10 10" />
+                        </svg>
 
-                        <button class="profile-avatar-change-button" type="button">
-                            Изменить фото
-                        </button>
-
-                        <p>
-                            PNG, JPG или WebP до 2 МБ
-                        </p>
+                        <span class="completed-modal-duration">
+                            Время паузы: 00:00
+                        </span>
 
                     </div>
 
-
-                    <input class="profile-avatar-input" type="file" accept="image/png, image/jpeg, image/webp" hidden>
-
-                </div>
+                </section>
 
 
-                <!-- Поля профиля -->
+                <!-- Переходы после завершения -->
 
-                <div class="profile-edit-form">
+                <a class="button-primary completed-button" href="history.html">
+                    Смотреть мои паузы
+                </a>
 
-                    <div class="form-field">
+                <a class="completed-home-link" href="home.html">
+                    На главную
+                </a>
 
-                        <label for="profile-edit-name">
-                            ИМЯ
-                        </label>
-
-                        <div class="input-container">
-
-                            <input id="profile-edit-name" type="text" placeholder="Введите имя" required>
-
-                        </div>
-
-                    </div>
+            </div>
 
 
-                    <div class="form-field">
+            <!--
+                После завершения паузы крестик возвращает
+                пользователя на главную страницу.
+            -->
 
-                        <label for="profile-edit-email">
-                            EMAIL
-                        </label>
-
-                        <div class="input-container">
-
-                            <input id="profile-edit-email" type="email" placeholder="Введите email">
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-field">
-
-                        <label for="profile-edit-phone">
-                            ТЕЛЕФОН
-                        </label>
-
-                        <div class="input-container">
-
-                            <input id="profile-edit-phone" type="tel" placeholder="Добавьте номер телефона">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Сохранение -->
-
-                <button class="button-primary profile-edit-save" type="submit">
-                    Сохранить изменения
-                </button>
-
-            </form>
-
-
-            <!-- Закрытие модалки -->
-
-            <button class="profile-edit-close" type="button" aria-label="Закрыть">
+            <button class="completed-modal-close" type="button" aria-label="Закрыть и перейти на главную">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
                     aria-hidden="true">
@@ -618,21 +322,11 @@
 
     </div>
 
-    <!-- ======================================================
-                 ОБЩИЙ FOOTER
-                 Юридические ссылки ведут на разделы, которые будут
-                 созданы отдельным этапом.
-                 ====================================================== -->
 
-    <site-footer data-root=".." data-home="home.html"></site-footer>
+    <!-- ====================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ====================================================== -->
 
-
-
-    <!-- ======================================================
-         JAVASCRIPT
-         ====================================================== -->
-
-    <script src="../js/footer.js"></script>
     <script src="../js/script.js"></script>
 
 </body>

@@ -33,6 +33,9 @@
 
     /* Основные контентные карточки: mobile. */
     --radius-card: var(--radius-16);
+
+    /* Внутренний отступ обычных контентных карточек: mobile. */
+    --card-padding: 20px;
 }
 
 
@@ -42,6 +45,7 @@
 
     :root {
         --radius-card: var(--radius-20);
+        --card-padding: 24px;
     }
 
 }
@@ -414,7 +418,7 @@ button {
     width: calc(100% - 48px);
 
     margin-top: 32px;
-    padding: 20px;
+    padding: var(--card-padding);
 
     background: var(--color-background-card);
 
@@ -514,7 +518,7 @@ button {
 .benefit-card {
     width: 100%;
 
-    padding: 20px;
+    padding: var(--card-padding);
 
     display: flex;
     flex-direction: column;
@@ -531,6 +535,8 @@ button {
 .card-badge {
     width: 38px;
     height: 28px;
+    min-height: 28px;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
@@ -1075,7 +1081,7 @@ button {
     width: calc(100% - 48px);
 
     margin-top: 44px;
-    padding: 20px;
+    padding: var(--card-padding);
 
     display: flex;
     flex-direction: column;
@@ -1258,7 +1264,7 @@ button {
 .home-page .today-history-box {
     width: 100%;
     margin: 12px 0 0;
-    padding: 20px;
+    padding: var(--card-padding);
 }
 
 /* Иконка часов получает цвет через fill="currentColor". */
@@ -1329,7 +1335,7 @@ button {
 
 .home-page .stat-card {
     min-width: 0;
-    padding: 24px;
+    padding: var(--card-padding);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -1427,7 +1433,7 @@ button {
     width: calc(100% - 48px);
 
     margin-top: 84px;
-    padding: 20px;
+    padding: var(--card-padding);
 
     display: flex;
     flex-direction: column;
@@ -1548,7 +1554,7 @@ button {
     width: 100%;
 
     margin-top: 12px;
-    padding: 16px;
+    padding: var(--card-padding);
 
     display: flex;
     flex-direction: column;
@@ -1645,7 +1651,7 @@ button {
     width: calc(100% - 48px);
 
     margin-top: 24px;
-    padding: 20px;
+    padding: var(--card-padding);
 
     display: flex;
     flex-direction: column;
@@ -2206,7 +2212,8 @@ button {
 
     .features-section {
         width: 100%;
-        height: 273px;
+        height: auto;
+        min-height: 273px;
 
         /*
            На mobile было margin-top: 32px.
@@ -2221,19 +2228,12 @@ button {
     .features-container {
         width: 100%;
         max-width: 1200px;
-        height: 100%;
+        height: auto;
 
         margin: 0 auto;
 
         display: flex;
-
-        /*
-           КЛЮЧЕВАЯ СТРОКА:
-           на mobile было column,
-           на desktop возвращаем row.
-        */
         flex-direction: row;
-
         align-items: stretch;
 
         gap: 32px;
@@ -2252,7 +2252,7 @@ button {
 
         min-width: 0;
 
-        padding: 32px;
+        padding: var(--card-padding);
 
         display: flex;
         flex-direction: column;
@@ -2380,7 +2380,7 @@ button {
     }
 
     .home-page .hero-section {
-        padding: 48px 0;
+        padding: 80px 0;
     }
 
     .home-page .hero-container {
@@ -2445,7 +2445,7 @@ button {
     }
 
     .home-page .today-history-box {
-        padding: 24px;
+        padding: var(--card-padding);
     }
 
     .home-page .stats-grid {
@@ -2715,41 +2715,39 @@ button {
 }
 
 
-/* ------------------------------------------------------
-   Нижнее переключение:
-   "Уже есть аккаунт? Войти"
-   ------------------------------------------------------ */
+/* ==========================================================
+   СОГЛАСИЕ С ДОКУМЕНТАМИ В МОДАЛКЕ
+   ========================================================== */
 
-.auth-modal-switch {
-    margin: 20px 0 0;
+.auth-consent {
+    margin: 16px 0 0;
 
-    text-align: center;
-
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
 
-    color: var(--color-text-primary);
+    color: var(--color-text-tertiary);
 }
 
 
-.auth-mode-switch {
-    margin-left: 4px;
-
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.3;
-
+.auth-consent a {
     color: var(--color-text-accent);
 
-    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+
+.auth-consent a:hover {
+    color: var(--color-primary-green);
+}
+
+
+.auth-consent a:focus-visible {
+    outline: 2px solid var(--color-border-active);
+    outline-offset: 2px;
+
+    border-radius: 2px;
 }
 
 
@@ -2888,10 +2886,22 @@ button {
     outline-color: var(--color-border-active);
 }
 
-/* В истории ответы отображаются полностью. */
+/*
+   В карточке истории каждый ответ занимает одну строку.
+   Полный текст остаётся доступен в модальном окне.
+*/
 
 .history-page .pause-card-content {
-    overflow-wrap: anywhere;
+    min-width: 0;
+}
+
+.history-page .pause-card-content p {
+    width: 100%;
+    min-width: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .history-page .bottom-tab-bar-container {
@@ -3193,7 +3203,7 @@ button {
         width: 100%;
 
         margin-top: 32px;
-        padding: 20px;
+        padding: var(--card-padding);
     }
 
 
@@ -3422,7 +3432,7 @@ button {
         height: 275px;
 
         margin: 0;
-        padding: 24px;
+        padding: var(--card-padding);
 
         justify-content: center;
     }
@@ -4249,7 +4259,7 @@ button {
 .post-card {
     width: 100%;
 
-    padding: 20px;
+    padding: var(--card-padding);
 
     background: var(--color-background-card);
 
@@ -4718,7 +4728,7 @@ button {
     }
 
     .post-card {
-        padding: 24px;
+        padding: var(--card-padding);
     }
 
 }
@@ -4902,7 +4912,7 @@ button {
 .course-card-content {
     min-height: 168px;
 
-    padding: 20px;
+    padding: var(--card-padding);
 }
 
 .course-meta-row {
@@ -5037,7 +5047,6 @@ button {
     }
 
     .course-card-content {
-        height: 168px;
         min-height: 168px;
     }
 
@@ -5194,7 +5203,7 @@ site-footer {
 }
 
 .footer-socials {
-    margin-top: 16px;
+    margin-top: 24px;
 
     display: flex;
     align-items: center;
@@ -5287,4 +5296,146 @@ site-footer {
         margin-top: 40px;
     }
 
+}
+
+/* ==========================================================
+   МОБИЛЬНАЯ СТРАНИЦА АВТОРИЗАЦИИ
+   ========================================================== */
+
+.auth-page {
+    width: 100%;
+    max-width: 420px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+}
+
+
+/* Верхняя панель */
+
+.auth-page-header {
+    width: 100%;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* Кнопка возврата */
+
+.auth-page-back {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-primary-green);
+    background: var(--color-background-card);
+
+    border: 1px solid var(--color-border-default);
+    border-radius: 50%;
+
+    text-decoration: none;
+}
+
+
+.auth-page-back svg {
+    width: 24px;
+    height: 24px;
+
+    display: block;
+}
+
+
+.auth-page-back:hover {
+    border-color: var(--color-border-active);
+}
+
+
+.auth-page-back:focus-visible {
+    outline: 2px solid var(--color-border-active);
+    outline-offset: 3px;
+}
+
+
+/* Карточка использует общие стили модалки,
+   но на мобильной странице не имеет рамки и белого фона. */
+
+.auth-page .auth-page-card {
+    width: 100%;
+    min-height: 0;
+
+    margin-top: 32px;
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 0;
+}
+
+
+/* Заголовок страницы */
+
+.auth-page .auth-modal-heading {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    color: var(--color-text-primary);
+}
+
+
+/* Переключатель */
+
+.auth-page .segment-tabs {
+    margin-top: 32px;
+}
+
+
+/* Форма */
+
+.auth-page .auth-modal-form {
+    margin-top: 32px;
+}
+
+
+/* Основная кнопка */
+
+.auth-page .auth-page-submit {
+    width: 100%;
+
+    margin-top: 32px;
+}
+
+
+/* Юридический текст */
+
+.auth-page .auth-consent {
+    margin-top: 16px;
+}
+
+/* ==========================================================
+   ЕДИНЫЕ ВНУТРЕННИЕ ОТСТУПЫ КОНТЕНТНЫХ КАРТОЧЕК
+   ========================================================== */
+
+.profile-prompt,
+.benefit-card,
+.today-history-box,
+.home-page .today-history-box,
+.home-page .stat-card,
+.meta-info-card,
+.completed-modal .meta-info-card,
+.pause-card,
+.user-identity-card,
+.profile-page .user-identity-card,
+.post-card,
+.course-card-content {
+    padding: var(--card-padding);
 }

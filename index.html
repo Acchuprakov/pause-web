@@ -202,7 +202,7 @@
 
                 <div class="hero-actions">
 
-                    <button class="hero-primary-button" type="button">
+                    <button class="hero-primary-button guest-start-button" type="button">
                         Начать паузу
                     </button>
 
@@ -243,13 +243,12 @@
                     </div>
 
                     <h3 class="benefit-title">
-                        Замедление ума
+                        Остановиться
                     </h3>
 
                     <p class="benefit-description">
-                        Уделите себе всего несколько минут,
-                        чтобы восстановить ментальный баланс
-                        в хаосе дня.
+                        Сделайте короткую остановку посреди дня, чтобы замедлиться
+                        и вернуть внимание в настоящий момент.
                     </p>
 
                 </article>
@@ -264,12 +263,12 @@
                     </div>
 
                     <h3 class="benefit-title">
-                        Фиксация состояний
+                        Заметить себя
                     </h3>
 
                     <p class="benefit-description">
-                        Записывайте свои чувства, эмоции и мысли,
-                        чтобы проследить динамику тревожности.
+                        Ответьте на три простых вопроса о чувствах, мыслях
+                        и словах поддержки, которые нужны вам сейчас.
                     </p>
 
                 </article>
@@ -284,13 +283,12 @@
                     </div>
 
                     <h3 class="benefit-title">
-                        Пауза+
+                        Вернуться к себе
                     </h3>
 
                     <p class="benefit-description">
-                        Эксклюзивные курсы медитаций
-                        и дыхательных практик
-                        от сертифицированных психологов.
+                        Сохраняйте свои паузы и возвращайтесь к записям,
+                        чтобы замечать изменения в своём состоянии.
                     </p>
 
                 </article>
@@ -471,17 +469,16 @@
 
                 </div>
 
+                <!-- Переключение между регистрацией и входом -->
 
-                <!-- Email / Телефон -->
+                <div class="segment-tabs auth-mode-tabs" aria-label="Режим авторизации">
 
-                <div class="segment-tabs">
-
-                    <button class="tab-active" type="button">
-                        Email
+                    <button class="tab-active auth-mode-tab" type="button" data-auth-tab="register" aria-pressed="true">
+                        Регистрация
                     </button>
 
-                    <button class="tab-inactive" type="button">
-                        Телефон
+                    <button class="tab-inactive auth-mode-tab" type="button" data-auth-tab="login" aria-pressed="false">
+                        Вход
                     </button>
 
                 </div>
@@ -577,19 +574,17 @@
                     Зарегистрироваться
                 </button>
 
+                <!-- Согласие с документами показывается только при регистрации -->
 
-                <!-- Переключение Регистрация / Вход -->
-
-                <p class="auth-modal-switch">
-
-                    <span class="auth-modal-switch-text">
-                        Уже есть аккаунт?
-                    </span>
-
-                    <button class="auth-mode-switch" type="button">
-                        Войти
-                    </button>
-
+                <p class="auth-consent auth-register-only">
+                    Нажимая кнопку «Зарегистрироваться», я подтверждаю, что ознакомился с
+                    <a href="legal/privacy/" target="_blank">
+                        Политикой конфиденциальности
+                    </a>
+                    и
+                    <a href="legal/offer/" target="_blank">
+                        договором оферты
+                    </a>.
                 </p>
 
 

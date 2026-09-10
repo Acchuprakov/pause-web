@@ -72,8 +72,7 @@ const authModalClose = document.querySelector(".auth-modal-close");
 
 const authModalHeading = document.querySelector(".auth-modal-heading");
 const authModalSubmit = document.querySelector(".auth-modal-submit");
-const authModalSwitchText = document.querySelector(".auth-modal-switch-text");
-const authModeSwitch = document.querySelector(".auth-mode-switch");
+const authModeTabs = document.querySelectorAll("[data-auth-tab]");
 
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
@@ -1212,42 +1211,67 @@ function setAuthMode(mode) {
     if (
         !authModalCard ||
         !authModalHeading ||
-        !authModalSubmit ||
-        !authModalSwitchText ||
-        !authModeSwitch
+        !authModalSubmit
     ) {
         return;
     }
 
     resetPasswordVisibility();
 
+    authModalCard.dataset.authMode = mode;
+
+
+    /* Обновляем активную вкладку. */
+
+    authModeTabs.forEach(function (tab) {
+
+        const isActive =
+            tab.dataset.authTab === mode;
+
+        tab.classList.toggle(
+            "tab-active",
+            isActive
+        );
+
+        tab.classList.toggle(
+            "tab-inactive",
+            !isActive
+        );
+
+        tab.setAttribute(
+            "aria-pressed",
+            String(isActive)
+        );
+
+    });
+
+
+    /* Регистрация. */
 
     if (mode === "register") {
 
-        authModalCard.dataset.authMode = "register";
+        authModalHeading.innerHTML =
+            authModalContext === "feed"
+                ? "Чтобы писать комментарии<br>и ставить лайки — создайте аккаунт"
+                : "Чтобы сохранить паузу —<br>создайте аккаунт";
 
-        authModalHeading.innerHTML = authModalContext === "feed"
-            ? "Чтобы писать комментарии<br>и ставить лайки — создайте аккаунт"
-            : "Чтобы сохранить паузу —<br>создайте аккаунт";
-
-        authModalSubmit.textContent = "Зарегистрироваться";
-        authModalSwitchText.textContent = "Уже есть аккаунт?";
-        authModeSwitch.textContent = "Войти";
+        authModalSubmit.textContent =
+            "Зарегистрироваться";
 
     }
 
 
+    /* Вход. */
+
     if (mode === "login") {
 
-        authModalCard.dataset.authMode = "login";
+        authModalHeading.innerHTML =
+            authModalContext === "feed"
+                ? "Чтобы писать комментарии<br>и ставить лайки — войдите в аккаунт"
+                : "Чтобы сохранить паузу —<br>войдите в аккаунт";
 
-        authModalHeading.innerHTML = authModalContext === "feed"
-            ? "Чтобы писать комментарии<br>и ставить лайки — войдите в аккаунт"
-            : "Чтобы сохранить паузу —<br>войдите в аккаунт";
-
-        authModalSubmit.textContent = "Войти";
-        authModalSwitchText.textContent = "Нет аккаунта?";
-        authModeSwitch.textContent = "Регистрация";
+        authModalSubmit.textContent =
+            "Войти";
 
     }
 
@@ -1345,29 +1369,27 @@ authRequiredButtons.forEach(function (button) {
 });
 
 
-if (authModeSwitch) {
+/* Переключение вкладок «Регистрация / Вход». */
 
-    authModeSwitch.addEventListener("click", function () {
+authModeTabs.forEach(function (tab) {
 
-        if (!authModalCard) {
+    tab.addEventListener("click", function () {
+
+        const selectedMode =
+            tab.dataset.authTab;
+
+        if (
+            selectedMode !== "register" &&
+            selectedMode !== "login"
+        ) {
             return;
         }
 
-        const currentMode = authModalCard.dataset.authMode;
-
-        if (currentMode === "register") {
-
-            setAuthMode("login");
-
-        } else {
-
-            setAuthMode("register");
-
-        }
+        setAuthMode(selectedMode);
 
     });
 
-}
+});
 
 
 if (authModalClose) {

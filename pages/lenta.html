@@ -302,16 +302,16 @@
                 </div>
 
 
-                <!-- Email / Телефон -->
+                <!-- Переключение между регистрацией и входом -->
 
-                <div class="segment-tabs">
+                <div class="segment-tabs auth-mode-tabs" aria-label="Режим авторизации">
 
-                    <button class="tab-active" type="button">
-                        Email
+                    <button class="tab-active auth-mode-tab" type="button" data-auth-tab="register" aria-pressed="true">
+                        Регистрация
                     </button>
 
-                    <button class="tab-inactive" type="button">
-                        Телефон
+                    <button class="tab-inactive auth-mode-tab" type="button" data-auth-tab="login" aria-pressed="false">
+                        Вход
                     </button>
 
                 </div>
@@ -407,19 +407,17 @@
                     Зарегистрироваться
                 </button>
 
+                <!-- Согласие с документами показывается только при регистрации -->
 
-                <!-- Переключение Регистрация / Вход -->
-
-                <p class="auth-modal-switch">
-
-                    <span class="auth-modal-switch-text">
-                        Уже есть аккаунт?
-                    </span>
-
-                    <button class="auth-mode-switch" type="button">
-                        Войти
-                    </button>
-
+                <p class="auth-consent auth-register-only">
+                    Нажимая кнопку «Зарегистрироваться», я подтверждаю, что ознакомился с
+                    <a href="../legal/privacy/" target="_blank">
+                        Политикой конфиденциальности
+                    </a>
+                    и
+                    <a href="../legal/offer/" target="_blank">
+                        договором оферты
+                    </a>.
                 </p>
 
 
