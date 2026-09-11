@@ -422,7 +422,7 @@ class SiteFooter extends HTMLElement {
                     <div class="footer-bottom">
 
                         <p class="footer-copyright">
-                            © ${currentYear} ПАУЗА. Все права защищены.
+                            © ${currentYear} ПАУЗА. с любовью из Батайска ❤ v.1.0
                         </p>
 
                     </div>
