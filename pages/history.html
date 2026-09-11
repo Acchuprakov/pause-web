@@ -40,7 +40,7 @@
         <nav class="header-tabs" aria-label="Основная навигация">
             <a class="header-tab" href="home.html">Главная</a>
             <a class="header-tab header-tab--active" href="history.html" aria-current="page">Паузы</a>
-            <a class="header-tab" href="lenta.html">Лента</a>
+            <a class="header-tab" href="/lenta/">Лента</a>
             <a class="header-tab" href="../pause-plus/">Пауза+</a>
             <a class="header-tab" href="profile.html">Профиль</a>
         </nav>
@@ -150,7 +150,7 @@
                 </a>
                 <!-- Лента -->
 
-                <a class="bottom-tab" href="lenta.html">
+                <a class="bottom-tab" href="/lenta/">
                     <span class="bottom-tab-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -261,6 +261,30 @@
                         <strong>Себе:</strong>
                         <span class="pause-details-needs"></span>
                     </p>
+
+
+                    <!--
+                        Этот блок показывается только для новых записей,
+                        если пользователь открыл дополнительные вопросы.
+                    -->
+
+                    <div class="pause-details-reflection" hidden>
+
+                        <h3>
+                            Продолжение размышления
+                        </h3>
+
+                        <p class="pause-details-control-row" hidden>
+                            <strong>Что зависит от меня:</strong>
+                            <span class="pause-details-control"></span>
+                        </p>
+
+                        <p class="pause-details-next-step-row" hidden>
+                            <strong>Бережный следующий шаг:</strong>
+                            <span class="pause-details-next-step"></span>
+                        </p>
+
+                    </div>
 
                 </div>
 

@@ -16,7 +16,6 @@ const completedDate = document.querySelector(".completed-date");
 
 const backButton = document.querySelector(".header-back");
 
-const pauseAnswers = document.querySelectorAll(".question-card textarea");
 const chips = document.querySelectorAll(".chip");
 const pausesList = document.querySelector(".pauses-list");
 
@@ -57,6 +56,21 @@ const pauseDetailsDuration = document.querySelector(".pause-details-duration");
 const pauseDetailsFeelings = document.querySelector(".pause-details-feelings");
 const pauseDetailsThoughts = document.querySelector(".pause-details-thoughts");
 const pauseDetailsNeeds = document.querySelector(".pause-details-needs");
+const pauseDetailsReflection = document.querySelector(
+    ".pause-details-reflection"
+);
+const pauseDetailsControlRow = document.querySelector(
+    ".pause-details-control-row"
+);
+const pauseDetailsControl = document.querySelector(
+    ".pause-details-control"
+);
+const pauseDetailsNextStepRow = document.querySelector(
+    ".pause-details-next-step-row"
+);
+const pauseDetailsNextStep = document.querySelector(
+    ".pause-details-next-step"
+);
 
 let lastOpenedPauseCard = null;
 
@@ -73,6 +87,7 @@ const authModalClose = document.querySelector(".auth-modal-close");
 const authModalHeading = document.querySelector(".auth-modal-heading");
 const authModalSubmit = document.querySelector(".auth-modal-submit");
 const authModeTabs = document.querySelectorAll("[data-auth-tab]");
+const authForms = document.querySelectorAll(".auth-modal-form");
 
 const desktopLoginButton = document.querySelector(".desktop-login-button");
 const desktopRegisterButton = document.querySelector(".hero-secondary-button");
@@ -138,16 +153,16 @@ const userAvatarPlaceholders = document.querySelectorAll(
    ========================================================== */
 
 const feedPostsContainer = document.querySelector(".feed-posts");
+const feedPage = document.querySelector(
+    ".feed-page, [data-feed-access-page]"
+);
+const feedResultsCount = document.querySelector(".feed-results-count");
+const feedMobileFiltersButton = document.querySelector(
+    ".feed-mobile-filters-button"
+);
+const feedSidebar = document.querySelector(".feed-sidebar");
+const feedSortButtons = document.querySelectorAll("[data-feed-sort]");
 
-const feedFilter = document.querySelector(".feed-filter");
-const feedFilterButton = document.querySelector(".feed-filter-button");
-const feedFilterLabel = document.querySelector(".feed-filter-label");
-const feedFilterMenu = document.querySelector(".feed-filter-menu");
-const feedFilterIconDown = document.querySelector(".feed-filter-icon-down");
-const feedFilterIconUp = document.querySelector(".feed-filter-icon-up");
-const feedFilterOptions = document.querySelectorAll(".feed-filter-option");
-
-const feedPage = document.querySelector(".feed-page");
 const feedGuestAction = document.querySelector(".feed-guest-action");
 const feedUserAction = document.querySelector(".feed-user-action");
 const feedHomeLinks = document.querySelectorAll(".feed-home-link");
@@ -182,164 +197,28 @@ function isUserAuthenticated() {
 
 
 /*
-   Пока серверной части нет, редакционные публикации находятся здесь.
-   Добавлять и менять их может только владелец сайта в этом массиве.
-   Авторизованный пользователь может поставить лайк
-   и написать комментарий.
+   Данные Ленты подключаются отдельным файлом feed-data.js.
+   На страницах без Ленты файл можно не подключать — тогда
+   используются пустые массивы и остальная логика сайта работает как обычно.
 */
 
-const feedPosts = [
-    {
-        id: "pause-ordinary-life-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "09.09.2026, 12:52",
-        avatar: "../assets/images/pause-avatar.png",
-        text: [
-            "Большая часть жизни — это не путешествия, праздники и важные события.",
-            "",
-            "Это обычный вторник.",
-            "",
-            "Дорога домой. Ужин. Разговор с близким. Вечер за окном.",
-            "",
-            "Мы часто ждём чего-то особенного, чтобы почувствовать, что жизнь происходит.",
-            "",
-            "Но, может быть, самое важное — научиться замечать её в самом обычном."
-        ].join("\n"),
-        likes: 0,
-        comments: 0
-    },
-    {
-        id: "pause-day-feelings-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "08.09.2026, 19:10",
-        avatar: "../assets/images/pause-avatar.png",
-        text: [
-            "Мы привыкли оценивать день по результатам.",
-            "",
-            "Сделал — хороший день. Не сделал — плохой.",
-            "",
-            "Но что, если спросить иначе: «Как я себя чувствовал сегодня?»",
-            "",
-            "Пауза — это про то, как ты прожил день, а не только о том, что успел."
-        ].join("\n"),
-        likes: 0,
-        comments: 0
-    },
-    {
-        id: "pause-thought-cycle-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "07.09.2026, 16:40",
-        avatar: "../assets/images/pause-avatar.png",
-        text: [
-            "Бывает, одна мысль цепляется за тебя и не отпускает.",
-            "",
-            "Ты возвращаешься к ней снова и снова.",
-            "",
-            "К тому, что произошло. К тому, что мог сказать. К тому, что нужно было сделать иначе.",
-            "",
-            "И постепенно всё внимание оказывается там — в прошлом, в разговорах, в мыслях.",
-            "",
-            "А жизнь продолжает происходить прямо рядом.",
-            "",
-            "И ты её не замечаешь.",
-            "",
-            "Если сегодня поймаешь себя в этом круговороте мыслей — не пытайся их остановить.",
-            "",
-            "Просто заметь: я сейчас снова живу в своей голове.",
-            "",
-            "И верни внимание туда, где ты находишься."
-        ].join("\n"),
-        likes: 0,
-        comments: 0
-    },
-    {
-        id: "pause-accept-state-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "06.09.2026, 21:05",
-        avatar: "../assets/images/pause-avatar.png",
-        text: [
-            "Не нужно убегать от того, что ты чувствуешь.",
-            "",
-            "Если сегодня внутри напряжение или тревога — не спеши бороться с ним.",
-            "",
-            "Остановись на пару минут.",
-            "",
-            "Обрати внимание на себя, на свои ощущения.",
-            "",
-            "И просто скажи себе: «Да. Сейчас это так.»",
-            "",
-            "И, возможно, когда ты признаешь это состояние, оно начнёт понемногу отпускать."
-        ].join("\n"),
-        likes: 0,
-        comments: 0
-    },
-    {
-        id: "pause-window-evening-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "05.09.2026, 20:30",
-        avatar: "../assets/images/pause-avatar.png",
-        text: [
-            "Сегодня вечером просто посиди у окна.",
-            "",
-            "Без цели. Без телефона.",
-            "",
-            "Посмотри на небо. Заметь, как меняется свет. Как всё понемногу затихает.",
-            "",
-            "Никуда не спеши.",
-            "",
-            "Позволь этому моменту просто быть.",
-            "",
-            "Пауза."
-        ].join("\n"),
-        likes: 0,
-        comments: 0
-    },
-    {
-        id: "pause-breathing-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "04.09.2026, 14:25",
-        avatar: "../assets/images/pause-avatar.png",
-        text: "Уделите себе всего 2 минуты прямо сейчас. Сделайте глубокий вдох, почувствуйте опору под ногами и просто побудьте в этом моменте. Вы делаете достаточно. ✨",
-        likes: 24,
-        comments: 5
-    },
-    {
-        id: "pause-evening-01",
-        source: "pause",
-        author: "ПАУЗА.",
-        publishedAt: "03.09.2026, 20:15",
-        avatar: "../assets/images/pause-avatar.png",
-        text: "Иногда лучший способ продолжить день — ненадолго остановиться. Закройте глаза, расслабьте плечи и сделайте три спокойных вдоха.",
-        likes: 18,
-        comments: 3
-    },
-    {
-        id: "osho-awareness-01",
-        source: "mystic",
-        author: "Ошо",
-        publishedAt: "02.09.2026, 18:40",
-        avatar: "../assets/images/osho-avatar.png",
-        text: "Что бы вы ни делали, делайте это с полной осознанностью. Если вы двигаетесь, едите, сидите, моетесь или разговариваете — делайте это осознанно.",
-        likes: 12,
-        comments: 2
-    },
-    {
-        id: "buddha-happiness-01",
-        source: "mystic",
-        author: "Будда",
-        publishedAt: "01.09.2026, 11:30",
-        avatar: "../assets/images/budda-avatar.png",
-        text: "«Нелепо думать, что кто-то, кроме тебя, сможет сделать тебя счастливым или несчастным.»",
-        likes: 31,
-        comments: 0
-    }
-];
+const feedData = window.PAUSE_FEED_DATA || {
+    authors: [],
+    categories: [],
+    posts: []
+};
+
+const feedAuthors = Array.isArray(feedData.authors)
+    ? feedData.authors
+    : [];
+
+const feedCategories = Array.isArray(feedData.categories)
+    ? feedData.categories
+    : [];
+
+const feedPosts = Array.isArray(feedData.posts)
+    ? feedData.posts
+    : [];
 
 
 /* ==========================================================
@@ -411,6 +290,82 @@ function getPauseAnswer(answer) {
     }
 
     return answer.trim();
+
+}
+
+
+/*
+   Возвращает карточку вопроса по её постоянному ключу.
+   Ключи не зависят от порядка элементов на странице, поэтому
+   в форму можно безопасно добавлять новые вопросы.
+*/
+
+function getPauseQuestionCard(questionKey) {
+
+    return document.querySelector(
+        `[data-question-key="${questionKey}"]`
+    );
+
+}
+
+
+function getPauseQuestionText(questionKey) {
+
+    const questionCard = getPauseQuestionCard(questionKey);
+
+    if (!questionCard) {
+        return "";
+    }
+
+    const textarea = questionCard.querySelector("textarea");
+
+    return textarea
+        ? textarea.value.trim()
+        : "";
+
+}
+
+
+function getPauseQuestionTags(questionKey) {
+
+    const questionCard = getPauseQuestionCard(questionKey);
+
+    if (!questionCard) {
+        return [];
+    }
+
+    return Array.from(
+        questionCard.querySelectorAll(
+            '.chip[aria-pressed="true"]'
+        )
+    ).map(function (chip) {
+
+        return (
+            chip.dataset.value ||
+            chip.textContent
+        ).trim();
+
+    });
+
+}
+
+
+/*
+   Старые страницы читают поля feelings, thoughts и needs.
+   Собираем для них понятную строку из выбранных вариантов
+   и свободного ответа, одновременно сохраняя исходные части
+   отдельно в pauseData.answers.
+*/
+
+function createLegacyPauseAnswer(tags, text) {
+
+    const tagsText = tags.join(", ");
+
+    if (tagsText && text) {
+        return `${tagsText}. ${text}`;
+    }
+
+    return tagsText || text;
 
 }
 
@@ -576,7 +531,7 @@ if (startPauseButton) {
             Date.now()
         );
 
-        window.location.href = "pause.html";
+        window.location.href = "/pages/pause.html";
 
     });
 
@@ -601,7 +556,7 @@ if (guestStartPauseButton) {
             Date.now()
         );
 
-        window.location.href = "pages/pause.html";
+        window.location.href = "/pages/pause.html";
 
     });
 
@@ -651,27 +606,61 @@ if (completePauseButton) {
         clearInterval(pauseTimerId);
 
 
-        const feelings = pauseAnswers[0]
-            ? pauseAnswers[0].value.trim()
-            : "";
+        const feelingsText = getPauseQuestionText("feelings");
+        const thoughtsText = getPauseQuestionText("thoughts");
+        const supportText = getPauseQuestionText("support");
 
-        const thoughts = pauseAnswers[1]
-            ? pauseAnswers[1].value.trim()
-            : "";
+        const feelingsTags = getPauseQuestionTags("feelings");
+        const thoughtsTags = getPauseQuestionTags("thoughts");
+        const supportTags = getPauseQuestionTags("support");
 
-        const needs = pauseAnswers[2]
-            ? pauseAnswers[2].value.trim()
-            : "";
+        const controlText = getPauseQuestionText("control");
+        const nextStepText = getPauseQuestionText("nextStep");
+
+        const feelings = createLegacyPauseAnswer(
+            feelingsTags,
+            feelingsText
+        );
+
+        const thoughts = createLegacyPauseAnswer(
+            thoughtsTags,
+            thoughtsText
+        );
+
+        const needs = createLegacyPauseAnswer(
+            supportTags,
+            supportText
+        );
 
         const endTime = Date.now();
         const duration = endTime - startTimestamp;
 
         const pauseData = {
+            schemaVersion: 2,
             feelings: feelings,
             thoughts: thoughts,
             needs: needs,
+            answers: {
+                feelings: {
+                    tags: feelingsTags,
+                    text: feelingsText
+                },
+                thoughts: {
+                    tags: thoughtsTags,
+                    text: thoughtsText
+                },
+                support: {
+                    tags: supportTags,
+                    text: supportText
+                },
+                reflection: {
+                    control: controlText,
+                    nextStep: nextStepText
+                }
+            },
             duration: duration,
-            endTime: endTime
+            endTime: endTime,
+            createdAt: new Date(endTime).toISOString()
         };
 
 
@@ -719,11 +708,11 @@ if (completePauseButton) {
                     "register"
                 );
 
-                window.location.href = "../index.html";
+                window.location.href = "/index.html";
 
             } else {
 
-                window.location.href = "auth.html";
+                window.location.href = "/pages/auth.html";
 
             }
 
@@ -750,7 +739,7 @@ if (completePauseButton) {
 
         } else {
 
-            window.location.href = "completed.html";
+            window.location.href = "/pages/completed.html";
 
         }
 
@@ -808,11 +797,11 @@ if (backButton) {
             pauseUserStatus === "guest"
         ) {
 
-            window.location.href = "../index.html";
+            window.location.href = "/index.html";
 
         } else {
 
-            window.location.href = "home.html";
+            window.location.href = "/pages/home.html";
 
         }
 
@@ -829,31 +818,18 @@ chips.forEach(function (chip) {
 
     chip.addEventListener("click", function () {
 
-        const questionCard = chip.closest(".question-card");
+        const isSelected =
+            chip.getAttribute("aria-pressed") === "true";
 
-        if (!questionCard) {
-            return;
-        }
+        chip.setAttribute(
+            "aria-pressed",
+            String(!isSelected)
+        );
 
-        const textarea = questionCard.querySelector("textarea");
-
-        if (!textarea) {
-            return;
-        }
-
-        const chipText = chip.textContent.trim();
-
-        if (textarea.value.trim()) {
-
-            textarea.value += `, ${chipText}`;
-
-        } else {
-
-            textarea.value = chipText;
-
-        }
-
-        textarea.focus();
+        chip.classList.toggle(
+            "is-selected",
+            !isSelected
+        );
 
     });
 
@@ -894,6 +870,47 @@ function openPauseDetailsModal(pause, pauseCard) {
 
     if (pauseDetailsNeeds) {
         pauseDetailsNeeds.textContent = getPauseAnswer(pause.needs);
+    }
+
+
+    /* Дополнительные ответы есть только у записей новой версии. */
+
+    const reflection =
+        pause.answers &&
+            pause.answers.reflection &&
+            typeof pause.answers.reflection === "object"
+            ? pause.answers.reflection
+            : {};
+
+    const controlText =
+        typeof reflection.control === "string"
+            ? reflection.control.trim()
+            : "";
+
+    const nextStepText =
+        typeof reflection.nextStep === "string"
+            ? reflection.nextStep.trim()
+            : "";
+
+    if (pauseDetailsControlRow) {
+        pauseDetailsControlRow.hidden = !controlText;
+    }
+
+    if (pauseDetailsControl) {
+        pauseDetailsControl.textContent = controlText;
+    }
+
+    if (pauseDetailsNextStepRow) {
+        pauseDetailsNextStepRow.hidden = !nextStepText;
+    }
+
+    if (pauseDetailsNextStep) {
+        pauseDetailsNextStep.textContent = nextStepText;
+    }
+
+    if (pauseDetailsReflection) {
+        pauseDetailsReflection.hidden =
+            !controlText && !nextStepText;
     }
 
 
@@ -1128,6 +1145,377 @@ if (pausesList) {
    МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ
    ========================================================== */
 
+/*
+   Показывает ошибку конкретного поля.
+   Эту же функцию позже можно вызвать после ответа сервера,
+   например при неверном пароле или уже занятом email.
+*/
+
+function setAuthFieldError(input, message) {
+
+    if (!input) {
+        return;
+    }
+
+    const formField = input.closest(".form-field");
+
+    if (!formField) {
+        return;
+    }
+
+    const errorMessage = formField.querySelector(
+        ".form-field-error"
+    );
+
+    formField.classList.add("has-error");
+    input.setAttribute("aria-invalid", "true");
+
+    if (errorMessage) {
+        errorMessage.textContent = message;
+        errorMessage.hidden = false;
+    }
+
+}
+
+
+function clearAuthFieldError(input) {
+
+    if (!input) {
+        return;
+    }
+
+    const formField = input.closest(".form-field");
+
+    if (!formField) {
+        return;
+    }
+
+    const errorMessage = formField.querySelector(
+        ".form-field-error"
+    );
+
+    formField.classList.remove("has-error");
+    input.removeAttribute("aria-invalid");
+
+    if (errorMessage) {
+        errorMessage.textContent = "";
+        errorMessage.hidden = true;
+    }
+
+}
+
+
+function clearAuthFormErrors(container) {
+
+    if (!container) {
+        return;
+    }
+
+    container.querySelectorAll("input").forEach(function (input) {
+        clearAuthFieldError(input);
+    });
+
+}
+
+
+/*
+   Добавляет всем формам одинаковые подписи ошибок
+   и ссылку восстановления пароля.
+*/
+
+function setupAuthFormEnhancements() {
+
+    authForms.forEach(function (form, formIndex) {
+
+        form.noValidate = true;
+
+        if (!form.id) {
+            form.id = `auth-form-${formIndex + 1}`;
+        }
+
+        form.querySelectorAll(".form-field input").forEach(function (
+            input,
+            inputIndex
+        ) {
+
+            const formField = input.closest(".form-field");
+
+            if (!formField) {
+                return;
+            }
+
+            if (!input.id) {
+                input.id = `auth-field-${formIndex + 1}-${inputIndex + 1}`;
+            }
+
+            let errorMessage = formField.querySelector(
+                ".form-field-error"
+            );
+
+            if (!errorMessage) {
+
+                errorMessage = document.createElement("p");
+                errorMessage.classList.add("form-field-error");
+                errorMessage.id = `${input.id}-error`;
+                errorMessage.hidden = true;
+                errorMessage.setAttribute("aria-live", "polite");
+
+                formField.append(errorMessage);
+
+            }
+
+            const describedBy = input
+                .getAttribute("aria-describedby")
+                ?.split(/\s+/)
+                .filter(Boolean) || [];
+
+            if (!describedBy.includes(errorMessage.id)) {
+                describedBy.push(errorMessage.id);
+            }
+
+            input.setAttribute(
+                "aria-describedby",
+                describedBy.join(" ")
+            );
+
+            input.addEventListener("input", function () {
+                clearAuthFieldError(input);
+            });
+
+        });
+
+
+        const passwordInput = form.querySelector(".password-input");
+        const passwordField = passwordInput
+            ? passwordInput.closest(".form-field")
+            : null;
+
+        if (
+            passwordField &&
+            !passwordField.querySelector(".auth-forgot-password")
+        ) {
+
+            const forgotPasswordLink = document.createElement("a");
+
+            forgotPasswordLink.classList.add(
+                "auth-forgot-password",
+                "auth-login-only"
+            );
+
+            forgotPasswordLink.href = "#";
+            forgotPasswordLink.dataset.passwordRecovery = "";
+            forgotPasswordLink.textContent = "Забыли пароль?";
+
+            passwordField.append(forgotPasswordLink);
+
+        }
+
+    });
+
+
+    /*
+       Кнопка расположена после формы в HTML.
+       Связываем её с формой, чтобы работали и клик, и Enter.
+    */
+
+    if (authModalSubmit && authForms.length === 1) {
+
+        authModalSubmit.type = "submit";
+        authModalSubmit.setAttribute(
+            "form",
+            authForms[0].id
+        );
+
+    }
+
+}
+
+
+function validateAuthForm(form) {
+
+    const card = form.closest(".auth-modal-card");
+    const mode = card?.dataset.authMode === "login"
+        ? "login"
+        : "register";
+
+    const nameInput = form.querySelector(
+        'input[name="name"], input[id*="name"]'
+    );
+
+    const emailInput = form.querySelector(
+        'input[type="email"]'
+    );
+
+    const passwordInput = form.querySelector(
+        ".password-input"
+    );
+
+    clearAuthFormErrors(form);
+
+    let isValid = true;
+    let firstInvalidInput = null;
+
+
+    function addError(input, message) {
+
+        setAuthFieldError(input, message);
+
+        if (!firstInvalidInput) {
+            firstInvalidInput = input;
+        }
+
+        isValid = false;
+
+    }
+
+
+    if (
+        mode === "register" &&
+        nameInput &&
+        !nameInput.value.trim()
+    ) {
+        addError(nameInput, "Введите имя.");
+    }
+
+
+    if (emailInput) {
+
+        const email = emailInput.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+
+            addError(emailInput, "Введите email.");
+
+        } else if (!emailPattern.test(email)) {
+
+            addError(
+                emailInput,
+                "Проверьте формат email."
+            );
+
+        }
+
+    }
+
+
+    if (passwordInput) {
+
+        const password = passwordInput.value;
+
+        if (!password) {
+
+            addError(passwordInput, "Введите пароль.");
+
+        } else if (
+            mode === "register" &&
+            password.length < 8
+        ) {
+
+            addError(
+                passwordInput,
+                "Пароль должен содержать не менее 8 символов."
+            );
+
+        }
+
+    }
+
+
+    if (firstInvalidInput) {
+        firstInvalidInput.focus();
+    }
+
+    return isValid;
+
+}
+
+
+setupAuthFormEnhancements();
+
+
+authForms.forEach(function (form) {
+
+    form.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        if (!validateAuthForm(form)) {
+            return;
+        }
+
+        const card = form.closest(".auth-modal-card");
+        const mode = card?.dataset.authMode === "login"
+            ? "login"
+            : "register";
+
+        /*
+           Здесь позже подключается запрос к сервису авторизации.
+           Событие уже содержит проверенные значения формы.
+        */
+
+        form.dispatchEvent(
+            new CustomEvent("auth-form-ready", {
+                bubbles: true,
+                detail: {
+                    mode: mode,
+                    name: form.querySelector(
+                        'input[name="name"], input[id*="name"]'
+                    )?.value.trim() || "",
+                    email: form.querySelector(
+                        'input[type="email"]'
+                    )?.value.trim() || "",
+                    password: form.querySelector(
+                        ".password-input"
+                    )?.value || ""
+                }
+            })
+        );
+
+    });
+
+});
+
+
+document.querySelectorAll("[data-password-recovery]").forEach(function (
+    recoveryLink
+) {
+
+    recoveryLink.addEventListener("click", function (event) {
+
+        const recoveryHref = recoveryLink.getAttribute("href");
+
+        /* Когда появится настоящий адрес, ссылка начнёт работать сама. */
+
+        if (recoveryHref && recoveryHref !== "#") {
+            return;
+        }
+
+        event.preventDefault();
+
+        const form = recoveryLink.closest(".auth-modal-form");
+        const email = form
+            ?.querySelector('input[type="email"]')
+            ?.value.trim() || "";
+
+        if (email) {
+            sessionStorage.setItem("passwordRecoveryEmail", email);
+        }
+
+        recoveryLink.dispatchEvent(
+            new CustomEvent("password-recovery-requested", {
+                bubbles: true,
+                detail: {
+                    email: email
+                }
+            })
+        );
+
+    });
+
+});
+
+
 function setPasswordVisibility(toggleButton, isVisible) {
 
     const inputContainer = toggleButton.closest(".input-container");
@@ -1217,8 +1605,19 @@ function setAuthMode(mode) {
     }
 
     resetPasswordVisibility();
+    clearAuthFormErrors(authModalCard);
 
     authModalCard.dataset.authMode = mode;
+
+    const authPasswordInput = authModalCard.querySelector(
+        ".password-input"
+    );
+
+    if (authPasswordInput) {
+        authPasswordInput.autocomplete = mode === "login"
+            ? "current-password"
+            : "new-password";
+    }
 
 
     /* Обновляем активную вкладку. */
@@ -1250,10 +1649,22 @@ function setAuthMode(mode) {
 
     if (mode === "register") {
 
-        authModalHeading.innerHTML =
-            authModalContext === "feed"
-                ? "Чтобы писать комментарии<br>и ставить лайки — создайте аккаунт"
-                : "Чтобы сохранить паузу —<br>создайте аккаунт";
+        if (authModalContext === "feed") {
+
+            authModalHeading.innerHTML =
+                "Чтобы писать комментарии<br>и ставить лайки — создайте аккаунт";
+
+        } else if (authModalContext === "account") {
+
+            authModalHeading.textContent =
+                "Создайте аккаунт";
+
+        } else {
+
+            authModalHeading.innerHTML =
+                "Чтобы сохранить паузу —<br>создайте аккаунт";
+
+        }
 
         authModalSubmit.textContent =
             "Зарегистрироваться";
@@ -1265,10 +1676,22 @@ function setAuthMode(mode) {
 
     if (mode === "login") {
 
-        authModalHeading.innerHTML =
-            authModalContext === "feed"
-                ? "Чтобы писать комментарии<br>и ставить лайки — войдите в аккаунт"
-                : "Чтобы сохранить паузу —<br>войдите в аккаунт";
+        if (authModalContext === "feed") {
+
+            authModalHeading.innerHTML =
+                "Чтобы писать комментарии<br>и ставить лайки — войдите в аккаунт";
+
+        } else if (authModalContext === "account") {
+
+            authModalHeading.textContent =
+                "Войдите в аккаунт";
+
+        } else {
+
+            authModalHeading.innerHTML =
+                "Чтобы сохранить паузу —<br>войдите в аккаунт";
+
+        }
 
         authModalSubmit.textContent =
             "Войти";
@@ -1284,8 +1707,8 @@ function openAuthModal(mode, context) {
         return;
     }
 
-    authModalContext = context === "feed"
-        ? "feed"
+    authModalContext = context === "feed" || context === "account"
+        ? context
         : "pause";
 
     setAuthMode(mode);
@@ -1308,6 +1731,7 @@ function closeAuthModal() {
     authModal.setAttribute("aria-hidden", "true");
 
     resetPasswordVisibility();
+    clearAuthFormErrors(authModalCard);
 
     document.body.classList.remove("modal-open");
 
@@ -1416,11 +1840,15 @@ if (authModalOverlay) {
    ДОСТУП К ДЕЙСТВИЯМ В ЛЕНТЕ
    ========================================================== */
 
-function requestFeedAuthorization() {
+function requestFeedAuthorization(context) {
 
     if (isUserAuthenticated()) {
         return true;
     }
+
+    const requestedContext = context === "account"
+        ? "account"
+        : "feed";
 
     const isDesktop = window.matchMedia(
         "(min-width: 1200px)"
@@ -1428,7 +1856,7 @@ function requestFeedAuthorization() {
 
     if (isDesktop && authModal) {
 
-        openAuthModal("register", "feed");
+        openAuthModal("register", requestedContext);
 
     } else {
 
@@ -1437,8 +1865,8 @@ function requestFeedAuthorization() {
            регистрация и вход открываются отдельными страницами.
         */
 
-        sessionStorage.setItem("authContext", "feed");
-        window.location.href = "auth.html";
+        sessionStorage.setItem("authContext", requestedContext);
+        window.location.href = "/pages/auth.html";
 
     }
 
@@ -1466,8 +1894,8 @@ function updateFeedAccessView() {
     feedHomeLinks.forEach(function (link) {
 
         link.href = isAuthenticated
-            ? "home.html"
-            : "../index.html";
+            ? "/pages/home.html"
+            : "/index.html";
 
     });
 
@@ -1483,7 +1911,7 @@ feedProtectedLinks.forEach(function (link) {
         }
 
         event.preventDefault();
-        requestFeedAuthorization();
+        requestFeedAuthorization(link.dataset.authContext);
 
     });
 
@@ -1537,7 +1965,7 @@ function closeCompletedModal() {
 
     document.body.classList.remove("modal-open");
 
-    window.location.href = "home.html";
+    window.location.href = "/pages/home.html";
 
 }
 
@@ -1773,7 +2201,7 @@ if (profileDocumentsButton) {
 
     profileDocumentsButton.addEventListener("click", function () {
 
-        window.location.href = "../legal/";
+        window.location.href = "/legal/";
 
     });
 
@@ -1942,125 +2370,116 @@ if (profileEditForm) {
 
 
 /* ==========================================================
-   ФИЛЬТР ЛЕНТЫ
+   ФИЛЬТРЫ И СОРТИРОВКА ЛЕНТЫ
    ========================================================== */
 
-function setFeedFilterOpen(isOpen) {
+const activeFeedAuthor = feedPage
+    ? feedPage.dataset.feedAuthor || "pause"
+    : "pause";
 
-    if (
-        !feedFilterButton ||
-        !feedFilterMenu ||
-        !feedFilterIconDown ||
-        !feedFilterIconUp
-    ) {
-        return;
-    }
+const activeFeedCategory = feedPage
+    ? feedPage.dataset.feedCategory || ""
+    : "";
 
-    feedFilterButton.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-    );
+let activeFeedSort = "newest";
 
-    feedFilterMenu.hidden = !isOpen;
-    feedFilterIconDown.hidden = isOpen;
-    feedFilterIconUp.hidden = !isOpen;
+
+function getFeedTimestamp(post) {
+
+    const timestamp = Date.parse(post.publishedAtISO || "");
+
+    return Number.isNaN(timestamp)
+        ? 0
+        : timestamp;
 
 }
 
 
-function applyFeedFilter(filterValue) {
+function getVisibleFeedPosts() {
 
-    if (!feedPostsContainer) {
-        return;
-    }
+    const visiblePosts = feedPosts.filter(function (post) {
 
-    const postCards = feedPostsContainer.querySelectorAll(".post-card");
+        const matchesAuthor =
+            activeFeedAuthor === "all" ||
+            post.authorId === activeFeedAuthor;
 
-    postCards.forEach(function (postCard) {
+        const postCategories = Array.isArray(post.categoryIds)
+            ? post.categoryIds
+            : [];
 
-        postCard.hidden =
-            filterValue === "pause" &&
-            postCard.dataset.postSource !== "pause";
+        const matchesCategory =
+            !activeFeedCategory ||
+            postCategories.includes(activeFeedCategory);
+
+        return matchesAuthor && matchesCategory;
+
+    });
+
+    return visiblePosts.sort(function (firstPost, secondPost) {
+
+        const direction = activeFeedSort === "oldest"
+            ? 1
+            : -1;
+
+        return (
+            getFeedTimestamp(firstPost) -
+            getFeedTimestamp(secondPost)
+        ) * direction;
 
     });
 
 }
 
 
-if (feedFilterButton) {
+function updateFeedSortButtons() {
 
-    feedFilterButton.addEventListener("click", function () {
+    feedSortButtons.forEach(function (button) {
 
-        const isOpen =
-            feedFilterButton.getAttribute("aria-expanded") === "true";
+        const isActive = button.dataset.feedSort === activeFeedSort;
 
-        setFeedFilterOpen(!isOpen);
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
 
     });
 
 }
 
 
-feedFilterOptions.forEach(function (option) {
+feedSortButtons.forEach(function (button) {
 
-    option.addEventListener("click", function () {
+    button.addEventListener("click", function () {
 
-        const selectedFilter = option.dataset.feedFilter;
-        const selectedLabel = option.querySelector("span");
+        activeFeedSort = button.dataset.feedSort || "newest";
 
-        if (feedFilterLabel && selectedLabel) {
-            feedFilterLabel.textContent = selectedLabel.textContent;
-        }
-
-        feedFilterOptions.forEach(function (currentOption) {
-
-            const isSelected = currentOption === option;
-            const checkIcon = currentOption.querySelector(
-                ".feed-filter-check"
-            );
-
-            currentOption.classList.toggle("is-active", isSelected);
-            currentOption.setAttribute(
-                "aria-selected",
-                String(isSelected)
-            );
-
-            if (checkIcon) {
-                checkIcon.hidden = !isSelected;
-            }
-
-        });
-
-        applyFeedFilter(selectedFilter);
-        setFeedFilterOpen(false);
-
-        if (feedFilterButton) {
-            feedFilterButton.focus();
-        }
+        updateFeedSortButtons();
+        renderFeedPosts();
 
     });
 
 });
 
 
-if (feedFilter) {
+if (feedMobileFiltersButton && feedSidebar) {
 
-    document.addEventListener("click", function (event) {
+    feedMobileFiltersButton.addEventListener("click", function () {
 
-        const isOpen =
-            feedFilterButton &&
-            feedFilterButton.getAttribute("aria-expanded") === "true";
+        const isOpen = feedSidebar.classList.toggle("is-open");
 
-        if (
-            isOpen &&
-            !feedFilter.contains(event.target)
-        ) {
-            setFeedFilterOpen(false);
-        }
+        feedMobileFiltersButton.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        feedMobileFiltersButton.textContent = isOpen
+            ? "Скрыть фильтры"
+            : "Фильтры";
 
     });
 
 }
+
+
+updateFeedSortButtons();
 
 
 /* ==========================================================
@@ -2361,8 +2780,28 @@ function renderFeedPosts() {
 
     feedPostsContainer.innerHTML = "";
 
+    const visiblePosts = getVisibleFeedPosts();
 
-    feedPosts.forEach(function (post) {
+    if (feedResultsCount) {
+        feedResultsCount.textContent = String(visiblePosts.length);
+    }
+
+    if (!visiblePosts.length) {
+
+        const emptyState = document.createElement("p");
+
+        emptyState.classList.add("feed-empty-state");
+        emptyState.textContent =
+            "Публикаций по выбранному фильтру пока нет.";
+
+        feedPostsContainer.append(emptyState);
+
+        return;
+
+    }
+
+
+    visiblePosts.forEach(function (post) {
 
         const savedPostState = feedPostState[post.id] || {};
 
@@ -2395,21 +2834,28 @@ function renderFeedPosts() {
         postCard.classList.add("post-card");
         postCard.dataset.postId = post.id;
         postCard.dataset.postSource = post.source;
+        postCard.dataset.postAuthor = post.authorId;
+        postCard.dataset.postCategories = Array.isArray(post.categoryIds)
+            ? post.categoryIds.join(" ")
+            : "";
 
 
         /* Автор публикации. */
 
         const authorHeader = document.createElement("header");
         const authorMeta = document.createElement("div");
-        const authorName = document.createElement("h2");
-        const publishedAt = document.createElement("p");
+        const authorName = document.createElement("a");
+        const publishedAt = document.createElement("time");
 
         authorHeader.classList.add("post-author-header");
         authorMeta.classList.add("post-author-meta");
         authorName.classList.add("post-author-name");
         publishedAt.classList.add("post-published-at");
 
+        authorName.href = post.authorUrl || "/lenta/all/";
         authorName.textContent = post.author;
+
+        publishedAt.dateTime = post.publishedAtISO || "";
         publishedAt.textContent = post.publishedAt;
 
         authorMeta.append(authorName);
@@ -2429,6 +2875,83 @@ function renderFeedPosts() {
         postText.textContent = post.text;
 
         postCard.append(postText);
+
+
+        if (
+            post.citation &&
+            post.citation.url
+        ) {
+
+            const sourceLine = document.createElement("p");
+            const sourceLink = document.createElement("a");
+
+            sourceLine.classList.add("post-source");
+            sourceLink.classList.add("post-source-link");
+
+            sourceLink.href = post.citation.url;
+            sourceLink.target = "_blank";
+            sourceLink.rel = "noopener noreferrer";
+            sourceLink.textContent = `Источник: ${post.citation.title}`;
+
+            sourceLine.append(sourceLink);
+
+            if (post.citation.note) {
+
+                const sourceNote = document.createElement("span");
+
+                sourceNote.classList.add("post-source-note");
+                sourceNote.textContent = post.citation.note;
+
+                sourceLine.append(sourceNote);
+
+            }
+
+            postCard.append(sourceLine);
+
+        }
+
+
+        /* Категории публикации: одновременно подписи и ссылки на фильтры. */
+
+        const postCategoryIds = Array.isArray(post.categoryIds)
+            ? post.categoryIds
+            : [];
+
+        const postCategories = postCategoryIds
+            .map(function (categoryId) {
+
+                return feedCategories.find(function (category) {
+                    return category.id === categoryId;
+                });
+
+            })
+            .filter(Boolean);
+
+        if (postCategories.length) {
+
+            const postTags = document.createElement("nav");
+
+            postTags.classList.add("post-tags");
+            postTags.setAttribute(
+                "aria-label",
+                "Категории публикации"
+            );
+
+            postCategories.forEach(function (category) {
+
+                const tagLink = document.createElement("a");
+
+                tagLink.classList.add("post-tag");
+                tagLink.href = category.url;
+                tagLink.textContent = category.name;
+
+                postTags.append(tagLink);
+
+            });
+
+            postCard.append(postTags);
+
+        }
 
 
         const divider = document.createElement("div");
@@ -2890,11 +3413,6 @@ function renderFeedPosts() {
 
     });
 
-
-    /* По умолчанию показываем публикации ПАУЗЫ. */
-
-    applyFeedFilter("pause");
-
 }
 
 
@@ -2914,12 +3432,17 @@ document.addEventListener("keydown", function (event) {
 
 
     if (
-        feedFilterButton &&
-        feedFilterButton.getAttribute("aria-expanded") === "true"
+        feedSidebar &&
+        feedSidebar.classList.contains("is-open")
     ) {
 
-        setFeedFilterOpen(false);
-        feedFilterButton.focus();
+        feedSidebar.classList.remove("is-open");
+
+        if (feedMobileFiltersButton) {
+            feedMobileFiltersButton.setAttribute("aria-expanded", "false");
+            feedMobileFiltersButton.textContent = "Фильтры";
+            feedMobileFiltersButton.focus();
+        }
 
         return;
 

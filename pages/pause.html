@@ -90,107 +90,185 @@
 
 
         <!-- ================================================== -->
-        <!-- ПЕРВЫЙ ВОПРОС -->
+        <!-- ОСНОВНЫЕ ВОПРОСЫ -->
+        <!--
+            Чипы теперь работают как переключатели: можно выбрать
+            несколько вариантов и отдельно написать свой ответ.
+            Выбранные варианты сохраняются как структурированные
+            данные и в дальнейшем смогут использоваться для анализа.
+        -->
         <!-- ================================================== -->
 
-        <section class="question-card" aria-labelledby="question-feelings">
+        <section class="question-card" data-question-key="feelings" aria-labelledby="question-feelings">
 
             <h2 class="question-title" id="question-feelings">
                 1. Что ты сейчас чувствуешь?
             </h2>
 
-
-            <!-- Поле ответа -->
+            <p class="question-helper">
+                Заметь эмоции и ощущения в теле. Здесь нет правильного ответа.
+            </p>
 
             <div class="input-wrapper">
-
-                <textarea aria-labelledby="question-feelings" placeholder="Напишите здесь..."></textarea>
-
+                <textarea data-answer-field="feelings" aria-labelledby="question-feelings"
+                    placeholder="Например: тревожно, плечи напряжены, хочется выдохнуть…"></textarea>
             </div>
 
+            <p class="question-chips-label" id="feelings-chips-label">
+                Можно выбрать несколько вариантов
+            </p>
 
-            <!-- Быстрые варианты -->
-
-            <div class="question-chips">
-
-                <button class="chip" type="button">усталость</button>
-                <button class="chip" type="button">напряжение</button>
-                <button class="chip" type="button">грусть</button>
-                <button class="chip" type="button">радость</button>
-                <button class="chip" type="button">другое</button>
-
+            <div class="question-chips" aria-labelledby="feelings-chips-label">
+                <button class="chip" type="button" data-value="тревога" aria-pressed="false">тревога</button>
+                <button class="chip" type="button" data-value="усталость" aria-pressed="false">усталость</button>
+                <button class="chip" type="button" data-value="напряжение" aria-pressed="false">напряжение</button>
+                <button class="chip" type="button" data-value="раздражение" aria-pressed="false">раздражение</button>
+                <button class="chip" type="button" data-value="грусть" aria-pressed="false">грусть</button>
+                <button class="chip" type="button" data-value="растерянность"
+                    aria-pressed="false">растерянность</button>
+                <button class="chip" type="button" data-value="спокойствие" aria-pressed="false">спокойствие</button>
+                <button class="chip" type="button" data-value="радость" aria-pressed="false">радость</button>
             </div>
 
         </section>
 
 
-        <!-- ================================================== -->
-        <!-- ВТОРОЙ ВОПРОС -->
-        <!-- ================================================== -->
-
-        <section class="question-card" aria-labelledby="question-thoughts">
+        <section class="question-card" data-question-key="thoughts" aria-labelledby="question-thoughts">
 
             <h2 class="question-title" id="question-thoughts">
-                2. Что сейчас занимает твои мысли?
+                2. Какая мысль или ситуация сейчас занимает больше всего внимания?
             </h2>
 
-
-            <!-- Поле ответа -->
+            <p class="question-helper">
+                Можно назвать то, к чему ты мысленно возвращаешься.
+            </p>
 
             <div class="input-wrapper">
-
-                <textarea aria-labelledby="question-thoughts" placeholder="Напишите здесь..."></textarea>
-
+                <textarea data-answer-field="thoughts" aria-labelledby="question-thoughts"
+                    placeholder="Например: думаю о разговоре, работе или предстоящем решении…"></textarea>
             </div>
 
+            <p class="question-chips-label" id="thoughts-chips-label">
+                Можно выбрать несколько вариантов
+            </p>
 
-            <!-- Быстрые варианты -->
-
-            <div class="question-chips">
-
-                <button class="chip" type="button">работа</button>
-                <button class="chip" type="button">отношения</button>
-                <button class="chip" type="button">будущее</button>
-                <button class="chip" type="button">другое</button>
-
+            <div class="question-chips" aria-labelledby="thoughts-chips-label">
+                <button class="chip" type="button" data-value="работа" aria-pressed="false">работа</button>
+                <button class="chip" type="button" data-value="отношения" aria-pressed="false">отношения</button>
+                <button class="chip" type="button" data-value="будущее" aria-pressed="false">будущее</button>
+                <button class="chip" type="button" data-value="прошлое" aria-pressed="false">прошлое</button>
+                <button class="chip" type="button" data-value="деньги" aria-pressed="false">деньги</button>
+                <button class="chip" type="button" data-value="здоровье" aria-pressed="false">здоровье</button>
+                <button class="chip" type="button" data-value="важное решение" aria-pressed="false">важное
+                    решение</button>
+                <button class="chip" type="button" data-value="ничего конкретного" aria-pressed="false">ничего
+                    конкретного</button>
             </div>
 
         </section>
 
 
-        <!-- ================================================== -->
-        <!-- ТРЕТИЙ ВОПРОС -->
-        <!-- ================================================== -->
-
-        <section class="question-card" aria-labelledby="question-support">
+        <section class="question-card" data-question-key="support" aria-labelledby="question-support">
 
             <h2 class="question-title" id="question-support">
-                3. Что тебе хочется сказать себе сейчас?
+                3. Что тебе сейчас важно услышать от себя?
             </h2>
 
-
-            <!-- Поле ответа -->
+            <p class="question-helper">
+                Напиши одну поддерживающую фразу или назови небольшой следующий шаг.
+            </p>
 
             <div class="input-wrapper">
-
-                <textarea aria-labelledby="question-support" placeholder="Напишите здесь..."></textarea>
-
+                <textarea data-answer-field="support" aria-labelledby="question-support"
+                    placeholder="Например: мне можно не спешить и сделать только один шаг…"></textarea>
             </div>
 
+            <p class="question-chips-label" id="support-chips-label">
+                Можно выбрать несколько вариантов
+            </p>
 
-            <!-- Быстрые варианты -->
-
-            <div class="question-chips">
-
-                <button class="chip" type="button">отдохни</button>
-                <button class="chip" type="button">я справлюсь</button>
-                <button class="chip" type="button">я устал</button>
-                <button class="chip" type="button">больше не могу</button>
-                <button class="chip" type="button">другое</button>
-
+            <div class="question-chips" aria-labelledby="support-chips-label">
+                <button class="chip" type="button" data-value="мне можно замедлиться" aria-pressed="false">мне можно
+                    замедлиться</button>
+                <button class="chip" type="button" data-value="я делаю достаточно" aria-pressed="false">я делаю
+                    достаточно</button>
+                <button class="chip" type="button" data-value="мне можно отдохнуть" aria-pressed="false">мне можно
+                    отдохнуть</button>
+                <button class="chip" type="button" data-value="я могу попросить о помощи" aria-pressed="false">я могу
+                    попросить о помощи</button>
+                <button class="chip" type="button" data-value="не обязательно решать всё сейчас" aria-pressed="false">не
+                    обязательно решать всё сейчас</button>
+                <button class="chip" type="button" data-value="сейчас достаточно одного шага"
+                    aria-pressed="false">сейчас достаточно одного шага</button>
             </div>
 
         </section>
+
+
+        <!-- ================================================== -->
+        <!-- ДОПОЛНИТЕЛЬНОЕ РАЗМЫШЛЕНИЕ -->
+        <!--
+            Блок необязательный и по умолчанию закрыт, чтобы
+            основной сценарий оставался коротким.
+        -->
+        <!-- ================================================== -->
+
+        <details class="pause-reflection">
+
+            <summary class="pause-reflection-summary">
+                <span>
+                    <strong>Продолжить размышление</strong>
+                    <small>Ещё два необязательных вопроса</small>
+                </span>
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </summary>
+
+            <div class="pause-reflection-content">
+
+                <section class="question-card question-card--optional" data-question-key="control"
+                    aria-labelledby="question-control">
+
+                    <h2 class="question-title" id="question-control">
+                        4. Что сейчас зависит от тебя, а что находится вне твоего контроля?
+                    </h2>
+
+                    <p class="question-helper">
+                        Можно коротко разделить ситуацию на две части.
+                    </p>
+
+                    <div class="input-wrapper">
+                        <textarea data-answer-field="control" aria-labelledby="question-control"
+                            placeholder="От меня зависит… Вне моего контроля…"></textarea>
+                    </div>
+
+                </section>
+
+
+                <section class="question-card question-card--optional" data-question-key="nextStep"
+                    aria-labelledby="question-next-step">
+
+                    <h2 class="question-title" id="question-next-step">
+                        5. Какой самый небольшой и бережный шаг ты можешь сделать после этой паузы?
+                    </h2>
+
+                    <p class="question-helper">
+                        Выбери действие, которое действительно посильно сейчас.
+                    </p>
+
+                    <div class="input-wrapper">
+                        <textarea data-answer-field="nextStep" aria-labelledby="question-next-step"
+                            placeholder="Например: налить воды, убрать телефон на десять минут, написать одному человеку…"></textarea>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </details>
 
 
         <!-- ================================================== -->

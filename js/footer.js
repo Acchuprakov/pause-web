@@ -290,7 +290,7 @@ class SiteFooter extends HTMLElement {
                                 <li>
                                     <a
                                         class="footer-link"
-                                        href="${fromRoot("pages/lenta.html")}"
+                                        href="${fromRoot("/lenta/")}"
                                     >
                                         Лента
                                     </a>
@@ -379,6 +379,15 @@ class SiteFooter extends HTMLElement {
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a
+                                        class="footer-link"
+                                        href="${fromRoot("research/")}"
+                                    >
+                                        Исследования
+                                    </a>
+                                </li>
+
                             </ul>
 
                         </nav>
@@ -422,7 +431,7 @@ class SiteFooter extends HTMLElement {
                     <div class="footer-bottom">
 
                         <p class="footer-copyright">
-                            © ${currentYear} ПАУЗА. с любовью из Батайска ❤ v.1.0
+                            с любовью из Батайска ❤ // v.1.0 // © ${currentYear} ПАУЗА.
                         </p>
 
                     </div>
