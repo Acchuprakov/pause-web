@@ -723,7 +723,7 @@ if (completePauseButton) {
 
             } else {
 
-                window.location.href = "registration.html";
+                window.location.href = "auth.html";
 
             }
 
@@ -1438,7 +1438,7 @@ function requestFeedAuthorization() {
         */
 
         sessionStorage.setItem("authContext", "feed");
-        window.location.href = "registration.html";
+        window.location.href = "auth.html";
 
     }
 
